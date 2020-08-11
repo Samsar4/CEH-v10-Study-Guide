@@ -4,7 +4,7 @@
 The whole principle is to avoid **Theft, Tampering and Disruption** of the systems through **CIA Triad** (Confidentiality, Integrity and Availability).
 
 <p align="center">
-<img width="70%" src="https://i.ytimg.com/vi/AJTJN4wDBM8/hqdefault.jpg">
+<img width="50%" src="https://i.ytimg.com/vi/AJTJN4wDBM8/hqdefault.jpg">
 </p>
 
 - **Confidentiality**
@@ -29,13 +29,13 @@ Non-repudiation is the assurance that someone cannot deny the validity of someth
 There is an inter dependency between these three attributes. When **security goes up, usability and functionality come down**. Any organization should balance between these three qualities to arrive at a balanced information system.
 
 <p align="center">
-<img width="70%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/f14455ed4def635e1bc93b85657f43dbbf4a3127/triad2.png">
+<img width="50%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/f14455ed4def635e1bc93b85657f43dbbf4a3127/triad2.png">
 </p>
 
 ## <u>Types of Hackers</u>
 
 <p align="center">
-<img width="70%" src="https://www.simplilearn.com/ice9/free_resources_article_thumb/types-hacker.JPG">
+<img width="50%" src="https://www.simplilearn.com/ice9/free_resources_article_thumb/types-hacker.JPG">
 </p>
 
 
