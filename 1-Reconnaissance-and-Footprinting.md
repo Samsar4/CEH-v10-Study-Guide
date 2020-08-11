@@ -15,11 +15,9 @@ During this phase, a hacker can collect the following information (only high-lev
 - **E-mails**
 - **Job Information**
 
-
 Can be:
   - **Anonymous** - information gathering without revealing anything about yourself
   - **Pseudonymous** - making someone else take the blame for your actions
-
 
 ### <u>Types of Footprinting</u>
 
@@ -36,9 +34,9 @@ Can be:
 
 ### Search Engines
 
-- **NetCraft** - Blueprint a comprehensive list of information about the technologies and information about target website.
+- **[NetCraft](https://www.netcraft.com/)** - Blueprint a comprehensive list of information about the technologies and information about target website.
 - **Job Search Sites** - Information about technologies can be gleaned from job postings.
-- **Google**
+- **Google search** 
   - `filetype:`  - looks for file types
   - `index of` - directory listings
   - `info:` - contains Google's information about the page
@@ -47,7 +45,7 @@ Can be:
   - `link:` - finds linked pages
   - `related:` - finds similar pages
   - `site:` - finds pages specific to that site
-- **Metagoofil** - Uses **Google hacks** to find information in meta tags (domain, filetype, etc).
+- **Metagoofil** - Command line interface that uses **Google hacks** to find information in meta tags (domain, filetype, etc; Is a google dorks for terminal).
 
 ### Website Footprinting
 
@@ -58,11 +56,14 @@ Can be:
   - WebRipper
   - Teleport Pro
   - Backstreet Browser
-- **Archive.org / [Wayback machine](https://archive.org/web/)** - Provides cached websites from various dates which possibly have sensitive information that has been now removed
+- **Archive.org / [Wayback machine](https://archive.org/web/)** - Provides cached websites from various dates which possibly have sensitive information that has been now removed.
+  - Wayback Machine on Google: ![wayback](https://searchengineland.com/figz/wp-content/seloads/2011/01/archive41-500x256.png)
 
 ### Email Footprinting
 
 - **Email  header** - may show servers and where the location of those servers are
+  - Email headers can provide: **Names, Addresses (IP, email), Mail servers, Time stamps, Authentication and so on.**
+  - **EmailTrackerPro** is a Windows software that trace an email back to its true point of origin: ![emailtrackerpro](http://www.emailtrackerpro.com/support/v9/tutorials/images/traceheader/3.png)
 - **Email tracking** - services can track various bits of information including the IP address of where it was opened, where it went, etc.
 
 ### DNS Footprinting
@@ -114,21 +115,97 @@ Can be:
   - **LACNIC** - Latin America
   - **AfriNIC** - Africa
 
-- **Whois** - obtains registration information for the domain
+- **Whois** - obtains registration information for the domain from command line or web interface.
+  - on Kali, whois is pre-installed on CLI; e.g: `whois google.com`)
+  - on Windows, you can use **SmartWhois** GUI software to perform a whois, or any website like domaintools.com
+- **Nslookup** - Performs DNS queries; (nslookup is pre-installed on Kali Linux)
 
-- **Nslookup** - performs DNS queries
+  - `nslookup www.hackthissite.org`
+  - ```
+    Server:         192.168.63.2
+    Address:        192.168.63.2#53
 
-  - nslookup [ - options ] [ hostname ]
-  - interactive zone transfer
-    - nslookup
-    - server <IP Address>
-    - set type = any
-    - ls -d domainname.com
+    Non-authoritative answer:
+    Name:   www.hackthissite.org
+    Address: 137.74.187.103
+    Name:   www.hackthissite.org
+    Address: 137.74.187.102
+    Name:   www.hackthissite.org
+    Address: 137.74.187.100
+    Name:   www.hackthissite.org
+    Address: 137.74.187.101
+    Name:   www.hackthissite.org
+    Address: 137.74.187.104
+    ```
+    - First two lines shows my current DNS server; 
+    - The IP addresses returned is '**A record**', meaning is the IPvA address of the domain.
+    - NsLookup queries the specified DNS server and retrieves the requested records that are associated with the domain. 
 
+    - **The following types of DNS records are especially useful to use on Nslookup:**
+
+    - Type | Description
+      :--:|--
+      A| the IPv4 address of the domain.
+      AAAA | the domain’s IPv6 address.
+      CNAME | the canonical name — allowing one domain name to map on to another. This allows more than one website to refer to a single web server.
+      MX | the server that handles email for the domain.
+      NS | one or more authoritative name server records for the domain.
+      TXT | a record containing information for use outside the DNS server. The content takes the form name=value. This information is used for many things including authentication schemes such as SPF and DKIM.
+
+  - **Nslookup - Interactive mode zone transfer** (Interactive mode allows the user to query name servers for information about various hosts and domains or to print a list of hosts in a domain).
+    - `nslookup`
+    - `server <IP Address>`
+    - `set type = <DNS type>`
+    - `<target domain>`
+  - ```
+    nslookup 
+    > set type=AAAA                                                                                                                                            
+    > www.hackthissite.org
+    Server:         192.168.63.2                                                                                                                               
+    Address:        192.168.63.2#53                                                                                                                            
+                                                                                                                                                              
+    Non-authoritative answer:                                                                                                                                  
+    Name:   www.hackthissite.org                                                                                                                               
+    Address: 2001:41d0:8:ccd8:137:74:187:103                                                                                                                   
+    Name:   www.hackthissite.org                                                                                                                               
+    Address: 2001:41d0:8:ccd8:137:74:187:102                                                                                                                   
+    Name:   www.hackthissite.org                                                                                                                               
+    Address: 2001:41d0:8:ccd8:137:74:187:101                                                                                                                   
+    Name:   www.hackthissite.org                                                                                                                               
+    Address: 2001:41d0:8:ccd8:137:74:187:100
+    Name:   www.hackthissite.org
+    Address: 2001:41d0:8:ccd8:137:74:187:104
+    ```
 - **Dig** - unix-based command like nslookup
 
-  - dig @server name type
+  - `dig <target>`
+  - ```
+    dig www.hackthissite.org
 
+    ; <<>> DiG 9.16.2-Debian <<>> www.hackthissite.org
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 51391
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; MBZ: 0x0005, udp: 4096
+    ;; QUESTION SECTION:
+    ;www.hackthissite.org.          IN      A
+
+    ;; ANSWER SECTION:
+    www.hackthissite.org.   5       IN      A       137.74.187.104
+    www.hackthissite.org.   5       IN      A       137.74.187.101
+    www.hackthissite.org.   5       IN      A       137.74.187.100
+    www.hackthissite.org.   5       IN      A       137.74.187.102
+    www.hackthissite.org.   5       IN      A       137.74.187.103
+
+    ;; Query time: 11 msec
+    ;; SERVER: 192.168.63.2#53(192.168.63.2)
+    ;; WHEN: Tue Aug 11 15:05:01 EDT 2020
+    ;; MSG SIZE  rcvd: 129
+
+    ```
 ### Network Footprinting
 
 - IP address range can be obtained from regional registrar (ARIN here)
