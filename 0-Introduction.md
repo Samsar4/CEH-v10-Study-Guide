@@ -220,9 +220,9 @@ There are two types of Recon:
 
 - **The OSI Model** we just looked at is just a reference/logical model. It was designed to describe the functions of the communication system by dividing the communication procedure into smaller and simpler components. 
 
-- **The TCP/IP model** is a concise version of the OSI model. It contains four layers, unlike seven layers in the OSI model. The layers are: 
+- **The TCP/IP model** is a concise version of the OSI model. It contains four layers, unlike seven layers in the OSI model. 
 
-| Layer | Device Type | OSI Layer | TCP/IP Model | TCP/IP New | Protocols | PDU
+| Layer | Device Type | OSI Layer | TCP/IP model | TCP/IP New (actual) | Protocols | PDU
 --|--|--|--|--|--|--
 7 | Gateway | **Application** | Application| Application | HTTP, FTP, POP, SMTP, DNS, RIP | Data
 6 | -       | **Presentation**| Application| Application | HTTP, FTP, POP, SMTP, DNS, RIP, MIME | Data
@@ -231,6 +231,27 @@ There are two types of Recon:
 3 | Router  | **Network**     | Internet   | Network | IP, ARP, ICMP, IGMP | Packets
 2 | Switch/bridge | **Data Link** | Link   | Data Link | Ethernet, Token Ring | Frames
 1 | Hubs/Repeater | **Physical**  | Link   | Physical | Ethernet, Token Ring | Bits
+
+### <u>TCP Handshake</u>
+
+<h4 align="center">The Three-way handshake</h4>
+<p align="center">
+<img width="90%" src="https://wiki.mikrotik.com/images/f/fc/Image2001.gif">
+</p>
+
+#### ✅ TCP Connection establishment process 
+1. **Host A** sends out a **SYN** (synchronize) packet with proposed initial sequence number to Host B.
+2. **Host B** receives **SYN** message, it returns a packet with both SYN and ACK flags (**SYN-ACK**) set in the [TCP header](https://www.gatevidyalay.com/transmission-control-protocol-tcp-header/).
+3. **Host A** receives the **SYN-ACK**, it sends back **ACK** (Acknowledgment) packet.
+4. **Host B** receives **ACK** and at this stage the connection is **ESTABLISHED.**
+
+#### ❌ TCP Connection termination
+1. **Host A** sends a **FIN** (finish) flag, indicating that is has finished sending the data.
+2. **Host B** who receives the **FIN**, doest not terminate the connection but enters into a "passive close" (CLOSE_WAIT) state and sends the **ACK** for the **FIN** back to the Host A.
+3. **Host A** enters into a (TIME_WAIT) state, and sends an **ACK** back to the Host B.
+4. **Host B** gets the **ACK** from the Host A and **closes the connection.**
+
+⚠️ *Sequence numbers increase on new communication.  Example is computers A and B.  A would increment B's sequence number.  A would never increment it's own sequence.*
 
 ### <u>TCP Flags</u>
 
@@ -242,11 +263,6 @@ There are two types of Recon:
 | FIN  | Finish         | Ordered close to communications                              |
 | PSH  | Push           | Forces the delivery of data without concern for buffering    |
 | URG  | Urgent         | Data inside is being sent out of band.  Example is cancelling a message |
-
-### <u>TCP Handshake</u>
-
-- SYN -> SYN-ACK - ACK
-- Sequence numbers increase on new communication.  Example is computers A and B.  A would increment B's sequence number.  A would never increment it's own sequence.
 
 ### <u>Port Numbers</u>
 
@@ -284,7 +300,7 @@ There are two types of Recon:
 
   - Once a service has made a connection, the port is in an **established** state
 
-  - Netstat
+  - **`Netstat`** command:
 
     - Shows open ports on computer
     - **netstat -an** displays connections in numerical form
@@ -307,4 +323,3 @@ There are two types of Recon:
   - If they are all 0s, it's the network address
   - Any other combination indicates an address in the range
   - ![img](https://s3.amazonaws.com/prealliance-thumbnails.oneclass.com/thumbnails/001/751/775/original/stringio.txt?1513221790)
-

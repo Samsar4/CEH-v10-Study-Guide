@@ -60,10 +60,40 @@
   | 11:  Time Exceeded          | Packet took too long to be routed (code 0 is TTL expired)    |
 
 
-### <u>Port Discovery</u>?
-OSI Model on hacking perspective
+## <u>Port Discovery</u>
+
+<p align="center">
+<img width="70%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/f8b2f839cee428a08506a9831a5d2f066e7301e7/openport.png">
+</p>
+
+- **Knocking the door**
+  - The hacker above sends a SYN packet to port 80 on the server.
+    - If server returns **SYN-ACK packet** = the port is **open**
+    - If server returns **RST (reset) packet** = the port is **closed**
+
+### ☞ Keep in mind the TCP Flags: 
+| Flag | Name           | Function                                                     |
+| ---- | -------------- | ------------------------------------------------------------ |
+| SYN  | Synchronize    | Set during initial communication.  Negotiating of parameters and sequence numbers |
+| ACK  | Acknowledgment | Set as an acknowledgement to the SYN flag.  Always set after initial SYN |
+| RST  | Reset          | Forces the termination of a connection (in both directions)  |
+| FIN  | Finish         | Ordered close to communications                              |
+| PSH  | Push           | Forces the delivery of data without concern for buffering    |
+| URG  | Urgent         | Data inside is being sent out of band.  Example is cancelling a message |
+
+***
+
+<p align="center">
+<img width="70%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/649d665844b3a3e5c57983e6003616eff3292280/nmap-probe.png">
+</p>
+
+- **Checking if Stateful Firewall is present**
+  - The hacker above sends an **ACK segment/packet** on the first interaction *(without three-way handshake)*.
+    - If server returns **no response** means that might have a stateful firewall handling proper sessions
+    - If server returns **RST packet** means that have no stateful firewall
 
 ### <u>Port Scan Types</u>
+
 
 - **Full connect** - TCP connect or full open scan - full connection and then tears down with RST
   - Easiest to detect, but most reliable
