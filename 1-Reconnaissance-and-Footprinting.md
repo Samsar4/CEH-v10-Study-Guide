@@ -1,5 +1,7 @@
 # <u> Reconnaissance and Footprinting</u>
 
+> ⚡︎ **This chapter have [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/1-Footprinting-and-Reconnaissance)**
+
 ## <u>Footprinting</u>
 Footprinting is a part of reconnaissance process which is used for gathering possible information about a target computer system or network. 
 
@@ -56,13 +58,15 @@ Can be:
   - WebRipper
   - Teleport Pro
   - Backstreet Browser
-- **Archive.org / [Wayback machine](https://archive.org/web/)** - Provides cached websites from various dates which possibly have sensitive information that has been now removed.
-  - Wayback Machine on Google: ![wayback](https://searchengineland.com/figz/wp-content/seloads/2011/01/archive41-500x256.png)
+- **Archive.org / [Wayback machine](https://archive.org/web/)** 
+- Provides cached websites from various dates which possibly have sensitive information that has been now removed.
+  - **Wayback Machine -> Google.com**: ![wayback](https://searchengineland.com/figz/wp-content/seloads/2011/01/archive41-500x256.png)
 
 ### Email Footprinting
 
 - **Email  header** - may show servers and where the location of those servers are
   - Email headers can provide: **Names, Addresses (IP, email), Mail servers, Time stamps, Authentication and so on.**
+  -![emailheader](https://www.wikihow.com/images/thumb/7/72/Read-Email-Headers-Step-7.jpg/v4-460px-Read-Email-Headers-Step-7.jpg.webp)
   - **EmailTrackerPro** is a Windows software that trace an email back to its true point of origin: ![emailtrackerpro](http://www.emailtrackerpro.com/support/v9/tutorials/images/traceheader/3.png)
 - **Email tracking** - services can track various bits of information including the IP address of where it was opened, where it went, etc.
 
@@ -142,14 +146,14 @@ Can be:
     - **The following types of DNS records are especially useful to use on Nslookup:**
 
 
-  - | Type  | Description        |
-    | ----- | ------------------ |
-    | A     |  the IPv4 address of the domain          |
-    | AAAA  |  the domain’s IPv6 address          |
-    | CNAME |  the canonical name — allowing one domain name to map on to another. This allows more than one website to refer to a single web server.          | 
-    | MX    |  the server that handles email for the domain.        |
-    | NS    |  one or more authoritative name server records for the domain.          | 
-    | TXT   |  a record containing information for use outside the DNS server. The content takes the form name=value. This information is used for many things including authentication schemes such as SPF and DKIM.          |
+    - | Type  | Description        |
+      | ----- | ------------------ |
+      | A     |  the IPv4 address of the domain          |
+      | AAAA  |  the domain’s IPv6 address          |
+      | CNAME |  the canonical name — allowing one domain name to map on to another. This allows more than one website to refer to a single web server.          | 
+      | MX    |  the server that handles email for the domain.        |
+      | NS    |  one or more authoritative name server records for the domain.          | 
+      | TXT   |  a record containing information for use outside the DNS server. The content takes the form name=value. This information is used for many things including authentication schemes such as SPF and DKIM.          |
 
   - **Nslookup - Interactive mode zone transfer** (Interactive mode allows the user to query name servers for information about various hosts and domains or to print a list of hosts in a domain).
     - `nslookup`
@@ -213,13 +217,16 @@ Can be:
 - Windows command - tracert
 - Linux Command - traceroute
 
-### Other Tools
+### Other Relevant Tools
 
-- **OSRFramework** - uses open source intelligence to get information about target
+- **OSRFramework** - uses open source intelligence to get information about target. *(Username checking, DNS lookups, information leaks research, deep web search, regular expressions extraction, and many others)*.
 - **Web Spiders** - obtain information from the website such as pages, etc.
+- **[Recon-ng](https://github.com/lanmaster53/recon-ng)** - Recon-ng is a web-based open-source reconnaissance tool used to extract information from a target organization and its personnel.
+- **[Metasploit Framework](https://github.com/rapid7/metasploit-framework)** - The Metasploit Framework is a tool that provides information about security vulnerabilities and aids in penetration testing and IDS signature development; This is a huge framework that provide Recon tools as well.
+- **[theHarvester](https://github.com/laramies/theHarvester)** - theHarvester is a OSINT tool; Can gathers emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
 - **Social Engineering Tools**
   - Maltego
   - Social Engineering Framework (SEF)
-- **Shodan** - search engine that shows devices connected to the Internet
+- **[Shodan](https://www.shodan.io/)** - Shodan is a search engine that lets the user find specific types of computers (webcams, routers, servers, etc.) ... connected to the internet using a variety of filters. Some have also described it as a search engine of service banners, which are metadata that the server sends back to the client.
 
-**Computer Security Incident Response Team** (CSIRT) - point of contact for all incident response services for associates of the DHS
+> ⚡︎ **The [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/1-Footprinting-and-Reconnaissance) have all mentioned tools above; Is recommended to try the tools in your virtual environment.**
