@@ -229,4 +229,4 @@ Can be:
   - Social Engineering Framework (SEF)
 - **[Shodan](https://www.shodan.io/)** - Shodan is a search engine that lets the user find specific types of computers (webcams, routers, servers, etc.) ... connected to the internet using a variety of filters. Some have also described it as a search engine of service banners, which are metadata that the server sends back to the client.
 
-> ⚡︎ **The [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/1-Footprinting-and-Reconnaissance) have all mentioned tools above; Is recommended to try the tools in your virtual environment.**
+> ⚡︎ **The [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/1-Footprinting-and-Reconnaissance) have all mentioned tools above; Is recommended to try these tools in your virtual environment.**
