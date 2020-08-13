@@ -5,7 +5,19 @@
 ## <u>Footprinting</u>
 Footprinting is a part of reconnaissance process which is used for gathering possible information about a target computer system or network. 
 
-**Footprinting could be both passive and active**. Reviewing a company’s website is an example of passive footprinting, whereas attempting to gain access to sensitive information through social engineering is an example of active information gathering.
+When used in the computer security lexicon, "Footprinting" generally refers to one of the pre-attack phases; tasks performed before doing the actual attack. **Some of the tools used for Footprinting are Sam Spade, nslookup, traceroute, Nmap and neotrace.**
+
+### Footprinting helps to:
+
+- **Know Security Posture** – The data gathered will help us to get an overview of the security posture of the company such as details about the presence of a firewall, security configurations of applications etc.
+
+- **Reduce Attack Area** – Can identify a specific range of systems and concentrate on particular targets only. This will greatly reduce the number of systems we are focussing on.
+
+- **Identify vulnerabilities** – we can build an information database containing the vulnerabilities, threats, loopholes available in the system of the target organization.
+
+- **Draw Network map** – helps to draw a network map of the networks in the target organization covering topology, trusted routers, presence of server and other information.
+
+Footprinting could be both **passive** and **active**. Reviewing a company’s website is an example of passive footprinting, whereas attempting to gain access to sensitive information through social engineering is an example of active information gathering.
 
 During this phase, a hacker can collect the following information (only high-level information):
 
@@ -60,14 +72,16 @@ Can be:
   - Backstreet Browser
 - **Archive.org / [Wayback machine](https://archive.org/web/)** 
 - Provides cached websites from various dates which possibly have sensitive information that has been now removed.
-  - **Wayback Machine -> Google.com**: ![wayback](https://searchengineland.com/figz/wp-content/seloads/2011/01/archive41-500x256.png)
+  - **Wayback Machine -> Google.com**:
+    - ![wayback](https://searchengineland.com/figz/wp-content/seloads/2011/01/archive41-500x256.png)
 
 ### Email Footprinting
 
 - **Email  header** - may show servers and where the location of those servers are
   - Email headers can provide: **Names, Addresses (IP, email), Mail servers, Time stamps, Authentication and so on.**
-  -![emailheader](https://www.wikihow.com/images/thumb/7/72/Read-Email-Headers-Step-7.jpg/v4-460px-Read-Email-Headers-Step-7.jpg.webp)
-  - **EmailTrackerPro** is a Windows software that trace an email back to its true point of origin: ![emailtrackerpro](http://www.emailtrackerpro.com/support/v9/tutorials/images/traceheader/3.png)
+    - ![emailheader](https://www.wikihow.com/images/thumb/7/72/Read-Email-Headers-Step-7.jpg/v4-460px-Read-Email-Headers-Step-7.jpg.webp)
+  - **EmailTrackerPro** is a Windows software that trace an email back to its true point of origin:
+    - ![emailtrackerpro](http://www.emailtrackerpro.com/support/v9/tutorials/images/traceheader/3.png)
 - **Email tracking** - services can track various bits of information including the IP address of where it was opened, where it went, etc.
 
 ### DNS Footprinting
@@ -84,8 +98,6 @@ Can be:
 - **Authoritative Servers** hold all records for a namespace
 
 - **DNS Record Types**
-
-  
 
   - | Name  | Description        | Purpose                                        |
     | ----- | ------------------ | ---------------------------------------------- |
