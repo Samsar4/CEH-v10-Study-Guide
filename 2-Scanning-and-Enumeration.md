@@ -62,14 +62,16 @@
 
 ## <u>Port Discovery</u>
 
-<p align="center">
-<img width="70%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/f8b2f839cee428a08506a9831a5d2f066e7301e7/openport.png">
-</p>
+
+<img width="60%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/f8b2f839cee428a08506a9831a5d2f066e7301e7/openport.png">
+
 
 - **Knocking the door**
   - The hacker above sends a SYN packet to port 80 on the server.
     - If server returns **SYN-ACK packet** = the port is **open**
     - If server returns **RST (reset) packet** = the port is **closed**
+
+***
 
 ### ☞ Keep in mind the TCP Flags: 
 | Flag | Name           | Function                                                     |
@@ -83,9 +85,8 @@
 
 ***
 
-<p align="center">
-<img width="70%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/649d665844b3a3e5c57983e6003616eff3292280/nmap-probe.png">
-</p>
+<img width="60%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/649d665844b3a3e5c57983e6003616eff3292280/nmap-probe.png">
+
 
 - **Checking if Stateful Firewall is present**
   - The hacker above sends an **ACK segment/packet** on the first interaction *(without three-way handshake)*.
@@ -94,26 +95,25 @@
 
 ### <u>Port Scan Types</u>
 
-
 - **Full connect** - TCP connect or full open scan - full connection and then tears down with RST
   - Easiest to detect, but most reliable
-  - nmap -sT
+  - **`nmap -sT`**
 - **Stealth** - half-open scan or SYN scan - only SYN packets sent.  Responses same as full.
   - Useful for hiding efforts and evading firewalls
-  - nmap -sS
+  - **`nmap -sS`**
 - **Inverse TCP flag** - uses FIN, URG or PSH flag.  Open gives no response.  Closed gives RST/ACK
-  - nmap -sN (Null scan)
-  - nmap -sF (FIN scan)
+  - **`nmap -sN`** (Null scan)
+  - **`nmap -sF`** (FIN scan)
 - **Xmas** - so named because all flags are turned on so it's "lit up" like a Christmas tree
   - Responses are same as Inverse TCP scan
   - Do not work against Windows machines
-  - nmap -sX
+  - **`nmap -sX`**
 - **ACK flag probe** - multiple methods
   - TTL version - if TTL of RST packet < 64, port is open
   - Window version - if the Window on the RST packet is anything other than 0, port open
   - Can be used to check filtering.  If ACK is sent and no response, stateful firewall present.
-  - nmap -sA (ACK scan)
-  - nmap -sW (Window scan)
+  - **`nmap -sA`** (ACK scan)
+  - **`nmap -sW`** (Window scan)
 - **IDLE Scan** - uses a third party to check if a port is open
   - Looks at the IPID to see if there is a response
   - Only works if third party isn't transmitting data
@@ -121,7 +121,7 @@
     - IPID increase of 1 indicates port closed
     - IPID increase of 2 indicates port open
     - IPID increase of anything greater indicates the third party was not idle
-  - nmap -sI <zombie host>
+  - **`nmap -sI <zombie host>`**
 
 ### <u>Nmap Switches</u>
 

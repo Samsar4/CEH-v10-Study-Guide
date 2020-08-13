@@ -236,7 +236,7 @@ There are two types of Recon:
 
 <h4 align="center">The Three-way handshake</h4>
 <p align="center">
-<img width="90%" src="https://wiki.mikrotik.com/images/f/fc/Image2001.gif">
+<img width="77%" src="https://wiki.mikrotik.com/images/f/fc/Image2001.gif">
 </p>
 
 #### ✅ TCP Connection establishment process 
