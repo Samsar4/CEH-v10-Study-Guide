@@ -129,7 +129,7 @@
     - IPID increase of anything greater indicates the third party was not idle
   - **`nmap -sI <zombie host>`**
 
-### <u>Nmap Switches</u>
+## <u>Nmap Switches</u>
 
 | Switch          | Description                                                  |
 | :---------------: | :------------------------------------------------------------ |
@@ -224,7 +224,7 @@ Hping3 is a scriptable program that uses the Tcl language, whereby packets can b
 | -U      | Sets the URG flag                                            |
 | -X      | Sets the XMAS scan flags                                     |
 
-### <u>Evasion</u>
+## <u>Evasion</u>
 
 - To evade IDS, sometimes you need to change the way you scan
 - One method is to fragment packets (nmap -f switch)
@@ -245,7 +245,7 @@ Hping3 is a scriptable program that uses the Tcl language, whereby packets can b
 - **Tor** - a specific type of proxy that uses multiple hops to a destination; endpoints are peer computers
 - **Anonymizers** - hides identity on HTTP traffic (port 80)
 
-### <u>Banner Grabbing</u>
+## <u>Banner Grabbing</u>
 
 - **Active** - sending specially crafted packets and comparing responses to determine OS
 - **Passive** - reading error messages, sniffing traffic or looking at page extensions
@@ -294,7 +294,7 @@ Login with msfadmin/msfadmin to get started
 ```
   
 
-### <u>Vulnerability Scanning</u>
+## <u>Vulnerability Scanning</u>
 
 - Can be complex or simple tools run against a target to determine vulnerabilities
 - Industry standard is Tenable's **Nessus**
@@ -305,7 +305,7 @@ Login with msfadmin/msfadmin to get started
   - FreeScan - best known for testing websites and applications
   - OpenVAS - best competitor to Nessus and is free
 
-## <u>Enumeration Concepts</u>
+# <u>Enumeration Concepts</u>
 Enumeration is the process of extracting user names, machine names, network resources, shares, and services from a system, and its conducted in an intranet environment.
 
 - Get user names using email IDs
@@ -323,7 +323,7 @@ In this phase, the attacker creates an active connection to the system and perfo
 - **Direct access**
 - **Gain more information**
 
-### <u>NetBIOS Enumeration</u>
+## <u>NetBIOS Enumeration</u>
 
 - NetBIOS provides name servicing, connectionless communication and some Session layer stuff
 - The browser service in Windows designed to host information about all machines within domain or TCP/IP network segment
@@ -364,7 +364,7 @@ In this phase, the attacker creates an active connection to the system and perfo
   - NetBIOS Enumerator (is a nbtstat with GUI)
   - NSAuditor
 
-### <u>Windows System Basics</u>
+## <u>Windows System Basics</u>
 
 - Everything runs within context of an account
 - **Security Context** - user identity and authentication information
@@ -384,7 +384,7 @@ In this phase, the attacker creates an active connection to the system and perfo
   - **`rpcinfo`** and **`rpcclient`** - info on RPC in the environment
   - **`showmount`** - displays all shared directories on the machine
 
-### <u>SNMP Enumeration</u>
+## <u>SNMP Enumeration</u>
 > ⚡︎ **Check the SNMP Enumeration [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/3-Enumeration/2-SNMP-Enumeration.md)**
 
 SNMP enumeration is the process of enumerating the users accounts and devices on a SNMP enabled computer.
@@ -419,7 +419,7 @@ Attackers enumerate SNMP to extract information about network resources such as 
 <img width="80%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/292c0411bb379aaf25e403741f64e62bbe4bc6a0/snmp-snas.png">
 
 
-### <u>LDAP Enumeration</u>
+## <u>LDAP Enumeration</u>
 
 - Connects on 389 to a Directory System Agent (DSA)
 - Returns information such as valid user names, domain information, addresses, telephone numbers, system data, organization structure and other items
@@ -429,7 +429,7 @@ Attackers enumerate SNMP to extract information about network resources such as 
   - Lex
   - LDAP Admin Tool
 
-### <u>NTP Enumeration</u>
+## <u>NTP Enumeration</u>
 
 - Runs on UDP 123
 - Querying can give you list of systems connected to the server (name and IP)
@@ -439,7 +439,7 @@ Attackers enumerate SNMP to extract information about network resources such as 
   - Can also use Nmap and Wireshark
 - **Commands** include ntptrace, ntpdc and ntpq
 
-### <u>SMTP Enumeration</u>
+## <u>SMTP Enumeration</u>
 
 - VRFY - validates user
 - EXPN - provides actual delivery address of mailing list and aliases
