@@ -421,26 +421,132 @@ Attackers enumerate SNMP to extract information about network resources such as 
 
 ## <u>LDAP Enumeration</u>
 
+- **Runs on TCP ports 389 and 636 (over SSL)**
 - Connects on 389 to a Directory System Agent (DSA)
 - Returns information such as valid user names, domain information, addresses, telephone numbers, system data, organization structure and other items
-- **Tools**
+
+- To identify if the target system is using LDAP services you can use **nmap** with `-sT` flag for TCP connect/Full scan and `-O` flag for OS detection. 
+
+**`sudo nmap -sT -O 192.168.63.142`**
+
+```
+PORT      STATE SERVICE
+53/tcp    open  domain
+88/tcp    open  kerberos-sec
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap <--------------------------------------
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+593/tcp   open  http-rpc-epmap
+636/tcp   open  ldapssl <--------------------------------------
+3268/tcp  open  globalcatLDAP
+3269/tcp  open  globalcatLDAPssl
+49154/tcp open  unknown
+49155/tcp open  unknown
+49157/tcp open  unknown
+49158/tcp open  unknown
+49159/tcp open  unknown
+MAC Address: 00:00:11:33:77:44
+Running: Microsoft Windows 2012
+OS CPE: cpe:/o:microsoft:windows_server_2012:r2
+OS details: Microsoft Windows Server 2012 or Windows Server 2012 R2
+Network Distance: 1 hop
+```
+- **Tools for Enumeration LDAP:**
   - Softerra
   - JXplorer
   - Lex
   - LDAP Admin Tool
 
+- **JXplorer example**:
+<img width="80%" src="https://a.fsdn.com/con/app/proj/jxplorer/screenshots/16630.jpg/max/max/1">
+
 ## <u>NTP Enumeration</u>
 
-- Runs on UDP 123
+- **Runs on UDP 123**
 - Querying can give you list of systems connected to the server (name and IP)
 - **Tools**
   - NTP Server Scanner
   - AtomSync
   - Can also use Nmap and Wireshark
-- **Commands** include ntptrace, ntpdc and ntpq
+- **Commands** include `ntptrace`, `ntpdate`, `ntpdc` and `ntpq`
+
+**Nmap example for NTP enumeration:**
+- `-sU` UDP scan
+- `-pU` port UDP 123 (NTP)
+- `-Pn` Treat all hosts as online -- skip host discovery
+- `-n` Never do DNS resolution
+- The [nmap script](https://nmap.org/nsedoc/scripts/ntp-monlist.html) `ntp-monlist` will run against the ntp service which only runs on UDP 123  
+
+**`nmap -sU -pU:123 -Pn -n --script=ntp-monlist <target>`**
+
+```
+PORT    STATE SERVICE REASON
+123/udp open  ntp     udp-response
+| ntp-monlist:
+|   Target is synchronised with 127.127.38.0 (reference clock)
+|   Alternative Target Interfaces:
+|       10.17.4.20
+|   Private Servers (0)
+|   Public Servers (0)
+|   Private Peers (0)
+|   Public Peers (0)
+|   Private Clients (2)
+|       10.20.8.69      169.254.138.63
+|   Public Clients (597)
+|       4.79.17.248     68.70.72.194    74.247.37.194   99.190.119.152
+|       ...
+|       12.10.160.20    68.80.36.133    75.1.39.42      108.7.58.118
+|       68.56.205.98
+|       2001:1400:0:0:0:0:0:1 2001:16d8:dd00:38:0:0:0:2
+|       2002:db5a:bccd:1:21d:e0ff:feb7:b96f 2002:b6ef:81c4:0:0:1145:59c5:3682
+|   Other Associations (1)
+|_      127.0.0.1 seen 1949869 times. last tx was unicast v2 mode 7
+```
+
+- As you can see on the output above, information of all clients that is using NTP services on the network shown IPv4 and IPv6 addresses.
 
 ## <u>SMTP Enumeration</u>
+- **Ports used**:
+  - **SMTP: TCP 25** --> [outbound email]
+  - **IMAP: TCP 143 / 993**(over SSL) --> [inbound email]
+  - **POP3: TCP 110 / 995**(over SSL) --> [inbound email]
+> - In simple words: **users typically use a program that uses SMTP for sending e-mail and either POP3 or IMAP for receiving e-mail.**
 
-- VRFY - validates user
-- EXPN - provides actual delivery address of mailing list and aliases
-- RCPT TO - defines recipients
+- **Enumerating with nmap**:
+- `-p25` port 25 (SMTP)
+- `--script smtp-commands` nmap script - attempts to use EHLO and HELP to gather the Extended commands supported by an SMTP server.
+
+**`nmap -p25 --script smtp-commands <target IP>`**
+
+```
+PORT   STATE SERVICE
+25/tcp open  smtp
+| smtp-commands: WIN-J83C1DR5CV1.ceh.global Hello [10.10.10.10], TURN, SIZE 2097152, ETRN, PIPELINING, DSN, ENHANCEDSTATUSCODES, 8bitmime, BINARYMIME, CHUNKING, VRFY, OK, 
+|_ This server supports the following commands: HELO EHLO STARTTLS RCPT DATA RSET MAIL QUIT HELP AUTH TURN ETRN BDAT VRFY 
+
+Nmap done: 1 IP address (1 host up) scanned in 0.86 seconds
+```
+
+- It is possible to connect to SMTP through Telnet connection, instead using port 23(Telnet) we can set the port 25(SMTP) on the telnet command:
+  - **`telnet <target> 25`**
+
+- Case we got connected, we can use the **SMTP commands** to explore as shown below:
+  - ![smtp](https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/2ea0450933a1899b77a7519a46b4aee3b1597759/smtp-commands.png)
+
+### Some SMTP Commands:
+
+Command | Description
+:--:|--
+HELO | It’s the first SMTP command: is starts the conversation identifying the sender server and is generally followed by its domain name.
+EHLO | An alternative command to start the conversation, underlying that the server is using the Extended SMTP protocol.
+MAIL FROM | With this SMTP command the operations begin: the sender states the source email address in the “From” field and actually starts the email transfer.
+RCPT TO | It identifies the recipient of the email
+DATA | With the DATA command the email content begins to be transferred; it’s generally followed by a 354 reply code given by the server, giving the permission to start the actual transmission.
+VRFY | The server is asked to verify whether a particular email address or username actually exists.
+EXPN | asks for a confirmation about the identification of a mailing list.
+
+**Other tools**:
+- smtp-user-enum
+  - Username guessing tool primarily for use against the default Solaris SMTP service. Can use either EXPN, VRFY or RCPT TO.
