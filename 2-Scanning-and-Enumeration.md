@@ -1,6 +1,6 @@
 # Scanning and Enumeration
 
-> ⚡︎ **This chapter have practical labs for [Scanning Networks (1)](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/2-Scanning-Networks) and [Enumeration (2)](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/3-Enumeration)**
+> ⚡︎ **This chapter has practical labs for [Scanning Networks (1)](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/2-Scanning-Networks) and [Enumeration (2)](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/3-Enumeration)**
 
 **Network Scanning** - Discovering systems on the network (can be hosts, switches, servers, routers, firewalls and so on) and looking at what ports are open as well as applications/services and their respective versions that may be running.
 
