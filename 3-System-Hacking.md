@@ -3,15 +3,11 @@
 > ⚡︎ **This chapter has [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/5-System-Hacking)**
 ## Goals:
 1. **Gaining Access** - Uses information gathered to exploit the system
-    - Password attacks
-    - **Non-electronic attacks**
-        - e.g: Dumpster diving
-    - **Active online attacks**
-        - e.g: Dictionary attack, malwares, trojans, keyloggers
-    - **Passive online attacks**
-        - e.g: Sniffing cleartext passwords; MITM on networks;
-    - **Offline attacks**
-        - e.g: Precompute the hashes to crack offline
+    - **Password Attacks:**
+      - **Non-electronic attacks**
+      - **Active online attacks**
+      - **Passive online attacks**
+      - **Offline attacks**
 2. **Escalating Privileges** - Granting the account you've hacked admin or pivoting to an admin account
 3. **Executing Applications** - Putting back doors into the system so that you can maintain access
 4. **Hiding Files** - Making sure the files you leave behind are not discoverable
@@ -63,33 +59,38 @@
     - Ophcrack - crack the passwords and obtain plain text passwords;[practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/2-SAM-Hashes.md)
     - Rainbowcrack - rainbow tables generator for password cracking
 
+- **CHNTPW** - chntpw is a software utility for **resetting** or **blanking local passwords used by Windows NT, 2000, XP, Vista, 7, 8, 8.1 and 10**. It does this by editing the SAM database where Windows stores password hashes.
+  1. **Physical access** to victim's computer
+  2. Startup on BIOS and allow boot to CD or USB
+  3. Modify the SAM user account information through the CHNTPW
+
 ⚠️ **SAM (Security Account Manager)** is a database file present in Windows machines that stores user accounts and security descriptors for users on a local computer. It stores users passwords in a hashed format (in LM hash and NTLM hash). Because a hash function is one-way, this provides some measure of security for the storage of the passwords.
     
 ### <u>Authentication and Passwords</u>
 
 - **Three Different Types**
-  - **Something You Are** - uses biometrics to validate identity (retina, fingerprint, etc.)
+  - **Something You Are** - Uses biometrics to validate identity (retina, fingerprint, etc.)
     - Downside is there can be lots of false negatives
-    - **False acceptance rate** (FAR) - rate that a system accepts access for people that shouldn't have it
-    - **False rejection rate** (FRR) - rate that a system rejects access for someone who should have it
-    - **Crossover error rate** (CER) - combination of the two; the lower the CER, the better the system
+
+    - **False acceptance rate (FAR) - Type II** - Likelihood that an unauthorized user will be accepted (This would be bad)
+    - **False injection rate (FRR) - Type I** - Likelihood that an authorized user will be rejected
+    - **Crossover error rate (CER)** - Combination of the two; the lower the CER, the better the system
     - **Active** - requires interaction (retina scan or fingerprint scanner)
-    - **Passive** - requires no interaction (iris scan)
-  - **Something You Have** - usually consists of a token of some kind (swipe badge, ATM card, etc.)
+    - **Passive** - Requires no interaction (iris scan)
+  - **Something You Have** - Usually consists of a token of some kind (swipe badge, ATM card, etc.)
     - This type usually requires something alongside it (such as a PIN for an ATM card)
     - Some tokens are single-factor (such as a plug-and-play authentication)
-  - **Something You Know** - better known as a password
+  - **Something You Know** - Better known as a password
     - Most systems use this because it is universal and well-known
 
-- **Two-Factor** - when you have two types of authentication such as something you know (password) and something you have (access card)
+- **Two-Factor** - When you have two types of authentication such as something you know (password) and something you have (access card)
 
-- **Strength of passwords** - determined by length and complexity
+- **Strength of passwords** - Determined by length and complexity
   - ECC says that both should be combined for the best outcome
   - Complexity is defined by number of character sets used (lower case, upper case, numbers, symbols, etc.)
 - **Default passwords** - always should be changed and never left what they came with.  Databases such as cirt.net, default-password.info and open-sez.me all have databases of these
 
-
-### Windows Security Architecture
+## Windows Security Architecture
 
 - Authentication credentials stored in SAM file
 - File is located at C:\windows\system32\config
@@ -141,8 +142,9 @@
   - Microsoft Management Console - used by Windows to administer system
   - Has "snap-ins" that allow you to modify sets (such as Group Policy Editor)
 
-### <u>Linux Security Architecture</u>
+## <u>Linux Security Architecture</u>
 
+### Linux Directory Structure
 - Linux root is just a slash (/)
 - Important locations
   - **/** - root directory
@@ -153,25 +155,29 @@
   - **/mnt** - holds the access locations you've mounted
   - **/sbin** - system binaries folder which holds more administrative commands
   - **/usr** - holds almost all of the information, commands and files unique to the users
-- Linux Commands
+
+![linux-architecture](https://www.tecmint.com/wp-content/uploads/2013/09/Linux-Directory-Structure.jpeg)
+
+  
+### Linux Common Commands
 
 | Command  | Description                                                  |
-| -------- | ------------------------------------------------------------ |
-| adduser  | Adds a user to the system                                    |
-| cat      | Displays contents of file                                    |
-| cp       | Copies                                                       |
-| ifconfig | Displays network configuration information                   |
-| kill     | Kills a running process                                      |
-| ls       | Displays the contents of a folder.  -l option provides most information. |
-| man      | Displays the manual page for a command                       |
-| passwd   | Used to change password                                      |
-| ps       | Process status.  -ef option shows all processes              |
-| rm       | Removes files.  -r option recursively removes all directories and subdirectories |
-| su       | Allows you to perform functions as another user (super user) |
+| :--------: | ------------------------------------------------------------ |
+| `adduser`  | Adds a user to the system                                    |
+| `cat`      | Displays contents of file                                    |
+| `cp `      | Copies                                                       |
+| `ifconfig` | Displays network configuration information                   |
+| `kill `    | Kills a running process                                      |
+| `ls `      | Displays the contents of a folder.  -l option provides most information. |
+| `man  `    | Displays the manual page for a command                       |
+| `passwd `  | Used to change password                                      |
+| `ps   `    | Process status.  -ef option shows all processes              |
+| `rm   `    | Removes files.  -r option recursively removes all directories and subdirectories |
+| `su `      | Allows you to perform functions as another user (super user) |
 
 - Adding an ampersand after a process name indicates it should run in the background.
-- **pwd** - displays curennt directory
-- **chmod** - changes the permissions of a folder or file
+- **`pwd`** - displays curennt directory
+- **`chmod`** - changes the permissions of a folder or file
   - Read is 4, write is 2 and execute is 1
   - First number is user, second is group, third is others
   - Example - 755 is everything for users, read/execute for group, and read/execute for others
@@ -181,10 +187,7 @@
 - /etc/password stores passwords in hashes.
 - /etc/shadow stores passwords encrypted (hashed and salted) and is only accessible by root
 
-
-
-
-### <u>Privilege Escalation and Executing Applications</u>
+## <u>Privilege Escalation and Executing Applications</u>
 
 - **Vertical** - lower-level user executes code at a higher privilege level
 - **Horizontal** - executing code at the same user level but from a location that would be protected from that access
@@ -197,7 +200,7 @@
 - ECC refers executing applications as "owning" a system
 - **Executing applications** - starting things such as keyloggers, spyware, back doors and crackers
 
-### <u>Hiding Files and Covering Tracks</u>
+## <u>Hiding Files and Covering Tracks</u>
 
 - In Windows, **Alternate Data Stream** (ADS) can hide files
   - Hides a file from directory listing on an NTFS file system
@@ -218,7 +221,7 @@
   - Best option is be selective and delete the entries pertaining to your actions.
 - Can also disable auditing ahead of time to prevent logs from being captured
 
-### <u>Rootkits</u>
+## <u>Rootkits</u>
 
 - Software put in place by attacker to obscure system compromise
 - Hides processes and files
