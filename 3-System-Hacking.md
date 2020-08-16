@@ -19,12 +19,13 @@
 
 ### <u>Password Attacks</u>
 
+> ⚡︎ **Check out the practical labs(3) on [Dumping and Cracking SAM hashes](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/2-SAM-Hashes.md), [Rainbow Tables Basics](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/3-Rainbow-tables.md) and [LLMNR/NBT-NS](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/1-LLMNR-NBT-NS.md)** 
 - **Non-electronic** - social engineering attacks - most effective.
   - Includes shoulder surfing and dumpster diving
 - **Active online** - done by directly communicating with the victim's machine
   - Includes dictionary and brute-force attacks, hash injections, phishing, Trojans, spyware, keyloggers and password guessing
   - **Keylogging** - process of using a hardware device or software application to capture keystrokes of a user
-  - **LLMNR/NBT-NS** - attack based off Windows technologies that caches DNS locally. Responding to these poisons the local cache.  If an NTLM v2 hash is sent over, it can be sniffed out and then cracked. **⚡︎ [Check the LLMNR/NBT-NS practical lab.](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/1-LLMNR-NBT-NS.md)**
+  - **LLMNR/NBT-NS** - attack based off Windows technologies that caches DNS locally. Responding to these poisons the local cache.  If an NTLM v2 hash is sent over, it can be sniffed out and then cracked.
     - **Tools**
       - NBNSpoof
       - Pupy
@@ -55,8 +56,8 @@
     - Legion
     - John the Ripper
     - fgdump - dump SAM databases
-    - Pwdump7 - dump SAM databases; [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/2-SAM-Hashes.md)
-    - Ophcrack - crack the passwords and obtain plain text passwords;[practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/2-SAM-Hashes.md)
+    - Pwdump7 - dump SAM databases;
+    - Ophcrack - crack the passwords and obtain plain text passwords;
     - Rainbowcrack - rainbow tables generator for password cracking
 
 - **CHNTPW** - chntpw is a software utility for **resetting** or **blanking local passwords used by Windows NT, 2000, XP, Vista, 7, 8, 8.1 and 10**. It does this by editing the SAM database where Windows stores password hashes.
@@ -168,25 +169,66 @@
 | `cp `      | Copies                                                       |
 | `ifconfig` | Displays network configuration information                   |
 | `kill `    | Kills a running process                                      |
-| `ls `      | Displays the contents of a folder.  -l option provides most information. |
+| `ls `      | Displays the contents of a folder.  `-l` option provides most information. |
 | `man  `    | Displays the manual page for a command                       |
 | `passwd `  | Used to change password                                      |
-| `ps   `    | Process status.  -ef option shows all processes              |
-| `rm   `    | Removes files.  -r option recursively removes all directories and subdirectories |
+| `ps   `    | Process status.  `-ef` option shows all processes              |
+| `rm   `    | Removes files.  `-r` option recursively removes all directories and subdirectories |
 | `su `      | Allows you to perform functions as another user (super user) |
 
 - Adding an ampersand after a process name indicates it should run in the background.
 - **`pwd`** - displays curennt directory
 - **`chmod`** - changes the permissions of a folder or file
-  - Read is 4, write is 2 and execute is 1
+  - **Read is 4, write is 2 and execute is 1**
+  - Read | Write | Execute
+    :--:|:--:|:--:
+    r-- | -w- | --x
+    4 | 2 | 1
   - First number is user, second is group, third is others
-  - Example - 755 is everything for users, read/execute for group, and read/execute for others
-- Root has UID and GID of 0
-- First user has UID and GID of 500
-- Passwords are stored in /etc/shadow for most current systems
-- /etc/password stores passwords in hashes.
-- /etc/shadow stores passwords encrypted (hashed and salted) and is only accessible by root
+  - when you issue the `ls` command with `-la` flag on Linux, you can see the permissions. As you can see below the file have a permission for everyone (777), will be like this:
+    - <code><b style="color:red">rwx</b>rwxrwx</code> ---> user
+    - <code>rwx<b style="color:red">rwx</b>rwx</code> ---> group
+    - <code>rwxrwx<b style="color:red">rwx</b></code> ---> others
+  - Another example - **755** is **everything for users**, **read/execute for group**, and **read/execute for others**
+    - <code><b style="color:red">rwx</b>r-xr-x</code> ---> user
+    - <code>rwx<b style="color:red">r-x</b>r-x</code> ---> group
+    - <code>rwxr-x<b style="color:red">r-x</b></code> ---> others
+  - You also can set permissions like: `chmod g=rw` (set read/write for groups).
+- **Root has UID and GID of 0** - *you can see this information by issuing the command `id`.*
+`root@kali:~# id`
+  - ```
+    uid=0(root) gid=0(root) groups=0(root)
+    ```
 
+- First user has UID and GID of 500 (Fedora and CentOS); in most Linux systems the **non-root/normal user are UID and GID of 1000.**
+
+- `normal-user@kali:~# id`
+  - ```
+    id
+    uid=1000(kali) gid=1000(kali) groups=1000(kali),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),109(netdev),117(bluetooth),132(scanner)
+    ```
+
+- Passwords are stored in **/etc/shadow** for most current systems
+- **/etc/passwd** stores passwords in hashes.
+- `cat /etc/passwd`
+  - ```
+    root:x:0:0:root:/root:/bin/bash
+    daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+    bin:x:2:2:bin:/bin:/usr/sbin/nologin
+    sys:x:3:3:sys:/dev:/usr/sbin/nologin
+    sync:x:4:65534:sync:/bin:/bin/sync
+    (...)
+    ```
+- **/etc/shadow** stores passwords encrypted (hashed and salted) and is only accessible by root
+
+- `sudo cat /etc/shadow`
+  - ```
+    root:!:18390:0:99999:7:::
+    daemon:*:18390:0:99999:7:::
+    bin:*:18390:0:99999:7:::
+    kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lbaRi.jNDsP2qjV3GvFAqd5Fu.8/7/P1.:18281:0:99999:7:::
+    (...)
+    ```
 ## <u>Privilege Escalation and Executing Applications</u>
 
 - **Vertical** - lower-level user executes code at a higher privilege level
@@ -202,24 +244,30 @@
 
 ## <u>Hiding Files and Covering Tracks</u>
 
+> ⚡︎ **Check out the practical labs(2) on [Hiding Files using NTFS streams](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/8-NTFS-Streams.md) and [Steganography](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/9-Steganography.md)**
+
 - In Windows, **Alternate Data Stream** (ADS) can hide files
   - Hides a file from directory listing on an NTFS file system
   - readme.txt:badfile.exe
   - Can be run by start readme.txt:badfile.exe
-  - You can also create a link to this and make it look real (e.g. mklink innocent.exe readme.txt:badfile.exe)
+  - You can also create a symlink to this and make it look real (e.g. mklink innocent.exe readme.txt:badfile.exe)
   - Every forensic kit looks for this, however
   - To show ADS, dir /r does the trick
   - You can also blow away all ADS by copying files to a FAT partition
-- You can also hide files by attributes
+- **You can also hide files by attributes**
   - In Windows:  attrib +h filename
   - In Linux, simply add a . to the beginning of the filename
-- Can hide data and files with steganography
-- Also need to worry about clearing logs
+- **Can hide data and files with steganography**
+  - Tools for steganography:
+    - Snow
+    - OpenStego
+    - OpenPuff
+- **Also need to worry about clearing logs**
   - In Windows, you need to clear application, system and security logs
   - Don't just delete; key sign that an attack has happened
   - Option is to corrupt a log file - this happens all the time
   - Best option is be selective and delete the entries pertaining to your actions.
-- Can also disable auditing ahead of time to prevent logs from being captured
+- **Can also disable auditing ahead of time to prevent logs from being captured**
 
 ## <u>Rootkits</u>
 
