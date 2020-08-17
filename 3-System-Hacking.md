@@ -231,6 +231,8 @@
     ```
 ## <u>Privilege Escalation and Executing Applications</u>
 
+> ⚡︎ **Check out the [practical lab on PrivEsc](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/5-Escalating-Privileges.md)**
+
 - **Vertical** - lower-level user executes code at a higher privilege level
 - **Horizontal** - executing code at the same user level but from a location that would be protected from that access
 - **Four Methods**
@@ -262,12 +264,52 @@
     - Snow
     - OpenStego
     - OpenPuff
-- **Also need to worry about clearing logs**
-  - In Windows, you need to clear application, system and security logs
-  - Don't just delete; key sign that an attack has happened
-  - Option is to corrupt a log file - this happens all the time
-  - Best option is be selective and delete the entries pertaining to your actions.
+
+## <u>Covering Tracks</u>
+
+**Clearing logs is the main idea behind covering tracks.**
+1. Find the logs (Windows or Linux)
+2. Clear them.
+#### On Windows:
+In Windows, you need to clear **application**, **system** and **security logs**.
+
+  - **Auditpol** for changing settings on log files (used for manipulate audit policies).
+  - Main commands: 
+    - `auditpol /get /category:*` --> display all audit policies in detail if is enable *(Object Acces, System, Logon/Logoff, Privilege Use, and so on).*
+    - `auditpol /clear` --> reset (disable) the system audit policy for all subcategories.
+    - `auditpol /remove` --> Removes all per-user audit policy settings and disables all system audit policy settings.
+
+> ⚡︎ **Check out the [practical lab on Auditpol](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/11-Auditpol.md)**
+  - **MRU** (Most Recently Used) programs that registry recenlty used programs/files and saves on Windows Registry.
+  - Is possible to manually clear the logs on **Event Viewer**.
+
+
+#### On Linux:
+- You can use `rm -rf` to force remove the bash **history**
+
+**Most common logs on Linux:**
+
+- `/var/log/messages` or `/var/log/syslog/`
+  - General messages, as well as system-related information. 
+- `/var/log/auth.log` or `/var/log/secure`
+  - Store authentication logs, including both successful and failed logins and authentication methods.
+- `/var/log/boot.log`
+  - Related to booting and any messages logged during startup.
+- `/var/log/maillog` or `var/log/mail.log` 
+  - stores all logs related to mail servers.
+
+
+#### Conclusion on Covering Tracks 
+
+- Option is to corrupt a log file - this happens all the time
+- Best option is be selective and delete the entries pertaining to your actions.
+
 - **Can also disable auditing ahead of time to prevent logs from being captured**
+
+- Tools:
+  - ccleaner --> automate the system cleaning, scrub online history, log files, etc. [Windows]
+  - MRUblaster [Windows]
+  - Meterpreter on MSF have **clearev** to clear all event logs remotely. [Kali Linux using MSF]
 
 ## <u>Rootkits</u>
 
