@@ -1,6 +1,7 @@
 # System Hacking
 
 > ⚡︎ **This chapter has [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/5-System-Hacking)**
+
 ## Goals:
 1. **Gaining Access** - Uses information gathered to exploit the system
     - **Password Attacks:**
