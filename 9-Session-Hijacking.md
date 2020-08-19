@@ -2,7 +2,8 @@
 
 > ⚡︎ **This chapter has [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/10-Session-Hijacking)**
 
-- Attacker waits for a session to begin and after the victim authenticates, steals the session for himself
+*Attacker waits for a session to begin and after the victim authenticates, steals the session for himself*
+
 - **Steps**
   1. Sniff the traffic between the client and server
   2. Monitor the traffic and predict the sequence numbering
@@ -23,18 +24,27 @@
   - **Juggernaut**
   - **Hamster**
   - **Ferret**
-- **Countermeasures**
-  - Using unpredictable session IDs
-  - Limiting incoming connections
-  - Minimizing remote access
-  - Regenerating the session key after authentication
-  - Use IPSec to encrypt
-- **IPSec**
-  - **Transport Mode** - payload and ESP trailer are encrypted; IP header is not
-  - **Tunnel mode** - everything is encrypted; cannot be used with NAT
-  - **Architecture Protocols**
-    - **Authentication Header** - guarantees the integrity and authentication of IP packet sender
-    - **Encapsulating Security Payload** (ESP) - provides origin authenticity and integrity as well as confidentiality
-    - **Internet Key Exchange** (IKE) - produces the keys for the encryption process
-    - **Oakley** - uses Diffie-Hellman to create master and session keys
-    - ** Internet Security Association Key Management Protocol** (ISAKMP) - software that facilitates encrypted communication between two endpoints
+  
+## Countermeasures
+* **Session IDS**
+  - Using unpredictable (randomized) Session IDs
+  - Never use URL's with Sessions IDs
+  - Don't Re-use Session IDs
+- Use **HTTP-Only on Cookies** preventing XSS (Cross-Site Scripting)
+- Don't use HTTP protocol without encryption --> Use TLS/SSL [HTTPS]
+- Limiting incoming connections
+- Minimizing remote access
+- Regenerating the session key after authentication
+- Time - absolute / inactive *(e.g: 1h of inactivity the user will automatically log off)*
+- Use **MFA**
+- Use **IPSec to encrypt**
+
+### IPSec
+- **Transport Mode** - payload and ESP trailer are encrypted; IP header is not
+- **Tunnel mode** - everything is encrypted; cannot be used with NAT
+- **Architecture Protocols**
+  - **Authentication Header** - guarantees the integrity and authentication of IP packet sender
+  - **Encapsulating Security Payload** (ESP) - provides origin authenticity and integrity as well as confidentiality
+  - **Internet Key Exchange** (IKE) - produces the keys for the encryption process
+  - **Oakley** - uses Diffie-Hellman to create master and session keys
+  - **Internet Security Association Key Management Protocol** (ISAKMP) - software that facilitates encrypted communication between two endpoints
