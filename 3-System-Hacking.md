@@ -18,7 +18,7 @@
     - In Linux, append a dot in front of a file to hide it
 
 
-### <u>Password Attacks</u>
+## <u>Password Attacks</u>
 
 > ⚡︎ **Check out the practical labs(3) on [Dumping and Cracking SAM hashes](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/2-SAM-Hashes.md), [Rainbow Tables Basics](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/3-Rainbow-tables.md) and [LLMNR/NBT-NS](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/1-LLMNR-NBT-NS.md)** 
 - **Non-electronic** - social engineering attacks - most effective.
@@ -68,7 +68,7 @@
 
 ⚠️ **SAM (Security Account Manager)** is a database file present in Windows machines that stores user accounts and security descriptors for users on a local computer. It stores users passwords in a hashed format (in LM hash and NTLM hash). Because a hash function is one-way, this provides some measure of security for the storage of the passwords.
     
-### <u>Authentication and Passwords</u>
+## <u>Authentication and Passwords</u>
 
 - **Three Different Types**
   - **Something You Are** - Uses biometrics to validate identity (retina, fingerprint, etc.)
@@ -300,7 +300,7 @@ In Windows, you need to clear **application**, **system** and **security logs**.
   - stores all logs related to mail servers.
 
 
-#### Conclusion on Covering Tracks 
+### Conclusion on Covering Tracks 
 
 - Option is to corrupt a log file - this happens all the time
 - Best option is be selective and delete the entries pertaining to your actions.

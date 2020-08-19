@@ -2,7 +2,7 @@
 
 > ⚡︎ **This chapter has [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/7-Sniffing)**
 
-### <u>Basic Knowledge</u>
+## <u>Basic Knowledge</u>
 
  - Sniffing is capturing packets as they pass on the wire to review for interesting information
  - **MAC**  (Media Access Control) - physical or burned-in address - assigned to NIC for communications at the Data Link layer
@@ -18,30 +18,30 @@
     - Hubs by default have one collision domain
     - Switches have a collision domain for each port
 
-### <u>Protocols Susceptible</u>
+## <u>Protocols Susceptible</u>
 
-- SMTP is sent in plain text and is viewable over the wire.  SMTP v3 limits the information you can get, but you can still see it.
-- FTP sends user ID and password in clear text
-- TFTP passes everything in clear text
-- IMAP, POP3, NNTP and HTTP all  send over clear text data
-- TCP shows sequence numbers (usable in session hijacking)
-- TCP and UCP show open ports
-- IP shows source and destination addresses
+- **SMTP** is sent in plain text and is viewable over the wire. SMTP v3 limits the information you can get, but you can still see it.
+- **FTP** sends user ID and password in clear text
+- **TFTP** passes everything in clear text
+- **IMAP**, **POP3**, **NNTP** and **HTTP** all  send over clear text data
+- **TCP** shows sequence numbers (usable in session hijacking)
+- **TCP** and **UCP** show open ports
+- **IP** shows source and destination addresses
 
-### <u>ARP</u>
+## <u>ARP</u>
 
 - Stands for Address Resolution Protocol
 - Resolves IP address to a MAC address
 - Packets are ARP_REQUEST and ARP_REPLY
 - Each computer maintains it's own ARP cache, which can be poisoned
 - **Commands**
-  - arp -a - displays current ARP cache
-  - arp -d * - clears ARP cache
+  - **`arp -a`** displays current ARP cache
+  - **`arp -d *`** clears ARP cache
 - Works on a broadcast basis - both requests and replies are broadcast to everyone
 - **Gratuitous ARP** - special packet to update ARP cache even without a request
   - This is used to poison cache on other machines
 
-### <u>IPv6</u>
+## <u>IPv6</u>
 
 - Uses 128-bit address
 - Has eight groups of four hexadecimal digits
@@ -64,14 +64,15 @@
 - Scope applies for multicast and anycast
 - Traditional network scanning is **computationally less feasible**
 
-### <u>Wiretapping</u>
+## <u>Wiretapping</u>
+*Wiretapping, also known as telephone tapping, is the process of monitoring telephone and Internet conversations by a third party, often by covert means.*
 
-- **Lawful interception** - legally intercepting communications between two parties
-- **Active** - interjecting something into the communication
-- **Passive** - only monitors and records the data
-- **PRISM** - system used by NSA to wiretap external data coming into US
+- **Lawful interception** - Legally intercepting communications between two parties
+- **Active** - Interjecting something into the communication
+- **Passive** - Only monitors and records the data
+- **PRISM** - System used by NSA to wiretap external data coming into US
 
-### <u>Active and Passive Sniffing</u>
+## <u>Active and Passive Sniffing</u>
 
 - **Passive sniffing** - watching network traffic without interaction; only works for same collision domain
 - **Active sniffing** - uses methods to make a switch send traffic to you even though it isn't destined for your machine
@@ -81,7 +82,7 @@
 - **Network tap** - special port on a switch that allows the connected device to see all traffic
 - **Port mirroring** - another word for span port
 
-### <u>MAC Flooding</u>
+## <u>MAC Flooding</u>
 
 - Switches either flood or forward data
 - If a switch doesn't know what MAC address is on a port, it will flood the data until it finds out
@@ -99,39 +100,44 @@
 - **Switch port stealing** - tries to update information regarding a specific port in a race condition
 - MAC Flooding will often destroy the switch before you get anything useful, doesn't last long and it will get you noticed.  Also, most modern switches protect against this.
 
-### <u>ARP Poisoning</u>
+## <u>ARP Poisoning</u>
+![arp](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/ARP_Spoofing.svg/1200px-ARP_Spoofing.svg.png)
+***ARP spoofing** is a type of attack in which a malicious actor sends falsified ARP (Address Resolution Protocol) messages over a local area network. This results in the linking of an attacker's MAC address with the IP address of a legitimate computer or server on the network.*
 
-- Also called ARP spoofing or gratuitous ARP
+- **Also called ARP spoofing or gratuitous ARP**
 - This can trigger alerts because of the constant need to keep updating the ARP cache of machines
 - Changes the cache of machines so that packets are sent to you instead of the intended target
 - **Countermeasures**
   - Dynamic ARP Inspection using DHCP snooping
-  - XArp can also watch for this
+  - Can use Static ARP ACL to map
+  - Header to Payload validation
+  - XArp software  can also watch for this
   - Default gateway MAC can also be added permanently into each machine's cache
-- **Tools**
+- **Tools for ARP Poisoning**
   - Cain and Abel
   - WinArpAttacker
   - Ufasoft
   - dsniff
 
-### <u>DHCP Starvation</u>
+## <u>DHCP Starvation</u>
+*Is an attack that targets DHCP servers whereby forged DHCP requests are crafted by an attacker with the intent of exhausting all available IP addresses that can be allocated by the DHCP server.*
 
 - Attempt to exhaust all available addresses from the server
 - Attacker sends so many requests that the address space allocated is exhausted
-- DHCPv4 packets - DHCPDISCOVER, DHCPOFFER, DHCPREQUEST, DHCPACK
+- DHCPv4 packets - `DHCPDISCOVER`, `DHCPOFFER`, `DHCPREQUEST`, `DHCPACK`
 - DHCPv6 packets - Solicit, Advertise, Request (Confirm/Renew), Reply
 - **DHCP Steps**
-  1. Client sends DHCPDISCOVER
-  2. Server responds with DHCPOFFER
-  3. Client sends request for IP with DHCPREQUEST
-  4. Server sends address and config via DHCPACK
+  1. Client sends `DHCPDISCOVER`
+  2. Server responds with `DHCPOFFER`
+  3. Client sends request for IP with `DHCPREQUEST`
+  4. Server sends address and config via `DHCPACK`
 - **Tools**
   - Yersinia
   - DHCPstarv
 - Mitigation is to configure DHCP snooping
 - **Rogue DHCP Server** - setup to offer addresses instead of real server.  Can be combined with starvation to real server.
 
-### <u>Spoofing</u>
+## <u>Spoofing</u>
 
 - **MAC Spoofing** - changes your MAC address.  Benefit is CAM table uses most recent address.
 - Port security can slow this down, but doesn't always stop it
@@ -139,23 +145,29 @@
 - **IRDP Spoofing** - hacker sends ICMP Router Discovery Protocol messages advertising a malicious gateway
 - **DNS Poisoning** - changes where machines get their DNS info from, allowing attacker to redirect to malicious websites
 
-### <u>Sniffing Tools</u>
+## <u>Sniffing Tools</u>
 
 - **Wireshark**
   - Previously known as Ethereal
   - Can be used to follow streams of data
   - Can also filter the packets so you can find a specific type or specific source address
   - **Example filters**
-    - ! (arp or icmp or dns) - filters out the "noise" from ARP, DNS and ICMP requests
-    - http.request - displays HTTP GET requests
-    - tcp contains string - displays TCP segments that contain the word "string"
-    - ip.addr==172.17.15.12 && tcp.port==23 - displays telnet packets containing that IP
-    - tcp.flags==0x16 - filters TCP requests with ACK flag set
+    - `!` (arp or icmp or dns)
+        - Filters out the "noise" from ARP, DNS and ICMP requests
+    - `http.request` 
+        - Displays HTTP GET requests
+    - `tcp contains string`
+        - Displays TCP segments that contain the word "string"
+    - **`ip.addr==172.17.15.12 && tcp.port==23`**
+        - Displays telnet packets containing that IP
+    - **`tcp.flags==0x16`**
+        - Filters TCP requests with ACK flag set
 - **tcpdump**
   - Recent version is WinDump (for Windows)
   - **Syntax**
-    - tcpdump flag(s) interface
-    - tcpdump -i eth1 - puts the interface in listening mode
+    - <**tcpdump flag(s) interface**>
+    - `tcpdump -i eth1`
+        - Puts the interface in listening mode
 - **tcptrace**
   - Analyzes files produced by packet capture programs such as Wireshark, tcpdump and Etherpeek
 - **Other Tools**

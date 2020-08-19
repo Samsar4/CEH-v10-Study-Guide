@@ -26,7 +26,8 @@
 - **Draw network diagrams** - Shows logical and physical pathways into networks
 - **Use proxies** - Obscures efforts to keep you hidden
 - **Pentest Report** - Document everything that you find
-### <u>Identifying Targets</u>
+
+## <u>Identifying Targets</u>
 
 - The easiest way to scan for live systems is through ICMP.
 
