@@ -1,12 +1,12 @@
 # Hacking Web Applications
 
-### <u>Web Organizations</u>
+## <u>Web Organizations</u>
 
-- **Internet Engineering Task Force** (IETF) - creates engineering documents to help make the Internet work better
-- **World Wide Web Consortium** (W3C) - a standards-developing community
-- **Open Web Application Security Project** (OWASP) - organization focused on improving the security of software
+- **Internet Engineering Task Force (IETF)** - Creates engineering documents to help make the Internet work better.
+- **World Wide Web Consortium (W3C)** - A standards-developing community.
+- **Open Web Application Security Project (OWASP)** - Organization focused on improving the security of software.
 
-### <u>OWASP Web Top 10</u>
+## <u>OWASP Web Top 10</u>
 
 ![owasp](https://sdtimes.com/wp-content/uploads/2017/11/OWASP.png)
 
@@ -23,7 +23,7 @@
 
 **WebGoat** - project maintained by OWASP which is an insecure web application meant to be tested
 
-### <u>Web Application Attacks</u>
+## <u>Web Application Attacks</u>
 
 - Most often hacked before of inherent weaknesses built into the program
 - First step is to identify entry points (POST data, URL parameters, cookies, headers, etc.)
@@ -40,8 +40,6 @@ Injecting SQL commands into input fields to produce output
 
 SQL injection usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
 
-
-
 **SQL Syntax - Basics:**
 
 SQL Command | Info.
@@ -55,13 +53,18 @@ SQL Command | Info.
 ``CREATE INDEX`` | creates an index (search key)
 ``DROP INDEX`` | deletes an index
 
-Examples of SQL Injection:
+---
+
+### SQL Injection in action
+
 - On the UserId input field, you can enter: 
     - `105 OR 1=1`.
+
 - The is valid and will not return only UserId 105, this injection will return ALL rows from the "Users" table, **since OR 1=1 is always TRUE**. Then, the SQL statement will look like this:
     - `SELECT * FROM Users WHERE UserId = 105 OR 1=1;`
 
 - Double dash (`--`) tells the server to ignore the rest of the query (in this example, the password check)
+
 - `"' OR 1 = 1 --"` into a login field - basically tells the server **if 1 = 1 (always true)** to allow the login.
 
 - Based on `=` is always true;
@@ -159,5 +162,4 @@ Adds header response data to an input field so server splits the response
   - Is not an attack in and of itself - must be combined with another attack
  
 ### Countermeasures
-input scrubbing for injection, SQL parameterization for SQL injection, keeping patched servers, turning off unnecessary services, ports and protocols
-
+Input scrubbing for injection, SQL parameterization for SQL injection, keeping patched servers, turning off unnecessary services, ports and protocols

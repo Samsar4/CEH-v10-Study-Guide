@@ -1,6 +1,6 @@
 # Hacking Web Servers
 
-### <u>Web Server Attack Methodology</u>
+## <u>Web Server Attack Methodology</u>
 
 - **Information Gathering** - Internet searches, whois, reviewing robots.txt
 
@@ -36,7 +36,7 @@
 - **Session Hijacking**
 - **Web Server Password Cracking**
 
-### <u>Web Server Architecture</u>
+## <u>Web Server Architecture</u>
 
 - **Most Popular Servers** - Apache, IIS and Nginx
 - Apache runs configurations as a part of a module within special files (http.conf, etc.)
@@ -61,7 +61,7 @@
   - **4xx: Client Error** - request contains bad syntax or cannot be fulfilled
   - **5xx: Server Error** - server failed to fulfill an apparently valid request
 
-### <u>Web Server Attacks</u>
+## <u>Web Server Attacks</u>
 
 - **DNS Amplification** - uses recursive DNS to DoS a target; amplifies DNS answers to target until it can't do anything
 - **Directory Transversal** (../ or dot-dot-slash) - requests file that should not be accessible from web server
