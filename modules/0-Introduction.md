@@ -122,7 +122,7 @@ There are two types of Recon:
 
 ## <u>Penetration Test - Basics</u>
 
-> **This subject will be covered with details in [Chapter 14 - Pentesting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/14-Pentesting.md).**
+> **This subject will be covered with details in [Chapter 14 - Pentesting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/14-Pentesting.md).**
 
 - Clearly defined, full scale test of security controls
 - Phases
