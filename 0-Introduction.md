@@ -86,8 +86,12 @@ There is an inter dependency between these three attributes. When **security goe
 
 ## <u>Vulnerabilities</u>
 
-- **Common Vulnerability Scoring System** (CVSS) - places numerical score based on severity
-- **National Vulnerability Database** (NVD) - US government repository of vulnerabilities
+- **CVSS - Common Vulnerability Scoring System** 
+  - Places numerical score based on severity
+- **CVE – Common Vulnerabilities and Exposures** 
+  - Is a list of publicly disclosed vulnerabilities and exposures that is maintained by MITRE.
+- **NVD - National Vulnerability Database** 
+  -  is a database, maintained by NIST, that is fully synchronized with the MITRE CVE list; US Gov. vulnerabilities repository.
 
 ### Vulnerability Categories
 
@@ -116,7 +120,9 @@ There are two types of Recon:
     - e.g: Rookit, Trojan, Backdoor can be used.
 5. **Covering Tracks** - Steps taken to conceal success and intrusion; Not be noticed; Clear the logs;
 
-## <u>Penetration Test</u>
+## <u>Penetration Test - Basics</u>
+
+> **This subject will be covered with details in [Chapter 14 - Pentesting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/14-Pentesting.md).**
 
 - Clearly defined, full scale test of security controls
 - Phases
