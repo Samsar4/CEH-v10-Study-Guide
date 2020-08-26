@@ -38,7 +38,6 @@ There is an inter dependency between these three attributes. When **security goe
 <img width="50%" src="https://www.simplilearn.com/ice9/free_resources_article_thumb/types-hacker.JPG">
 </p>
 
-
 - **White Hat** - Ethical hackers.
 - **Black Hat** - Hackers that seek to perform malicious activities.
 - **Gray Hat** - Hackers that perform good or bad activities but do not have the permission of the organization they are hacking against.
@@ -61,28 +60,47 @@ There is an inter dependency between these three attributes. When **security goe
 - **Daisy Chaining / Pivotting** - It involves gaining access to a network and /or computer and then using the same information to gain access to multiple networks and computers that contains desirable information. 
 - **Doxxing** - Publishing PII about an individual usually with a malicious intent.
 - **Enterprise Information Security Architecture** (EISA) - process that determines how systems work within an organization.
-- **Incident management** - Deals with specific incidents to mitigate the attack.
+- **Incident management** - Deals with specific incidents to mitigate the attack. 
 
+## <u> Attack Vectors </u>
+*Path by which a hacker can gain access to a host in order to deliver a payload or malicious outcome*
 
-
-## <u> Attack Types and Vectors </u>
-
-### Attack Vectors
 - **APT - Advanced Persistent Threats**
     - An advanced persistent threat is a stealthy threat actor, typically a nation state or state-sponsored group, which gains unauthorized access to a computer network and remains undetected for an extended period.
 - **Botnets**
     - Huge network of compromised hosts. (used for DDoS).
-- **Cloud computing**
 - **Insider attacks**
     - Disgruntled employee can damage assets from inside.
+- **Cloud computing**
 - **Mobile threats**
 - **Viruses, worms, and malware**
+- **Unpatched software**
+- **Deficient security policies**
+- **Social networking**
+- **Audit compliance**
+- **Cybercrime**
 
-### Attack Types
+## <u>Attack Types</u>
 - **Operating System** (OS) - Attacks targeting OS flaws or security issues inside such as guest accounts or default passwords
 - **Application Level** - Attacks on programming code and software logic
 - **Shrink-Wrap Code** - Act of exploiting holes in unpatched or poorly-configured software.
 - **Misconfiguration** - Attack takes advantage of systems that are misconfigured due to improper configuration or default configuration
+
+## <u>Five Phases of Hacking</u>
+
+1. **Reconnaissance**  - Gathering evidence about targets; 
+There are two types of Recon:
+    - **Passive Reconnaissance**: Gain information about targeted computers and networks **without direct interaction with the systems**.
+        - e.g: Google Search, Public records, New releases, Social Media, Wardrive scanning networks around.
+    - **Active Reconnaissance**: Envolves direct interaction with the target.
+        - e.g: Make a phone call to the target, Job interview; tools like Nmap, Nessus, OpenVAS, Nikto and Metasploit can be considered as Active Recon.
+
+2. **Scanning & Enumeration** - Obtaining more in-depth information about targets.
+    - e.g: Network Scanning, Port Scanning, Which versions of services are running.
+3. **Gaining Access** - Attacks are leveled in order to gain access to a system.
+4. **Maintaining Access** - Items put in place to ensure future access.
+    - e.g: Rookit, Trojan, Backdoor can be used.
+5. **Covering Tracks** - Steps taken to conceal success and intrusion; Not be noticed; Clear the logs;
 
 ## <u>Vulnerabilities</u>
 
@@ -102,23 +120,6 @@ There is an inter dependency between these three attributes. When **security goe
 - **Design flaws** - flaws inherent to system design such as encryption and data validation
 - **Operating System Flaws** - flaws specific to each OS
 - **Default passwords** - leaving default passwords that come with system/application
-
-
-## <u>Five Phases of Hacking</u>
-
-1. **Reconnaissance**  - Gathering evidence about targets; 
-There are two types of Recon:
-    - **Passive Reconnaissance**: Gain information about targeted computers and networks without actively engaging with the systems
-        - e.g: Google Search, Public records, New releases, Social Media, Wardrive scanning networks around.
-    - **Active Reconnaissance**: Envolves direct interaction with the target.
-        - e.g: Make a phone call to the target, Job interview; tools like Nmap, Nessus, OpenVAS, Nikto and Metasploit can be considered as Active Recon.
-
-2. **Scanning & Enumeration** - Obtaining more in-depth information about targets.
-    - e.g: Network Scanning, Port Scanning, Which versions of services are running.
-3. **Gaining Access** - Attacks are leveled in order to gain access to a system.
-4. **Maintaining Access** - Items put in place to ensure future access.
-    - e.g: Rookit, Trojan, Backdoor can be used.
-5. **Covering Tracks** - Steps taken to conceal success and intrusion; Not be noticed; Clear the logs;
 
 ## <u>Penetration Test - Basics</u>
 
