@@ -60,7 +60,7 @@ There is an inter dependency between these three attributes. When **security goe
 - **Daisy Chaining / Pivotting** - It involves gaining access to a network and /or computer and then using the same information to gain access to multiple networks and computers that contains desirable information. 
 - **Doxxing** - Publishing PII about an individual usually with a malicious intent.
 - **Enterprise Information Security Architecture** (EISA) - process that determines how systems work within an organization.
-- **Incident management** - Deals with specific incidents to mitigate the attack. 
+
 
 ## <u> Attack Vectors </u>
 *Path by which a hacker can gain access to a host in order to deliver a payload or malicious outcome*
@@ -80,12 +80,6 @@ There is an inter dependency between these three attributes. When **security goe
 - **Audit compliance**
 - **Cybercrime**
 
-## <u>Attack Types</u>
-- **Operating System** (OS) - Attacks targeting OS flaws or security issues inside such as guest accounts or default passwords
-- **Application Level** - Attacks on programming code and software logic
-- **Shrink-Wrap Code** - Act of exploiting holes in unpatched or poorly-configured software.
-- **Misconfiguration** - Attack takes advantage of systems that are misconfigured due to improper configuration or default configuration
-
 ## <u>Five Phases of Hacking</u>
 
 1. **Reconnaissance**  - Gathering evidence about targets; 
@@ -101,6 +95,19 @@ There are two types of Recon:
 4. **Maintaining Access** - Items put in place to ensure future access.
     - e.g: Rookit, Trojan, Backdoor can be used.
 5. **Covering Tracks** - Steps taken to conceal success and intrusion; Not be noticed; Clear the logs;
+
+## <u>Attack Types</u>
+**Operating System** (OS) - Attacks targeting OS flaws or security issues inside such as guest accounts or default passwords
+  - **Vectors**: Buffer overflows, Protocol Implementations, software defects, patch levels, authentication schemes
+
+**Application Level** - Attacks on programming code and software logic
+  - **Vectors**: Buffer overflows, Bugs, XSS, DoS, SQL Injection, MitM
+
+**Shrink-Wrap Code** - Act of exploiting holes in unpatched or poorly-configured software.
+  - **Examples**: Software defect in version 1.0; DEfect in example CGI scripts; Default passwords 
+
+**Misconfiguration** - Attack takes advantage of systems that are misconfigured due to improper configuration or default configuration
+  - **Examples**: Improper permissions of SQL users; Access-list permit all
 
 ## <u>Vulnerabilities</u>
 
@@ -135,6 +142,19 @@ There are two types of Recon:
   - **White Box** - When the attacker have complete knowledge of the system provided by the owner/target.
   - **Gray Box** - When the attacker has some knowledge of the system and/or network
 
+
+## InfoSec Policies
+1. **Policies** - High-level statements about protecting information; Business rules
+    - Common Security Policies:
+      - System Policy
+      - Partner Policy
+      - Network Policy
+      - User Policy
+      - Provider Policy
+2. **Procedures** - Set of details steps to accomplish a goal; Instructions for implementation
+3. **Guidelines** - Advice on actions given a situation; Recommended, not mandatory
+
+
 ## <u>Security Controls</u>
 
 - **Directive** - Also known as **procedural controls** because they deal with company procedures such as security policies, operations plans, and guidelines. 
@@ -153,6 +173,11 @@ There are two types of Recon:
 - **Corrective control**: Mitigates the impact of a manifested threat. (Backups can mitigate a ransomware; IPS can block an attacker)
 
 *Most of security controls are preventive phase controls*.
+
+⚠️ **Defense in Depth**: Multiple layers of security controls; Provides redundancy in the event of a control failure. (e.g.: image below)
+
+![defense-in-depth](https://www.fairwarning.com/wp-content/uploads/2019/03/Defense-in-Depth-for-Cloud-Security-Rainbow-Diagram.png)
+
 
 ### Types of  Security Controls
 
@@ -222,6 +247,15 @@ There are two types of Recon:
 - **CSIRT** - "Computer Security Incident Response Team" CSIRT provided a single point of contact when reporting computer security incidents
 
 - **ITIL** - "Information Technology Infrastructure Library" - An operational framework developed in the '80s that standardizes IT management procedures 
+
+## Incident Management
+- **Incident management** - Deals with specific incidents to mitigate the attack. 
+  1. **Prepare:** Select people, assign rules, define tools to handle the incident.
+  2. **Identify & Detect:** Determine an incident has ocurred (IDS, SIEM, AV)
+  3. **Contain:** Limit the damage; Isolate hosts; Contact system owners.
+  4. **Eradicate:** Remove the cause of incident; Patch if needed.
+  5. **Recovery:** Get back into production; Monitor affected systems.
+  6. **Lessons Learned:** Document what happened and why; Transfer knowledge.
 
 ## <u>Essential Knowledge</u>
 

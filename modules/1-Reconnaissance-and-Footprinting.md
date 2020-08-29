@@ -7,6 +7,13 @@ Footprinting is a part of reconnaissance process which is used for gathering pos
 
 When used in the computer security lexicon, "Footprinting" generally refers to one of the pre-attack phases; tasks performed before doing the actual attack. **Some of the tools used for Footprinting are Sam Spade, nslookup, traceroute, Nmap and neotrace.**
 
+## Footprinting Types: <u>Active and Passive</u>
+
+- **Active** - requires attacker to touch the device or network
+  - Social engineering and other communication that requires interaction with target
+- **Passive** - measures to collect information from publicly available sources
+  - Websites, DNS records, business information databases
+
 ### Footprinting helps to:
 
 - **Know Security Posture** – The data gathered will help us to get an overview of the security posture of the company such as details about the presence of a firewall, security configurations of applications etc.
@@ -33,16 +40,41 @@ Can be:
   - **Anonymous** - information gathering without revealing anything about yourself
   - **Pseudonymous** - making someone else take the blame for your actions
 
-### <u>Types of Footprinting</u>
-
-- **Active** - requires attacker to touch the device or network
-  - Social engineering and other communication that requires interaction with target
-- **Passive** - measures to collect information from publicly available sources
-  - Websites, DNS records, business information databases
-
 **Competitive Intelligence** - information gathered by businesses about competitors
 
 **Alexa.com** - resource for statistics about websites
+
+## Footprinting Objectives
+
+- **Network**
+  - DNS
+  - IP networks
+  - Acessible Systems
+  - Websites 
+  - Access Control 
+  - VPN Endpoints 
+  - Firewall vendors 
+  - IDS Systems 
+  - Routing/Routed Protocols 
+  - Phone System (Analog/VoIP) 
+
+- **Organization**
+  - Org Structure
+  - Websites
+  - Phone Numbers
+  - Directory Information
+  - Office Locations
+  - Company History
+  - Business Associations
+
+- **Hosts**
+  - Listening Services
+  - Operating System Versions
+  - Internet Reachability
+  - Enumerated Information
+  - SNMP Info
+  - Users/Groups
+  - Mobile Devices
 
 ## <u>Methods and Tools</u>
 
