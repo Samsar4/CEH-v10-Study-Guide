@@ -4,17 +4,27 @@
 
 ### 📢 About this repo
 
-* This is a *'Open Source Study Guide'* forked from 
+* **This is a unofficial Study Guide for CEH, forked from:**
     - https://github.com/scottymcraig/CEHv10StudyGuide 
-* The objective of this repo is to help you pass the [CEH v10](https://iclass.eccouncil.org/our-courses/certified-ethical-hacker-ceh/) exam without paying any expensive training course.
 
-* **This study guide have some [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/README.md) to test your knowledge and learn by doing.**
+* The objective of this repo is to clarify all topics presented on [CEH v10](https://iclass.eccouncil.org/our-courses/certified-ethical-hacker-ceh/).
+
+* Changes:
+    - [➕] Increased information details in general
+    - [➕] Practical labs added
+    - [➕] Images added for clear understanding
+    - [➕] Content segregation  
+
+
+---
+
+⚡︎ **This study guide have some [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/README.md) to test your knowledge and learn by doing.**
 
 ---
 
 ## Index
 
-0. [Introduction](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/0-Introduction.md)
+0. [Introduction to Ethical Hacking](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/0-Introduction.md)
 1. [Reconnaissance and Footprinting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/1-Reconnaissance-and-Footprinting.md)
 2. [Scanning and Enumeration](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/2-Scanning-and-Enumeration.md)
 3. [System Hacking](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/3-System-Hacking.md)

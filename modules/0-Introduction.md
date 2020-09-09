@@ -38,9 +38,13 @@ There is an inter dependency between these three attributes. When **security goe
 <img width="50%" src="https://www.simplilearn.com/ice9/free_resources_article_thumb/types-hacker.JPG">
 </p>
 
-- **White Hat** - Ethical hackers.
-- **Black Hat** - Hackers that seek to perform malicious activities.
-- **Gray Hat** - Hackers that perform good or bad activities but do not have the permission of the organization they are hacking against.
+> - **Black Hat** - Hackers that seek to perform malicious activities.
+> - **Gray Hat** - Hackers that perform good or bad activities but do not have the permission of the organization they are hacking against.
+> - **White Hat** - Ethical hackers; They use their skills to improve security by exposing vulnerabilities before malicious hackers.
+
+**Script Kiddie / Skiddies** - Unskilled individual who uses malicious scripts or programs, such as a web shell, developed by others to attack computer systems and networks and deface websites. 
+
+**State-Sponsored Hacker** - Hacker that is hired by a government or entity related.
 
 **Hacktivist** - Someone who hacks for a cause; political agenda.
 
@@ -48,74 +52,104 @@ There is an inter dependency between these three attributes. When **security goe
 
 **Cyberterrorist** - Motivated by religious or political beliefs to create fear or disruption.
 
-**State-Sponsored Hacker** - Hacker that is hired by a government or entity related.
-
 ## <u>Hacking Vocabulary</u>
 
 - **Hack value** - Perceived value or worth of a target as seen by the attacker.
 - **Vulnerability** - A system flaw, weakness on the system (on design, implementation etc).
+- **Threat** - Exploits a vulnerability.
 - **Exploit** - Exploits are a way of gaining access to a system through a security flaw and taking advantage of the flaw for their benefit.
 - **Payload** - Component of an attack; is the part of the private user text which could also contain malware such as worms or viruses which performs the malicious action; deleting data, sending spam or encrypting data.
 - **Zero-day attack** - Attack that occurs before a vendor knows or is able to patch a flaw.
 - **Daisy Chaining / Pivotting** - It involves gaining access to a network and /or computer and then using the same information to gain access to multiple networks and computers that contains desirable information. 
 - **Doxxing** - Publishing PII about an individual usually with a malicious intent.
-- **Enterprise Information Security Architecture** (EISA) - process that determines how systems work within an organization.
+- **Enterprise Information Security Architecture** (EISA) - determines the structure and behavior of organization's information systems through processes, requirements, principles and models.
 
+## <u> Threat Categories </u>
+* **Network Threats**
+  - Information gathering
+  - Sniffing and eavesdropping
+  - DNS/ARP Poisoning
+  - MITM (Man-in-the-Middle Attack)
+  - DoS/DDoS
+  - Password-based attacks
+  - Firewall and IDS attack
+  - Session Hijacking
+
+* **Host Threats**
+  - Password cracking
+  - Malware attacks
+  - Footprinting
+  - Profiling
+  - Arbitrary code execution
+  - Backdoor access
+  - Privilege Escalation
+  - Code Execution
+
+* **Application Threats**
+  - Injection Attacks
+  - Improper data/input validation
+  - Improper error handling and exeception management
+  - Hidden-field manipulation
+  - Broken session management
+  - Cryptography issues
+  - SQL injection
+  - Phishing
+  - Buffer Overflow
+  - Information disclosure
+  - Security Misconfigurations
 
 ## <u> Attack Vectors </u>
 *Path by which a hacker can gain access to a host in order to deliver a payload or malicious outcome*
 
 - **APT - Advanced Persistent Threats**
-    - An advanced persistent threat is a stealthy threat actor, typically a nation state or state-sponsored group, which gains unauthorized access to a computer network and remains undetected for an extended period.
+  - An advanced persistent threat is a stealthy threat actor, typically a nation state or state-sponsored group, which gains unauthorized access to a computer network and remains undetected for an extended period; Typically uses zero day attacks.
+- **Cloud computing / Cloud based technologies**
+  - Flaw in one client's application cloud allow attacker to access other client's data
+- **Viruses, worms, and malware**
+  - Viruses and worms are the most prevalent networking threat that are capable of infecting a network within seconds.
+- **Ransomware**
+  - Restricts access to the computer system's files and folders and demands an online ransom payment to the attacker in order to remove the restrictions.
+- **Mobile Device threats**
 - **Botnets**
-    - Huge network of compromised hosts. (used for DDoS).
+  - Huge network of compromised systems used by an intruder to perform various network attacks
 - **Insider attacks**
     - Disgruntled employee can damage assets from inside.
-- **Cloud computing**
-- **Mobile threats**
-- **Viruses, worms, and malware**
-- **Unpatched software**
-- **Deficient security policies**
-- **Social networking**
-- **Audit compliance**
-- **Cybercrime**
+    - Huge network of compromised hosts. (used for DDoS).
 
-## <u>Five Phases of Hacking</u>
+- **Phishing attacks**
+- **Web Application Threats**
+  - Attacks like SQL injection, XSS (Cross-site scripting)...
+- **IoT Threats**
 
-1. **Reconnaissance**  - Gathering evidence about targets; 
-There are two types of Recon:
-    - **Passive Reconnaissance**: Gain information about targeted computers and networks **without direct interaction with the systems**.
-        - e.g: Google Search, Public records, New releases, Social Media, Wardrive scanning networks around.
-    - **Active Reconnaissance**: Envolves direct interaction with the target.
-        - e.g: Make a phone call to the target, Job interview; tools like Nmap, Nessus, OpenVAS, Nikto and Metasploit can be considered as Active Recon.
-
-2. **Scanning & Enumeration** - Obtaining more in-depth information about targets.
-    - e.g: Network Scanning, Port Scanning, Which versions of services are running.
-3. **Gaining Access** - Attacks are leveled in order to gain access to a system.
-4. **Maintaining Access** - Items put in place to ensure future access.
-    - e.g: Rookit, Trojan, Backdoor can be used.
-5. **Covering Tracks** - Steps taken to conceal success and intrusion; Not be noticed; Clear the logs;
 
 ## <u>Attack Types</u>
-**Operating System** (OS) - Attacks targeting OS flaws or security issues inside such as guest accounts or default passwords
-  - **Vectors**: Buffer overflows, Protocol Implementations, software defects, patch levels, authentication schemes
+### 1. Operating System
+*Attacks targeting OS flaws or security issues inside such as guest accounts or default passwords.*
+>  - **Vectors**: Buffer overflows, Protocol Implementations, software defects, patch levels, authentication schemes
 
-**Application Level** - Attacks on programming code and software logic
-  - **Vectors**: Buffer overflows, Bugs, XSS, DoS, SQL Injection, MitM
+### 2. Application Level
+*Attacks on programming code and software logic.*
+>  - **Vectors**: Buffer overflows, Bugs, XSS, DoS, SQL Injection, MitM
 
-**Shrink-Wrap Code** - Act of exploiting holes in unpatched or poorly-configured software.
-  - **Examples**: Software defect in version 1.0; DEfect in example CGI scripts; Default passwords 
+### 3. Misconfiguration
+*Attack takes advantage of systems that are misconfigured due to improper configuration or default configuration.*
 
-**Misconfiguration** - Attack takes advantage of systems that are misconfigured due to improper configuration or default configuration
-  - **Examples**: Improper permissions of SQL users; Access-list permit all
+>  - **Examples**: Improper permissions of SQL users; Access-list permit all
+
+### 4. Shrink-Wrap Code
+*Act of exploiting holes in unpatched or poorly-configured software.*
+>  - **Examples**: Software defect in version 1.0; DEfect in example CGI scripts; Default passwords 
 
 ## <u>Vulnerabilities</u>
 
-- **CVSS - Common Vulnerability Scoring System** 
+- **CVSS - Common Vulnerability Scoring System** [[+]](https://nvd.nist.gov/vuln-metrics/cvss)
   - Places numerical score based on severity
-- **CVE – Common Vulnerabilities and Exposures** 
+  - ![cvss](https://3.bp.blogspot.com/-5V1cb_wTvsk/Wl78iF4Sd8I/AAAAAAAAF7U/KmK4pMXi54YworDgh4uI8aZtHgy0bbznQCLcBGAs/s1600/CVSS.png
+  )
+- **CVE – Common Vulnerabilities and Exposures** [[+]](https://cve.mitre.org/)
   - Is a list of publicly disclosed vulnerabilities and exposures that is maintained by MITRE.
-- **NVD - National Vulnerability Database** 
+  - ![cve](https://i0.wp.com/gbhackers.com/wp-content/uploads/2016/10/cve.png?resize=486%2C408&ssl=1)
+- **NVD - National Vulnerability Database**  [[+]](https://nvd.nist.gov/)
   -  is a database, maintained by NIST, that is fully synchronized with the MITRE CVE list; US Gov. vulnerabilities repository.
 
 ### Vulnerability Categories
@@ -127,6 +161,33 @@ There are two types of Recon:
 - **Design flaws** - flaws inherent to system design such as encryption and data validation
 - **Operating System Flaws** - flaws specific to each OS
 - **Default passwords** - leaving default passwords that come with system/application
+
+## <u>Five Phases of Hacking</u>
+
+### 1. **Reconnaissance**
+*Gathering evidence about targets*; There are two types of Recon:
+- **Passive Reconnaissance**: Gain information about targeted computers and networks **without direct interaction with the systems**.
+    - e.g: Google Search, Public records, New releases, Social Media, Wardrive scanning networks around.
+- **Active Reconnaissance**: Envolves direct interaction with the target.
+    - e.g: Make a phone call to the target, Job interview; tools like Nmap, Nessus, OpenVAS, Nikto and Metasploit can be considered as Active Recon.
+
+### 2. **Scanning & Enumeration**
+*Obtaining more in-depth information about targets.*
+- e.g: Network Scanning, Port Scanning, Which versions of services are running.
+
+### 3. **Gaining Access**
+*Attacks are leveled in order to gain access to a system.*
+- e.g: Can be done locally (offline), over a LAN or over the internet.
+  - e.g(2): Spoofing to exploit the system by pretending to be a legitimate user or different systems, they can send a data packet containing a bug to the target system in order to exploit a vulnerability.
+  - Can be done using many techniques like command injection, buffer overflow, DoS, brute forcing credentials, social engineering, misconfigurations etc.
+  
+### 4. **Maintaining Access**
+*Items put in place to ensure future access.*
+- e.g: Rookit, Trojan, Backdoor can be used.
+
+### 5. **Covering Tracks**
+*Steps taken to conceal success and intrusion; Not be noticed.*
+  - e.g: Clear the logs; Obfuscate trojans or malicious backdoors programs.
 
 ## <u>Penetration Test - Basics</u>
 
@@ -142,35 +203,65 @@ There are two types of Recon:
   - **White Box** - When the attacker have complete knowledge of the system provided by the owner/target.
   - **Gray Box** - When the attacker has some knowledge of the system and/or network
 
+## 3 Types of Active Defense 
+- **Annoyance**
+  - Involves tracking a hacker and leading him into a fake server, wasting his time — and making him easy to detect.
+- **Attribution**
+  - Identify an attacker; Uses tools to trace the source of an attack back to a specific location, or even an individual hacker.
+- **Attack**
+  - That is most controversial. To “hack back,” a company accesses an alleged hacker’s computer to delete its data or even to take revenge. Both of these steps are considered illegal. 
 
-## InfoSec Policies
-1. **Policies** - High-level statements about protecting information; Business rules
-    - Common Security Policies:
-      - System Policy
-      - Partner Policy
-      - Network Policy
-      - User Policy
-      - Provider Policy
-2. **Procedures** - Set of details steps to accomplish a goal; Instructions for implementation
-3. **Guidelines** - Advice on actions given a situation; Recommended, not mandatory
+## <u> Information Assurance (IA) </u>
+*Refers to the assurance of the Integrity, Availability, confidentiality, and authenticity of information and information systems during usage, processing, storage and transmission of information.*
+
+* **Processes that help achieving IA:**
+  - Developing local policy, process, and guidance.
+  - Designing network and user authetication strategy.
+  - Identifying network vulnerabilities and threats (Vulnerability assessments outline the security posture of the network).
+  - Idenfitying problems and resource requirements.
+  - Creating plan for identified resource requirements.
+  - Applying appropriate IA controls.
+  - Performing C&A (Certification and Accreditation) process of information systems helps to trace vulnerabilities, and implement sa fety measures.
+  - Providing information assurance training to all personnel in federal and private org.
+
+## <u>Information Security Management Program </u>
+*Combination of policies, processes, procedures, standards, and guidelines to establish the required **level of information security.***
+
+- Designed to ensure the business operates in a state of reduced risk.
+- It encompasses all organizational and operational processes and participants relevant to information security.
+
+![infosec](https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/950220d4b802bb726fe84470c7a13055b056a621/infosec.jpg)
 
 
-## <u>Security Controls</u>
+> ⚠️ **IA** focus on risk assessment, mitigation side of things; 
+> ⚠️ **InfoSec** focus on actually implementing security measures to safeguard systems.
 
-- **Directive** - Also known as **procedural controls** because they deal with company procedures such as security policies, operations plans, and guidelines. 
+## <u>EISA - Enterprise Information Security Architecture</u>
+*Set of requirements, process, principles, and models that determines the structure and behavior of an organization's information systems.*
 
-- **Deterrent control**: Deters the actor from attempting the threat.
-    - e.g: Warning Sign, SSH Login Banner.
+* **Goals of EISA**:
+  - Help in monitoring and detecting network behaviors
+  - Detect and recover from security breaches
+  - Prioritizing resources of an organization
+  - Help to perform risk assessment of an organization's IT assets.
+  - Cost prospective when incorporated in security provisions such as incident response, disaster recovery, event correlation, etc.
+
+## <u>Physical Security Controls</u> 
 
 - **Preventive control**: Deters the actor from performing the threat.
-    - e.g: Fence, Server Locks, Password Complexity, Firewall.
+    - e.g: Fence, Server Locks, Mantraps, etc.
 
 - **Detective control**: Recognizes an actor's threat.   
-    - e.g: Background check, CCTV, IDS/IPS.
+    - e.g: Background check, CCTV.
 
-- **Compensating control**: Provides alternative fixes to any of the above functions
+- **Deterrent control**: Deters the actor from **attempting** the threat.
+    - e.g: Warning Sign.
 
-- **Corrective control**: Mitigates the impact of a manifested threat. (Backups can mitigate a ransomware; IPS can block an attacker)
+- **Recovery**: Mitigates the impact of a manifested threat.
+    - e.g: Backups.
+
+- **Compensating control**: Provides alternative fixes to any of the above functions.
+
 
 *Most of security controls are preventive phase controls*.
 
@@ -183,15 +274,60 @@ There are two types of Recon:
 
 | Description    | Examples                                      |
 | -------------- | --------------------------------------------- |
-| Physical       | Guards, lights, cameras                       |
-| Technical      | Encryption, smart cards, access control lists |
-| Administrative | Training awareness, policies                  |
+| **Physical**   | Guards, lights, cameras, fire extinguishers, flood protection                     |
+| **Administrative** | Training awareness, policies, procedures and guidelines to infosec                 |
+| **Technical**    | IDS/IPS, Firewall, Encryption, Smart cards, Access control lists |
 
 | Description  | Examples                    |
 | ------------ | --------------------------- |
-| Preventative | authentication, alarm bells |
-| Detective    | audits, backups             |
-| Corrective   | restore operations          |
+| **Preventative** | authentication, alarm bells |
+| **Detective**    | audits, backups             |
+| **Corrective**   | restore operations          |
+
+## <u>Managing the Risk</u>
+**Risk** can be defined as a probability of the occurrence of a threat or an event that may damage, or cause loss or have other negative impact either from internal or external liabilities.
+
+### Risk matrix
+
+A **risk matrix** is used during **risk assessment** to define the level of risk by considering the category of **probability or likelihood** against the category of consequence **severity**. 
+
+ - This is a simple mechanism to increase visibility of risks and assist management decision making.
+
+![matrix](https://paladinrisk.com.au/wp-content/uploads/2018/11/risk-1-1024x434.jpg)
+
+### Risk management
+*Is the identification, evaluation, and prioritization of risks followed by coordinated and economical application of resources to minimize, monitor, and control the probability or impact of unfortunate events or to maximize the realization of opportunities.*
+
+### Phases of Risk Management
+
+<p align="center">
+<img width="60%" src="http://informeanual.abengoa.com/export/sites/abengoa_ia/2010/resources/images/responsabilidad_social/C12ING/12.6.jpg" />
+</p>
+
+- **Risk Identification**
+  - Identifies the sources, causes, consequences of the internal and external risks.
+- **Risk Assessment**
+  - Assesses the org. risk and provides an estimate on the likelihood and impact of the risk
+- **Risk Treatment**
+  - Selects and implements appropriate controls on the identified risks
+- **Risk Tracking**
+  - Ensures appropriate control are implemented to handle risks and identifies the chance of a new risk occurring
+- **Risk Review** 
+  - Evaluates the performance of the implemented risk management strategies
+
+### Threat Modeling
+Is a risk assessment approach for analyzing the security of an application by capturing, organizing and analyzing all the information that affects the security of an application.
+
+1. Identify Objectives
+    - Helps to determine how much effort needs to be put on subsequent steps
+2. Application Overview
+    - **Identify the components**, data flows, and trust boundaries
+3. Decompose Application
+    - Find **more relevant details on threats**
+4. Identify Threats
+    - Identify threats relevant to your control scenario and context using the information obtained in steps 2 and 3
+5. Identify Vulnerabilities
+    - **Identify weaknesses** related to the threats found using vulnerability categories
 
 ## <u>Law Categories</u>
 
@@ -199,6 +335,73 @@ There are two types of Recon:
 - **Civil** - Private rights and remedies.
 - **Common** - Laws that are based on societal customs.
 
+## <u>Security Policies</u>
+1. **Policies** - High-level statements about protecting information; Business rules to safeguard CIA triad; Security Policies can be applied on Users, Systems, Partners, Networks, and Providers.
+    - **Common Security Policies examples:**
+      - Password Policy
+        - Meet the password complexity requirements.
+        - e.g: Minimum 8 char length, upper and lower case and alphanumerical.
+      - Wireless Security Policy
+      - AUP - Acceptable Use-Policy
+        - How to properly use company's assets
+        - e.g: "Do's and Dont's" with company's computer.
+      - Data Retention Policy 
+        - e.g: Keep the data for X time.
+      - Access Control Policies
+        - e.g: Accessing servers; Firewalls 
+2. **Procedures** - Set of details steps to accomplish a goal; Instructions for implementation
+3. **Guidelines** - Advice on actions given a situation; Recommended, not mandatory
+
+## Security Policy - Examples
+* **Access Control Policy**
+  - This defines the resources being protected and the rules that control access to them
+
+* **Remote Access Policy**
+  - This defines who can have remote access and defines access medium and remote access security controls.
+
+* **Firewall Management Policy**
+  - This defines access, management and monitoring of firewalls in an organization.
+
+* **Network Connection Policy**
+  - This defines who can install new resources on the network, approve the installation of new devices, document network changes etc.
+
+* **Password Policy**
+  - This defines guidelines for using strong password protection on available resources.
+
+* **User Account Policy**
+  - This defines the account creation process, authority, rights and responsibility of user accounts.
+
+* **Information Protection Policy**
+  - This defines the sensitivity levels of information, who may have access, how it is stored and transmitted, and how it should be deleted from storage media etc.
+
+* **Special Access Policy**
+  - This defines the terms and conditions of granting special access to system resources.
+
+* **Email Security Policy**
+  - This policy is designed to govern the proper usage of corporate email.
+
+* **Acceptable Use Policy**
+  - This defines the acceptable use of system resources.
+
+## Security Policiy - Types
+1. **Promiscuous Policy** - This policy usually has no restrictions on usage of system resources.
+
+2. **Permissive Policy** - This policy begins wide open and only know dangerous services/attacks or behaviors are blocked. This type of policy has to be updated regularly to stay effective.
+
+3. **Prudent Policy** - This policy provides maximum security while allowing known but necessary dangers. This type of policy will block all services and only safe/necessary services are enabled individually. Everything is logged.
+
+4. **Paranoid Policy** - This policy forbids everything. No Internet connection or severely restricted Internet usage is allowed.
+
+## Security Policy - Creation Steps 
+1. Perform a Risk Assessment
+2. Use security Standards and Frameworks as guide
+3. Get Management and Staff input
+4. Enforce the policy. Use penalties for non-compliance
+5. Publish final draft to entire org.
+6. Have all staff read/sign that they understood policy
+7. Employ tools to help enforce policy
+8. Staff training
+9. Review and update regularly
 
 ## <u>Laws and Standards</u>
 
@@ -257,8 +460,9 @@ There are two types of Recon:
   5. **Recovery:** Get back into production; Monitor affected systems.
   6. **Lessons Learned:** Document what happened and why; Transfer knowledge.
 
-## <u>Essential Knowledge</u>
+# <u>Essential Knowledge</u>
 
+## <u> OSI Model and TCP Model</u>
 - **The OSI Model** we just looked at is just a reference/logical model. It was designed to describe the functions of the communication system by dividing the communication procedure into smaller and simpler components. 
 
 - **The TCP/IP model** is a concise version of the OSI model. It contains four layers, unlike seven layers in the OSI model. 
