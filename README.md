@@ -6,11 +6,12 @@
 
 * **This is a unofficial Study Guide for CEH, forked from:**
     - https://github.com/scottymcraig/CEHv10StudyGuide 
-    * Changes:
-    ➕ Increased information details in general
-    ➕ Practical labs added
-    ➕ Images added for clear understanding
-    ➕ Content segregation  
+    * changes:
+        - ➕ Modules added
+        - ➕ Increased information details in all modules
+        - ➕ Practical labs added
+        - ➕ Images added for clear understanding
+        - ➕ Content segregation  
 
 * The objective of this repo is to clarify all topics presented on [CEH v10](https://iclass.eccouncil.org/our-courses/certified-ethical-hacker-ceh/) (ANSI) exam.
 
