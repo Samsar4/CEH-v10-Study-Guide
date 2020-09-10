@@ -189,21 +189,8 @@ There is an inter dependency between these three attributes. When **security goe
 *Steps taken to conceal success and intrusion; Not be noticed.*
   - e.g: Clear the logs; Obfuscate trojans or malicious backdoors programs.
 
-## <u>Penetration Test - Basics</u>
 
-> **This subject will be covered with details in [Chapter 14 - Pentesting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/14-Pentesting.md).**
-
-- Clearly defined, full scale test of security controls
-- Phases
-  - **Preparation** - Contracts and team determined
-  - **Assessment** - All hacking phases (reconnaissance, scanning, attacks, etc.)
-  - **Post-Assessment** - Reports & conclusions
-- Types
-  - **Black Box** - Done without any knowledge of the system or network.
-  - **White Box** - When the attacker have complete knowledge of the system provided by the owner/target.
-  - **Gray Box** - When the attacker has some knowledge of the system and/or network
-
-## 3 Types of Active Defense 
+## Three Types of Active Defense 
 - **Annoyance**
   - Involves tracking a hacker and leading him into a fake server, wasting his time — and making him easy to detect.
 - **Attribution**
@@ -295,7 +282,7 @@ A **risk matrix** is used during **risk assessment** to define the level of risk
 
 ![matrix](https://paladinrisk.com.au/wp-content/uploads/2018/11/risk-1-1024x434.jpg)
 
-### Risk management
+### Risk Management
 *Is the identification, evaluation, and prioritization of risks followed by coordinated and economical application of resources to minimize, monitor, and control the probability or impact of unfortunate events or to maximize the realization of opportunities.*
 
 ### Phases of Risk Management
@@ -328,12 +315,6 @@ Is a risk assessment approach for analyzing the security of an application by ca
     - Identify threats relevant to your control scenario and context using the information obtained in steps 2 and 3
 5. Identify Vulnerabilities
     - **Identify weaknesses** related to the threats found using vulnerability categories
-
-## <u>Law Categories</u>
-
-- **Criminal** - Laws that protect public safety and usually have jail time attached.
-- **Civil** - Private rights and remedies.
-- **Common** - Laws that are based on societal customs.
 
 ## <u>Security Policies</u>
 1. **Policies** - High-level statements about protecting information; Business rules to safeguard CIA triad; Security Policies can be applied on Users, Systems, Partners, Networks, and Providers.
@@ -403,62 +384,273 @@ Is a risk assessment approach for analyzing the security of an application by ca
 8. Staff training
 9. Review and update regularly
 
-## <u>Laws and Standards</u>
+## <u>Incident Management Process</u>
+*An incident is an event that could lead to loss of, or disruption to, an organization's operations, services or functions.*
 
-- **OSSTM Compliance** - "Open Source Security Testing Methodology Manual" maintained by ISECOM , defines three types of compliance
-  - **Legislative** - Deals with government regulations (Such as SOX and HIPAA)
-  - **Contractual** - Deals with industry / group requirement (Such as PCI DSS)
-  - **Standards based** - Deals with practices that must be followed by members of a given group/organization (Such as ITIL ,ISO and OSSTMM itself)
-  
+***Incident management** is a term describing the activities of an organization to identify, analyze, and correct hazards to prevent a future re-occurrence.*
+
+1. **Preparation:** Select people, assign rules, define tools to handle the incident.
+2. **Detection & Analysis:** Determine an incident has ocurred (IDS, SIEM, AV, Someone reporting, etc).
+3. **Classification and Prioritization:**
+4. **Notification:** Identify minor and major incident; who and how to notify an incident.
+5. **Containment:** Limit the damage; Isolate hosts; Contact system owners.
+6. **Forensic Investigation:** Investigate the root cause of the incident using forensic tools; System logs, real-time memory, network device logs, application logs, etc;
+7. **Eradicate & Recovery:** Remove the cause of incident; Patch if needed. Recovery: get back into production; Monitor affected systems.
+8. **Post-incident Activities:** Document what happened and why; Transfer knowledge.
+
+### Incident Response Team Duties
+
+1. Managing security issues by taking a proactive approach towards the customer's security vulnerabilities 
+2. Developing or reviewing processes and procedures that must be followed 
+3. Managing the response to an incident and ensuring that all procedures are followed correctly in order to minimize and control the damage
+4. Identifying and analyzing what has happened during an incident, including impact and threat
+5. Providing a single point of contact for reporting seucirty incidents and issues
+6. Reviewing changes in legal and regulatory requirements to ensure that all processes and procedures are valid
+7. Reviewing existing controls and recommending steps and technologies to prevent future incidents
+8. Establishing relationship with local law enforcement agency, gov. agencies, key partners and suppliers
+
+### SIEM -  Security Information and Event Management
+<p align="center">
+<img width="90%" src="https://secureops.com/wp-content/uploads/2020/01/components-of-siem.jpg" />
+</p>
+
+*Collects data points from network, including log files, traffic captures, SNMP messages, and so on, from every host on the network. SIEM can collect all this data into one centralized location and correlate it for analysis to look for security and performance issues, as well negative trends all in real time.*
+
+* **Aggregation**: Collecting data from disparate sources and organizing the data into a single format. Any device within a SIEM system that collects data is called collector or an aggregator.
+
+* **Correlation**: Is the logic that looks at data from disparate sources and can make determinations about events taking place on your network. (Could be in-band or out-of-band, depending on the placement of the NIDS/NIPS).
+	* **Alerts** - For notification if something goes bad.
+	* **Triggering** - Exceeding thresholds.
+
+* **Normalization**: Will actually create multiple tables / organize in such a way that the data can become more efficient and allows our analysis and reports tools to work better.
+
+* **WORM - Write Once Read Many**: The concept being is that log files are precious, and a lot of times you might want to look at them in an archival way, so that we can use optical media like WORM drives to store them.
+
+#### Most Popular SIEM Tools:
+
+* **[Splunk](https://www.splunk.com/)**
+	![splunk](https://www.splunk.com/content/dam/splunk2/images/screenshots/platform-journey/conflaunch/SS-UI-Light-Mode-frame.png)
+
+<br>
+
+* **[ArcSight](https://www.microfocus.com/en-us/products/siem-security-information-event-management/overview)**
+	![arcsight](https://i.ytimg.com/vi/N7J0EwdbKF0/maxresdefault.jpg)
+
+<br>
+
+* **[ELK - Elastic Search, Log Stash and Kibana](https://www.elastic.co/what-is/elk-stack) (Open Source)**
+	![elk](https://i.imgur.com/lydtCwn.png)
+
+## <u>Identity and Access Management</u>
+> **Identification, Authentication, Authorization**, and **Accounting** work together to manage assets securely.
+
+### 1. **Identification**
+*The information on credentials identifies the user.*
+
+- **Example**: 
+  - Your name, username, ID number, employee number, SSN etc.
+
+### 2. **Authentication**
+*“Prove you are the legitimate User". – Should always be done with Multifactor Authentication!*
+
+* **Authentication Factors:**
+	* Something you **know** (e.g. - password)
+	* Something you **have** (e.g. - smart card)
+	* Something you **are** (e.g. - fingerprint)
+	* Something you **do** (e.g. - android pattern; manual signature)
+	* **Somewhere** you are (e.g. - geolocation)
+> 🛑 **Multi-factor authentication** *generally uses two of this examples (e.g. - Something you **Know(1)** and Something you **Have(2)**, never on same category*
+
+### 3. Authorization concepts
+*What are you allowed to access – We use Access Control models, what and how we implement depends on the organization and what our security goals are.*
+
+* **Permissions**:
+	* Applied to resources
+* **Rights** / **Privileges**:
+	* Assign at system level 
+* **Authorization strategies**:
+	* Least privileged
+	* Separation of Duties
+
+### 4. Accouting
+*Trace an Action to a Subjects Identity:*
+- Prove who/what a given action was performed by (non-repudiation); Logging
+
+### Access Controls Models
+
+<p align="center">
+<img width="80%" src="https://security-architect.com/wp-content/uploads/FGA.png" />
+</p>
+
+* **Mandatory Access Control (MAC)**:
+	* Every object gets a **label**
+		- Confidential, secret, top secret, etc
+	* The administrator decides who gets access to what security level; Users cannot change these settings
+	* Used on old systems (e.g. Top Secret Gov. information)
+* **Discretionary Access Control (DAC)**:
+	* Used in most OS
+	* Owner of the data defines access
+	* Very flexible access control; Very weak security
+* **Role-based Access Control (RBAC)**:
+	* Access to resources is defines by a set of rules defined by a role in your organization/job function (Manager, Director etc)
+	* Administrators provide access based on the role of the user
+		- Rights are gained implicity instead of explicity
+	* In Windows, use **Groups** to provide role-based access control
+		- e.g. Admin Groups --> Rights and Perms,
+		- Sales Group --> Rights and Perms
+
+
+> ⚠️ **Access is defined by ACL, Access Control List**.
+> ⚠️ **Implicity deny** prevents access unless specifically permitted. 
+
+
+## Data Loss Prevention (DLP)
+Data Loss Prevention (DLP) is the practice of **detecting and preventing data breaches, exfiltration, or unwanted destruction of sensitive data**. Organizations use DLP to protect and secure their data and comply with regulations.
+
+* The DLP term refers to defending organizations against both data loss and data leakage prevention. 
+
+#### Organizations typically use DLP to:
+
+- Protect Personally Identifiable Information (PII) and comply with relevant regulations
+- Protect Intellectual Property critical for the organization
+- Achieve data visibility in large organizations
+- Secure mobile workforce and enforce security in Bring Your Own Device (BYOD) environments
+- Secure data on remote cloud systems
+
+<p align="center">
+<img width="90%" src="https://miro.medium.com/max/720/1*FG9LR51eySVRQJUjhVv-9A.png" />
+</p>
+
+## Data Backup
+Data backup plays a crucial role in maintaining business continuity by helping org. recover from IT disasters, security breaches, application failures, human error, etc. 
+
+All regulatory compliance such as COBIT, SSAE, SOCII, PCI-DSS, HIPPA, SOX, FINRA, FISMA, GDPR, etc. require business to maintain data backups of critical data for specified duration.
+
+### Backup Strategies
+1. Identifying the critical business data
+2. Selecting the backup media
+3. Selecting a backup technology
+4. Selecting the appropriate RAID levels
+5. Selecting an appropriate backup method
+
+### 3 Backup methods
+####  1. Cold backup 🔵
+
+<img width="40%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/29c5e018095b135baec32aaece84a900a43b23ca/cc-cold.png"/>
+
+- **Empty site, no hardware, no data, no people**
+- **It takes weeks to bring online**
+- Basic office spaces (e.g building, chairs, AC...)
+- No operational equipment
+- Cheapest recovery site
+
+#### 2. Warm backup 🟡
+
+<img width="40%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/29c5e018095b135baec32aaece84a900a43b23ca/cc-warm.png"/>
+
+- **Somewhere between cold and hot - Just enough to get going (Big room with rack space, you bring the hardware)**
+- Hardware is ready and waiting - you bring the software and data
+- **It takes days to bring online**
+- Operational equipment but little or no data
+
+#### 3. Hot backup 🔴
+
+<img width="40%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/29c5e018095b135baec32aaece84a900a43b23ca/cc-hot.png"/>
+
+- **Exact replica of production systems**
+- Applications and software are constantly updated
+- Flip a switch and everyting moves
+- **It take hours to bring online**
+- Real-time synchronization
+- Almost all data ready to go - often just a quick update
+- Very expensive
+
+
+## <u>Penetration Test - Basics</u>
+> **This topic will be covered with details in [Chapter 14 - Pentesting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/14-Pentesting.md).**
+
+*A penetration test, colloquially known as a pen test, pentest or ethical hacking, is an authorized simulated cyberattack on a computer system, performed to evaluate the security of the system.*
+
+> ⚠️ **Not to be confused with a vulnerability assessment.**
+
+- Clearly defined, full scale test of security controls
+- Phases
+  - **Preparation** - Contracts and team determined
+  - **Assessment** - All hacking phases (reconnaissance, scanning, attacks, etc.)
+  - **Post-Assessment** - Reports & conclusions
+- Types
+  - **Black Box** - Done without any knowledge of the system or network.
+  - **White Box** - When the attacker have complete knowledge of the system provided by the owner/target.
+  - **Gray Box** - When the attacker has some knowledge of the system and/or network
+
+## <u>Law Categories</u>
+
+- **Criminal** - Laws that protect public safety and usually have jail time attached.
+- **Civil** - Private rights and remedies.
+- **Common** - Laws that are based on societal customs.
+
+## Laws and Standards:
+
+### **OSSTM Compliance**
+**"Open Source Security Testing Methodology Manual"** maintained by ISECOM , defines three types of compliance.
+
+- **Legislative** - Deals with government regulations (Such as SOX and HIPAA).
+- **Contractual** - Deals with industry / group requirement (Such as PCI DSS).
+- **Standards based** - Deals with practices that must be followed by members of a given group/organization (Such as ITIL ,ISO and OSSTMM itself).
+
 - **OSSTM Controls**
   - **OSSTM Class A - Interactive Controls**
-    - *Authentication* -  Provides for identification and authorization based on credentials 
-    - *Indemnification* - Provided contractual protection against loss or damages
-    - *Subjugation* - Ensures that interactions occur according to processes defined by the asset owner
-    - *Continuity* -  Maintains interactivity with assets if corruption of failure occurs
-    - *Resilience* - Protects assets from corruption and failure
-   
+    - *Authentication* -  Provides for identification and authorization based on credentials.
+    - *Indemnification* - Provided contractual protection against loss or damages.
+    - *Subjugation* - Ensures that interactions occur according to processes defined by the asset owner.
+    - *Continuity* -  Maintains interactivity with assets if corruption of failure occurs.
+    - *Resilience* - Protects assets from corruption and failure.
   
-  
-  - **OSSTM Class B  - Process Controls**
-      - *Non-repudiation* - Prevents participants from denying its actions
-      - *Confidentiality* - Ensures that only participants know of an asset
-      - *Privacy* - Ensures that only participants have access to the asset
-      - *Integrity* - Ensures that only participants know when assets and processes change
-      - *Alarm*  - Notifies participants when interactions occur
+- **OSSTM Class B  - Process Controls**
+    - *Non-repudiation* - Prevents participants from denying its actions
+    - *Confidentiality* - Ensures that only participants know of an asset
+    - *Privacy* - Ensures that only participants have access to the asset
+    - *Integrity* - Ensures that only participants know when assets and processes change
+    - *Alarm*  - Notifies participants when interactions occur
       
-- **ISO 27001** - Security standard based on the British BS7799 standard, focuses on security governance
+### **PCI-DSS**
+**"Payment Card Industry Data Security Standard"** Standard for organizations handling Credit Cards, ATM cards and other POS cards.
 
-- **NIST-800-53** -  Catalogs security and privacy controls for federal information systems, created to help implementation of FISMA
+### **ISO 27001**
+This International Standard has been prepared to provide requirements for establishing, implementing, maintaining and continually improving an information security management system.
 
-- **ISO 27002 AND 17799** - Based on BS799 but focuses on security objectives and provides security controls based on industry best practice
+### **ISO 27002 AND 17799**
+Based on BS799 but focuses on security objectives and provides security controls based on industry best practice.
 
-- **FISMA** - "Federal Information Security Modernization Ac Of 2002" A law updated in 2004 to codify the authority of the Department of Homeland Security with regard to implementation of information security policies 
+### **HIPAA**
+**"Health Insurance Portability and Accountability Act"** a law that set's privacy standards to protect patient medical records and health information shared between doctors, hospitals and insurance providers.
+
+### **SOX**
+**"Sarbanes-Oxley Act" Law** that requires publicly traded companies to submit to independent audits and to properly disclose financial information.
+
+### DMCA
+**"The Digital Millennium Copyright Act"** is a 1998 United States copyright law that implements two 1996 treaties of the World Intellectual Property Organization. It criminalizes production and dissemination of technology, devices, or services intended to circumvent measures that control access to copyrighted works.
+
+### **FISMA** 
+**"Federal Information Security Modernization Ac Of 2002"** A law updated in 2004 to codify the authority of the Department of Homeland Security with regard to implementation of information security policies. *(For GOV. agencies)*
+
+### **NIST-800-53**
+Catalogs security and privacy controls for federal information systems, created to help implementation of FISMA.
   
-- **FITARA** - "Federal Information Technology Acquisition Reform Act" A 2013 bill that was intended to change the framework that determines how the US GOV purchases technology 
+### **FITARA**
+**"Federal Information Technology Acquisition Reform Act"** A 2013 bill that was intended to change the framework that determines how the US GOV purchases technology.
 
-- **HIPAA** - "Health Insurance Portability and Accountability Act" a law that set's privacy standards to protect patient medical records and health information shared between doctors, hospitals and insurance providers
+### **COBIT**
+**"Control Object for Information and Related Technology"** IT Governance framework and toolset, created by ISACA and ITGI
 
-- **PCI-DSS**  - "Payment Card Industry Data Security Standard" Standard for organizations handling Credit Cards, ATM cards and other POS cards
+### **GLBA**
+**"U.S Gramm-Leach-Bliley Act"** Law that protects the confidentiality and integrity of personal information that is collected by financial institutions.
 
-- **COBIT** - "Control Object for Information and Related Technology" IT Governance framework and toolset, created by ISACA and ITGI
+### **CSIRT**
+**"Computer Security Incident Response Team"** CSIRT provided a single point of contact when reporting computer security incidents
 
-- **SOX** - "Sarbanes-Oxley Act" Law that requires publicly traded companies to submit to independent audits and to properly disclose financial information
-
-- **GLBA** - "U.S Gramm-Leach-Bliley Act" Law that protects the confidentiality and integrity of personal information that is collected by financial institutions.
-
-- **CSIRT** - "Computer Security Incident Response Team" CSIRT provided a single point of contact when reporting computer security incidents
-
-- **ITIL** - "Information Technology Infrastructure Library" - An operational framework developed in the '80s that standardizes IT management procedures 
-
-## Incident Management
-- **Incident management** - Deals with specific incidents to mitigate the attack. 
-  1. **Prepare:** Select people, assign rules, define tools to handle the incident.
-  2. **Identify & Detect:** Determine an incident has ocurred (IDS, SIEM, AV)
-  3. **Contain:** Limit the damage; Isolate hosts; Contact system owners.
-  4. **Eradicate:** Remove the cause of incident; Patch if needed.
-  5. **Recovery:** Get back into production; Monitor affected systems.
-  6. **Lessons Learned:** Document what happened and why; Transfer knowledge.
+### **ITIL**
+**"Information Technology Infrastructure Library"** - An operational framework developed in the '80s that standardizes IT management procedures 
 
 # <u>Essential Knowledge</u>
 

@@ -81,8 +81,9 @@ Can be:
 ### Search Engines
 
 - **[NetCraft](https://www.netcraft.com/)** - Blueprint a comprehensive list of information about the technologies and information about target website.
+  - ![netcraft](https://i0.wp.com/hackingblogs.com/wp-content/uploads/2018/01/Capture-min-2.png)
 - **Job Search Sites** - Information about technologies can be gleaned from job postings.
-- **Google search** 
+- **Google search | Google dorks:** 
   - `filetype:`  - looks for file types
   - `index of` - directory listings
   - `info:` - contains Google's information about the page
@@ -91,17 +92,21 @@ Can be:
   - `link:` - finds linked pages
   - `related:` - finds similar pages
   - `site:` - finds pages specific to that site
+    - **Example**:
+    - ![google-dorks](https://miro.medium.com/max/659/0*GGRvHnh59qi5lVB9.png)
+  - [GHDB](https://www.exploit-db.com/google-hacking-database) is very good for learn Google Dorks and how it's done in real world scenario 
 - **Metagoofil** - Command line interface that uses **Google hacks** to find information in meta tags (domain, filetype, etc; Is a google dorks for terminal).
 
 ### Website Footprinting
 
-- **Web mirroring** - allows for discrete testing offline
-  - HTTrack
-  - Black Widow
-  - Wget
-  - WebRipper
-  - Teleport Pro
-  - Backstreet Browser
+- **Web mirroring | Website Cloning** - allows for discrete testing offline
+  - **HTTrack** - *you can use the CLI version or Web Interface version*
+  - **Wget** - Linux command 
+    - `wget -mk -w 10 http://hackthissite.org/`
+  - **Black Widow**
+  - **WebRipper**
+  - **Teleport Pro**
+  - **Backstreet Browser**
 - **Archive.org / [Wayback machine](https://archive.org/web/)** 
 - Provides cached websites from various dates which possibly have sensitive information that has been now removed.
   - **Wayback Machine -> Google.com**:
@@ -253,24 +258,248 @@ Can be:
     ;; MSG SIZE  rcvd: 129
 
     ```
+  - To get email records specify `-t MX`
+    - `dig <target> -t MX`
+  - To get zone transfer specify `axfr`
+
 ### Network Footprinting
 
-- IP address range can be obtained from regional registrar (ARIN here)
-- Use traceroute to find intermediary servers
-  - traceroute uses ICMP echo in Windows
-- Windows command - tracert
-- Linux Command - traceroute
+- IP address range can be obtained from regional registrar (e.g: ARIN for America, RIPE for Europe, etc)
 
-### Other Relevant Tools
+- Use `traceroute` to find intermediary servers
+  - traceroute uses ICMP echo in Windows (tracert)
+  - traceroute is good for detect Firewalls and the network path
 
-- **OSRFramework** - uses open source intelligence to get information about target. *(Username checking, DNS lookups, information leaks research, deep web search, regular expressions extraction, and many others)*.
-- **Web Spiders** - obtain information from the website such as pages, etc.
-- **[Recon-ng](https://github.com/lanmaster53/recon-ng)** - Recon-ng is a web-based open-source reconnaissance tool used to extract information from a target organization and its personnel.
-- **[Metasploit Framework](https://github.com/rapid7/metasploit-framework)** - The Metasploit Framework is a tool that provides information about security vulnerabilities and aids in penetration testing and IDS signature development; This is a huge framework that provide Recon tools as well.
-- **[theHarvester](https://github.com/laramies/theHarvester)** - theHarvester is a OSINT tool; Can gathers emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
-- **Social Engineering Tools**
-  - Maltego
-  - Social Engineering Framework (SEF)
-- **[Shodan](https://www.shodan.io/)** - Shodan is a search engine that lets the user find specific types of computers (webcams, routers, servers, etc.) ... connected to the internet using a variety of filters. Some have also described it as a search engine of service banners, which are metadata that the server sends back to the client.
+**Usage example**:
+  - **`traceroute -I nsa.gov`**
+    - Specify target: `traceroute <target>`
+    - In this case is used ICMP ECHO for tracerouting: `-I`
+```
+traceroute -I nsa.gov
+traceroute to nsa.gov (104.83.73.99), 30 hops max, 60 byte packets
+ 1  192.168.63.2 (192.168.63.2)  0.194 ms  0.163 ms  0.150 ms
+ 2  * * *
+ 3  * * *
+ 4  * * *
+ 5  * * *
+ 6  * * *
+ 7  * * *
+ 8  * * *
+ 9  * * *
+10  * * *
+11  a104-83-73-99.deploy.static.akamaitechnologies.com (104.83.73.99)  42.742 ms  42.666 ms  25.176 ms
 
-> ⚡︎ **The [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/1-Footprinting-and-Reconnaissance) have all mentioned tools above; Is recommended to try these tools in your virtual environment.**
+```
+> ⚠️ **Windows command - `tracert`**
+> ⚠️ **Linux Command - `traceroute`**
+
+## <u>Other Relevant Tools</u>
+
+### **OSRFramework**
+
+> ⚡︎ **OSRFramework has a [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/1-Footprinting-and-Reconnaissance/4-OSRFramework.md)**
+
+
+Uses open source intelligence to get information about target. *(Username checking, DNS lookups, information leaks research, deep web search, regular expressions extraction, and many others)*.
+
+### **Web Spiders**
+Obtain information from the website such as pages, etc.
+
+### **[Recon-ng](https://github.com/lanmaster53/recon-ng)**
+
+> ⚡︎ **Recon-ng has a [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/1-Footprinting-and-Reconnaissance/3-Recon-ng.md)**
+
+Recon-ng is a web-based open-source reconnaissance tool used to extract information from a target organization and its personnel.
+
+Provides a powerful environment in which open source web-based reconnaissance can be automated conducted, quickly and thoroughly.
+
+### **[Metasploit Framework](https://github.com/rapid7/metasploit-framework)**
+
+> ⚡︎ **Metasploit has a [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/1-Footprinting-and-Reconnaissance/5-Metasploit-Basics.md)**
+
+The Metasploit Framework is a tool that provides information about security vulnerabilities and aids in penetration testing and IDS signature development; **This is a huge framework that provide Recon tools as well.**
+
+### **[theHarvester](https://github.com/laramies/theHarvester)**
+
+> ⚡︎ **theHarvester has a [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/1-Footprinting-and-Reconnaissance/6-theHarvester.md)**
+
+
+theHarvester is a OSINT tool; Useful for gathering information like:
+  - Emails
+  - Subdomains
+  - Hosts
+  - Employee names
+  - Open ports
+  - Banners from different public sources like search engines, PGP key servers and SHODAN computer database.
+
+**Usage example**:
+- **`theHarvester -d www.hackthissite.org -n -b  google`**
+  - Issue theHarvester command: `theHarvester`
+  - Specify the domain: `-d <url>`
+  - Perform dns lookup: `-n`
+  - Specify search engine/source: `-b google`
+
+
+```
+theHarvester -d www.hackthissite.org -n -b  google
+table results already exists
+
+*******************************************************************
+*  _   _                                            _             *                                                                                        
+* | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *                                                                                        
+* | __|  _ \ / _ \  / /_/ / _` | '__\ \ / / _ \/ __| __/ _ \ '__| *                                                                                        
+* | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *                                                                                        
+*  \__|_| |_|\___| \/ /_/ \__,_|_|    \_/ \___||___/\__\___|_|    *                                                                                        
+*                                                                 *                                                                                        
+* theHarvester 3.1.0                                         *                                                                                             
+* Coded by Christian Martorella                                   *                                                                                        
+* Edge-Security Research                                          *                                                                                        
+* cmartorella@edge-security.com                                   *                                                                                        
+*                                                                 *                                                                                        
+*******************************************************************                                                                                        
+                                                                                                                                                           
+                                                                                                                                                           
+[*] Target: www.hackthissite.org 
+                                                                                                                                                           
+[*] Searching Google. 
+        Searching 0 results.
+        Searching 100 results.
+        Searching 200 results.
+        Searching 300 results.
+        Searching 400 results.
+        Searching 500 results.
+
+[*] No IPs found.
+
+[*] Emails found: 2
+----------------------
+ab790c1315@www.hackthissite.org
+staff@hackthissite.org
+
+[*] Hosts found: 7
+---------------------
+0.loadbalancer.www.hackthissite.org:
+22www.hackthissite.org:
+2522www.hackthissite.org:
+253dwww.hackthissite.org:
+www.hackthissite.org:137.74.187.104, 137.74.187.100, 137.74.187.101, 137.74.187.103, 137.74.187.102
+x22www.hackthissite.org:
+
+[*] Starting active queries.
+137.74.187.100
+[*] Performing reverse lookup in 137.74.187.0/24
+module 'theHarvester.discovery.dnssearch' has no attribute 'DnsReverse'
+```
+
+### **[Sublist3r](https://github.com/aboul3la/Sublist3r)**
+Sublist3r is a python tool designed to enumerate subdomains of websites using OSINT.
+
+Sublist3r enumerates subdomains using many search engines such as Google, Yahoo, Bing, Baidu and Ask. Sublist3r also enumerates subdomains using Netcraft, Virustotal, ThreatCrowd, DNSdumpster and ReverseDNS
+
+**Usage example**:
+- **`python3 sublist3r.py -d hackthissite.org`**
+  - Specify the domain: `d <url>`
+```
+python3 sublist3r.py -d hackthissite.org
+
+                 ____        _     _ _     _   _____                                                                                                       
+                / ___| _   _| |__ | (_)___| |_|___ / _ __                                                                                                  
+                \___ \| | | | '_ \| | / __| __| |_ \| '__|                                                                                                 
+                 ___) | |_| | |_) | | \__ \ |_ ___) | |                                                                                                    
+                |____/ \__,_|_.__/|_|_|___/\__|____/|_|                                                                                                    
+                                                                                                                                                           
+                # Coded By Ahmed Aboul-Ela - @aboul3la                                                                                                     
+                                                                                                                                                           
+[-] Enumerating subdomains now for hackthissite.org                                                                                                        
+[-] Searching now in Baidu..
+[-] Searching now in Yahoo..
+[-] Searching now in Google..
+[-] Searching now in Bing..
+[-] Searching now in Ask..
+[-] Searching now in Netcraft..
+[-] Searching now in DNSdumpster..
+[-] Searching now in Virustotal..
+[-] Searching now in ThreatCrowd..
+[-] Searching now in SSL Certificates..
+[-] Searching now in PassiveDNS..
+[-] Total Unique Subdomains Found: 41
+www.hackthissite.org
+admin.hackthissite.org
+api.hackthissite.org
+ctf.hackthissite.org
+vm-005.outbound.firewall.hackthissite.org
+vm-050.outbound.firewall.hackthissite.org
+vm-099.outbound.firewall.hackthissite.org
+vm-150.outbound.firewall.hackthissite.org
+vm-200.outbound.firewall.hackthissite.org
+forum.hackthissite.org
+forums.hackthissite.org
+git.hackthissite.org
+irc.hackthissite.org
+(...)
+```
+
+### [DIRB](https://tools.kali.org/web-applications/dirb)
+DIRB is a Web Content Scanner. It looks for existing (and/or hidden) Web Objects. It basically works by launching a dictionary based attack/brute force attack against a web server and analyzing the response.
+- Useful to find subdirectories on web application
+
+**Usage example**:
+- **`dirb https://www.hackthissite.org/ /usr/share/wordlists/dirb/small.txt`**
+  - Specify the url by issuing dirb command: `dib <url>`
+  - Specify the wordlist: `/path/to/wordlist`
+
+```
+dirb https://www.hackthissite.org/ /usr/share/wordlists/dirb/small.txt 
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+URL_BASE: https://www.hackthissite.org/
+WORDLIST_FILES: /usr/share/wordlists/dirb/small.txt
+
+-----------------
+
+GENERATED WORDS: 959                                                           
+
+---- Scanning URL: https://www.hackthissite.org/ ----
++ https://www.hackthissite.org/api (CODE:200|SIZE:10)                                                                                                     
++ https://www.hackthissite.org/blog (CODE:200|SIZE:20981)                                                                                                 
++ https://www.hackthissite.org/cgi-bin/ (CODE:403|SIZE:199)  
+```
+
+### Maltego
+
+> ⚡︎ **Maltego has [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/1-Footprinting-and-Reconnaissance/2-Maltego-Basics.md)**
+
+Maltego is a powerful OSINT tool, you can extract a broad type of information through the network, technologies and personnel(email, phone number, twitter).
+
+- You able to:
+  - Identify IP address
+  - Identify Domain and Domain Name Schema
+  - Identify Server Side Technology
+  - Identify Service Oriented Architecture (SOA) information
+  - Identify Name Server
+  - Identify Mail Exchanger
+  - Identify Geographical Location
+  - Identify Entities
+  - Discover Email addresses and Phone numbers
+
+![alt text](https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/6fe1dc406ed480aea2acfb2e9f34d51a0536e042/maltego-WebSite-IP-Location-WhoisOnDomain-5.png "IP Address, Location")
+
+
+### Social Engineering Framework (SEF)
+It’s a open source Social Engineering Framework (SCRIPT) that helps generate phishing attacks and fake emails. and it’s includes phishing pages, fake email, fake email with file attachment and other stuff that helps you in Social Engineering Attack. 
+
+![sef](https://hacknews247.com/wp-content/uploads/2018/10/20181002_212155_533793.png)
+
+### **[Shodan](https://www.shodan.io/)**
+Shodan is a search engine that lets the user find specific types of computers (webcams, routers, servers, etc.) ... connected to the internet using a variety of filters. Some have also described it as a search engine of service banners, which are metadata that the server sends back to the client.
+
+![shodan](https://logz.io/wp-content/uploads/2019/05/Shodan.png)
+
+### **[Censys](https://censys.io/overview/)**
+Alternative for Shodan
+
+![censys](https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/403be7a4514b6e0af36e0f568328372a5ce09cbf/censys.png)
