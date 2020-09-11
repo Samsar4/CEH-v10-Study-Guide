@@ -68,18 +68,29 @@
 
 ## <u>Port Discovery - Basic Concepts</u>
 
-
+> - **Knocking the door**
 <img width="60%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/f8b2f839cee428a08506a9831a5d2f066e7301e7/openport.png">
 
+- The hacker above sends a SYN packet to port 80 on the server.
+  - If server returns **SYN-ACK packet** = the port is **open**
+  - If server returns **RST (reset) packet** = the port is **closed**
 
-- **Knocking the door**
-  - The hacker above sends a SYN packet to port 80 on the server.
-    - If server returns **SYN-ACK packet** = the port is **open**
-    - If server returns **RST (reset) packet** = the port is **closed**
+> - **Checking if Stateful Firewall is present**
+<img width="60%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/649d665844b3a3e5c57983e6003616eff3292280/nmap-probe.png">
+
+
+- The hacker above sends an **ACK segment/packet** on the first interaction *(without three-way handshake)*.
+  - If server returns **no response** means that might have a stateful firewall handling proper sessions
+  - If server returns **RST packet** means that have no stateful firewall
+
+⚠️ **This can be easily achieved using nmap**
 
 ***
 
-### ☞ Keep in mind the TCP Flags: 
+### ⚠️ Keep in mind the TCP Flags & TCP Three-way handshake before use `nmap`!
+
+- **☞ TCP Flags:**
+
 | Flag | Name           | Function                                                     |
 | ---- | -------------- | ------------------------------------------------------------ |
 | SYN  | Synchronize    | Set during initial communication.  Negotiating of parameters and sequence numbers |
@@ -89,17 +100,12 @@
 | PSH  | Push           | Forces the delivery of data without concern for buffering    |
 | URG  | Urgent         | Data inside is being sent out of band.  Example is cancelling a message |
 
+- **☞ The TCP Three-way handshake:** *([explained in chapter 0 - Introduction](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/0-Introduction.md))*
+
+![TCP-handshake](https://wiki.mikrotik.com/images/f/fc/Image2001.gif)
+
 ***
 
-<img width="60%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/649d665844b3a3e5c57983e6003616eff3292280/nmap-probe.png">
-
-
-- **Checking if Stateful Firewall is present**
-  - The hacker above sends an **ACK segment/packet** on the first interaction *(without three-way handshake)*.
-    - If server returns **no response** means that might have a stateful firewall handling proper sessions
-    - If server returns **RST packet** means that have no stateful firewall
-
-⚠️ **This can be easily achieved using nmap**
 
 # Nmap
 

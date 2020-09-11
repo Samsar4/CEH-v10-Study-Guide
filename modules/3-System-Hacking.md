@@ -92,32 +92,44 @@
   - Complexity is defined by number of character sets used (lower case, upper case, numbers, symbols, etc.)
 - **Default passwords** - always should be changed and never left what they came with.  Databases such as cirt.net, default-password.info and open-sez.me all have databases of these
 
-## Windows Security Architecture
+# Windows Security Architecture
 
 - Authentication credentials stored in SAM file
 - File is located at C:\windows\system32\config
 - Older systems use LM hashing.  Current uses NTLM v2 (MD5)
 - Windows network authentication uses Kerberos
-- **LM Hashing**
+
+### **LM Hashing**
   - Splits the password up.  If it's over 7 characters, it is encoded in two sections.
   - If one section is blank, the hash will be AAD3B435B51404EE
   - Easy to break if password  is 7 characters or under because you can split the hash
 - SAM file presents as UserName:SID:LM_Hash:NTLM_Hash:::
-- **Ntds.dit** - database file on a domain controller that stores passwords
+
+### **Ntds.dit**
+Database file on a domain controller that stores passwords
   - Located in %SystemRoot%\NTDS\Ntds.dit or
   - Located in %SystemRoot%System32\Ntds.dit
   - Includes the entire Active Directory
-- **Kerberos**
-  - Steps of exchange
-    1. Client asks **Key Distribution Center** (KDC) for a ticket.  Sent in clear text.
-    2. Server responds with **Ticket Granting Ticket** (TGT).  This is a secret key which is hashed by the password copy stored  on the server.
-    3. If client can decrypt it, the TGT is sent back to the server requesting a **Ticket Granting Service** (TGS) service ticket.
-    4. Server sends TGS service ticket which client uses to access resources.
+
+### **Kerberos** for Active Directory Domain Services (AD DS)
+
+
+![kerberos](https://www.manageengine.com/products/active-directory-audit/kb/images/event-4771-kerberos-authentication-illustration.jpg)
+
+- Steps of exchange
+  1. Client asks **Key Distribution Center** (KDC) for a ticket.  Sent in clear text.
+  2. Server responds with **Ticket Granting Ticket** (TGT).  This is a secret key which is hashed by the password copy stored  on the server.
+  3. If client can decrypt it, the TGT is sent back to the server requesting a **Ticket Granting Service** (TGS) service ticket.
+  4. Server sends TGS service ticket which client uses to access resources.
   - **Tools**
     - KerbSniff
     - KerbCrack
     - Both take a  long time to crack
-- **Registry**
+
+> ⚠️ **Uses TCP/UDP Port 88**
+
+### **Registry**
+![registry](https://upload.wikimedia.org/wikipedia/en/5/52/Regstry_Editor.png)
   - Collection of all settings and configurations that make the system run
   - Made up of keys and values
   - Root level keys
@@ -140,11 +152,21 @@
   - Executables to edit
     - regedit.exe
     - regedt32.exe (preferred by Microsoft)
-- **MMC**
+### **MMC**
+  ![mmc](https://upload.wikimedia.org/wikipedia/en/b/b7/Microsoft_Management_Console_-_Device_Manager.png)
+  
   - Microsoft Management Console - used by Windows to administer system
+  
   - Has "snap-ins" that allow you to modify sets (such as Group Policy Editor)
 
-## <u>Linux Security Architecture</u>
+### **Sigverif.exe**
+  - ![sigverif](https://cdn.ghacks.net/wp-content/uploads/2015/04/sigverif-file-signature-verification.jpg)
+  - File Signature Verification (Sigverif.exe) detects signed files and allows you to:
+    - View the certificates of signed files to verify that the file has not been tampered with after being certified.
+    - Search for signed files.
+    - Search for unsigned files.
+
+# <u>Linux Security Architecture</u>
 
 ### Linux Directory Structure
 - Linux root is just a slash (/)
