@@ -392,13 +392,11 @@ module 'theHarvester.discovery.dnssearch' has no attribute 'DnsReverse'
 ```
 
 ### **[Sublist3r](https://github.com/aboul3la/Sublist3r)**
-Sublist3r is a python tool designed to enumerate subdomains of websites using OSINT.
-
-Sublist3r enumerates subdomains using many search engines such as Google, Yahoo, Bing, Baidu and Ask. Sublist3r also enumerates subdomains using Netcraft, Virustotal, ThreatCrowd, DNSdumpster and ReverseDNS
+Sublist3r **enumerates subdomains** using many search engines such as Google, Yahoo, Bing, Baidu and Ask. Sublist3r also enumerates subdomains using Netcraft, Virustotal, ThreatCrowd, DNSdumpster and ReverseDNS
 
 **Usage example**:
 - **`python3 sublist3r.py -d hackthissite.org`**
-  - Specify the domain: `d <url>`
+  - Specify the domain: `-d <url>`
 ```
 python3 sublist3r.py -d hackthissite.org
 
@@ -494,12 +492,54 @@ It’s a open source Social Engineering Framework (SCRIPT) that helps generate p
 
 ![sef](https://hacknews247.com/wp-content/uploads/2018/10/20181002_212155_533793.png)
 
+
+## <u>Web Based Recon</u>
+
+### **[NetCraft](https://www.netcraft.com/)**
+Netcraft is a website analyzing server, with the help of this website we find basic and important information on the website like:
+
+- **Background** — This includes basic domain information.
+  - Which OS, Web server is runing; Which ISP;
+- **Network** — This includes information from IP Address to Domain names to nameservers.
+- **SSL/TLS** — This gives the ssl/tls status of the target
+- **Hosting History** - This gives the information on the hosting history of the target
+- **Sender Policy Framework (SPF)** — This describes who can send mail on the domains behalf
+- **DMARC** -This is a mechanism for domain owners to indicate how mail purporting to originate from their domain should be authenticated
+- **Web Trackers** — This trackers can be used to monitor individual user behavior across the web
+Site Technology — This section includes details on:
+  - Cloud & PaaS
+  - Server-Side technologies (e.g: PHP)
+  - Client-Side technologies (e.g: JavaScript library)
+  - CDN Information
+  - CMS Information (e.g: Wordpress, Joomla, etc)
+  - Mobile Technologies
+  - Web stats (e.g: Web analytics, collection, etc)
+  - Character encoding
+
+
+![netcraft](https://i0.wp.com/hackingblogs.com/wp-content/uploads/2018/01/Capture-min-2.png)
+
 ### **[Shodan](https://www.shodan.io/)**
-Shodan is a search engine that lets the user find specific types of computers (webcams, routers, servers, etc.) ... connected to the internet using a variety of filters. Some have also described it as a search engine of service banners, which are metadata that the server sends back to the client.
+*Shodan Unlike traditional search engines such as Google, use Web crawlers to traverse your entire site, but directly into the channel behind the Internet, various types of port equipment audits, and never stops looking for the Internet and all associated **servers, camera, printers, routers, and so on**.*
+
+- Some have also described it as a search engine of service banners, which are metadata that the server sends back to the client.
+
+- Shodan works well with basic, single-term searches. Here are the basic search filters you can use:
+  - **city:** find devices in a particular city
+  - **country:** find devices in a particular country
+  - **geo:** you can pass it coordinates
+  - **hostname:** find values that match the hostname
+  - **net:** search based on an IP or /x CIDR
+  - **os:** search based on an operating system
+  - **port:** find particular ports that are open
+  - **before/after:** find results within a timeframe
+
 
 ![shodan](https://logz.io/wp-content/uploads/2019/05/Shodan.png)
+![shodan2](https://securityonline.info/wp-content/uploads/2017/10/shodan-1-615x1024.png)
 
 ### **[Censys](https://censys.io/overview/)**
-Alternative for Shodan
+*Alternative for Shodan.*
 
 ![censys](https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/403be7a4514b6e0af36e0f568328372a5ce09cbf/censys.png)
+

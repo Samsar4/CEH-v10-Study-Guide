@@ -2,9 +2,9 @@
 <img width="100%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/55c29341ff0f4bedab9817654b06cde10e2a4ed2/CEH-banner.jpg" />
 </p>
 
-### 📢 About this repo
+## 📢 About this repo
 
-* **This is a unofficial Study Guide for CEH, forked from:**
+* **Unofficial Study Guide for CEH v10 exam, forked from:**
     - https://github.com/scottymcraig/CEHv10StudyGuide 
     * changes:
         - ➕ Modules added
@@ -21,7 +21,7 @@
 
 ---
 
-## Index
+# Index
 
 0. [Introduction to Information Security and Ethical Hacking](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/0-Introduction.md)
 1. [Reconnaissance and Footprinting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/1-Reconnaissance-and-Footprinting.md)
