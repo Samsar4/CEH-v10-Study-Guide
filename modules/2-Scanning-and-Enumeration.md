@@ -68,14 +68,14 @@
 
 ## <u>Port Discovery - Basic Concepts</u>
 
-> - **Knocking the door**
+### Knocking the door:
 <img width="60%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/f8b2f839cee428a08506a9831a5d2f066e7301e7/openport.png">
 
 - The hacker above sends a SYN packet to port 80 on the server.
   - If server returns **SYN-ACK packet** = the port is **open**
   - If server returns **RST (reset) packet** = the port is **closed**
 
-> - **Checking if Stateful Firewall is present**
+### Checking if Stateful Firewall is present:
 <img width="60%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/649d665844b3a3e5c57983e6003616eff3292280/nmap-probe.png">
 
 
@@ -83,7 +83,7 @@
   - If server returns **no response** means that might have a stateful firewall handling proper sessions
   - If server returns **RST packet** means that have no stateful firewall
 
-⚠️ **This can be easily achieved using nmap**
+> ⚠️ **This can be easily achieved by using nmap only.**
 
 ***
 
@@ -115,69 +115,151 @@
 
 *Nmap ("Network Mapper") is a free and open source (license) utility for network discovery and security auditing. Many systems and network administrators also find it useful for tasks such as network inventory, managing service upgrade schedules, and monitoring host or service uptime. Nmap uses raw IP packets in novel ways to **determine what hosts are available on the network, what services (application name and version)** those hosts are offering, **what operating systems (and OS versions) they are running, what type of packet filters/firewalls are in use**, and dozens of other characteristics.* [[+]](https://nmap.org/)
 
-## Using Nmap
-## <u>Port Scan Types</u>
+# Nmap Scan Types:
 
-- **Full connect** - TCP connect or full open scan - full connection and then tears down with RST
-  - Easiest to detect, but most reliable
-  - **`nmap -sT`**
-- **Stealth** - half-open scan or SYN scan - only SYN packets sent.  Responses same as full.
+### **Stealth Scan**
+Half-open scan or SYN scan - only SYN packets sent. Responses same as full.
   - Useful for hiding efforts and evading firewalls
-  - **`nmap -sS`**
-- **Inverse TCP flag** - uses FIN, URG or PSH flag.  Open gives no response.  Closed gives RST/ACK
-  - **`nmap -sN`** (Null scan)
-  - **`nmap -sF`** (FIN scan)
-- **Xmas** - so named because all flags are turned on so it's "lit up" like a Christmas tree
-  - Responses are same as Inverse TCP scan
-  - Do not work against Windows machines
-  - **`nmap -sX`**
-- **ACK flag probe** - multiple methods
+  - **`nmap -sS <target IP>`**
+---
+### **Full connect**
+TCP connect or full open scan. The first two steps (SYN and SYN/ACK) are exactly the same as with a SYN scan. Then, instead of aborting the half-open connection with a RST packet, krad acknowledges the SYN/ACK with its own ACK packet, completing the connection. 
+  - Full connection and then tears down with RST.
+  - Easiest to detect, but most reliable
+  - **`nmap -sT <target IP>`**
+---
+### **TCP ACK scan / flag probe** - multiple methods
   - TTL version - if TTL of RST packet < 64, port is open
   - Window version - if the Window on the RST packet is anything other than 0, port open
-  - Can be used to check filtering.  If ACK is sent and no response, stateful firewall present.
-  - **`nmap -sA`** (ACK scan)
-  - **`nmap -sW`** (Window scan)
-- **IDLE Scan** - uses a third party to check if a port is open
-  - Looks at the IPID to see if there is a response
-  - Only works if third party isn't transmitting data
-  - Sends a request to the third party to check IPID id; then sends a spoofed packet to the target with a return of the third party; sends a request to the third party again to check if IPID increased.
-    - IPID increase of 1 indicates port closed
-    - IPID increase of 2 indicates port open
-    - IPID increase of anything greater indicates the third party was not idle
-  - **`nmap -sI <zombie host>`**
+  - **Can be used to check filtering.  If ACK is sent and no response, stateful firewall present.**
+  - **`nmap -sA <target IP>`** *(ACK scan)*
+  - **`nmap -sW <target IP>`** *(Window scan)*
+---
+### **NULL, FIN and Xmas Scan**
+> ⚠️ **Uses FIN, URG or PSH flag.**
+  - **Open gives no response. Closed gives RST/ACK**
+  - **`nmap -sN <target IP>`** *(Null scan)*
+  - **`nmap -sF <target IP>`** *(FIN scan)*
+
+- **Xmas Scan** - Sets the FIN, PSH, and URG flags, lighting the packet up like a Christmas tree.
+  - Responses are same as Inverse TCP scan
+  - Do not work against Windows machines
+  - **`nmap -sX <target IP>`**
+ > ⚠️ **The key advantage to these scan types (NULL, FIN or Xmas scan) is that they can sneak through certain non-stateful firewalls and packet filtering routers.**
+---
+### **IDLE Scan**
+uses a third party to check if a port is open
+- Looks at the IPID to see if there is a response
+- Only works if third party isn't transmitting data
+- Sends a request to the third party to check IPID id; then sends a spoofed packet to the target with a return of the third party; sends a request to the third party again to check if IPID increased.
+  - IPID increase of 1 indicates port closed
+  - IPID increase of 2 indicates port open
+  - IPID increase of anything greater indicates the third party was not idle
+- **`nmap -sI <zombie host> <target IP>`**
+---
+### **Spoofing**
+  - **Decoy:**
+    - **`nmap -Pn -D <spoofed IP> <target>`**
+      - This will perform a spoofed ping scan.
+  - **Source Address Spoofing:**
+    - **`nmap -e <network interface> -S <IP source> <target>`**
+      - Example --> **`nmap -e eth0 -S 10.0.0.140 10.0.0.165`**
+  - **MAC Address Spoofing:**
+    - **`nmap --spoof-mac <MAC|Vendor> <target>`**
+      - Example --> **`nmap --spoof-mac Cis 10.0.0.140`**
+
+> ⚠️ **Decoys will send spoofed IP address along with your IP address.**
+---
+### **Firewall Evasion**
+- **Multiple Decoy IP addresses:**
+  - This command is used to scan multiple decoy IP addresses. **Nmap will send multiple packets with different IP addresses, along with your attacker's IP address.**
+  - **`nmap -D RND:<number> <target>`**
+    - Example --> `nmap -D RND:10 192.168.62.4`
+- **IP Fragmentation:**
+  - Used to scan tiny fragment packets
+  - **`nmap -f <target>`**
+- **Maximum Transmission Unit:**
+  - This command is used to transmit smaller packets instead of sending one complete packet at a time.
+  - **`nmap -mtu 8 <target>`**
+    -  Maximum Transmission Unit (-mtu) and 8 bytes of packets.
+---
+### Timing & Performance
+- **Paranoid**
+  - Paranoid (0) Intrusion Detection System evasion
+  - **`nmap <target> -T0`**
+- **Sneaky**
+  - Sneaky (1) Intrusion Detection System evasion
+  - **`nmap <target> -T1`**
+- **Polite**
+  - Polite (2) slows down the scan to use less bandwidth and use less target machine resources
+  - **`nmap <target> -T2`**
+- **Normal**
+  - Normal (3) which is default speed 
+  - **`nmap <target> -T3`**
+- **Agressive**
+  - Aggressive (4) speeds scans; assumes you are on a reasonably fast and reliable network
+  - **`nmap <target> -T4`** 
+- **Insane**
+  - Insane (5) speeds scan; assumes you are on an extraordinarily fast network
+  - **`nmap <target> -T5`**
+---
+### UDP Scan
+Most popular services runs over the TCP, but there are many common services that also uses UDP: **DNS (53), SMTP (25), DHCP (67), NTP (123), NetBIOS-ssn (137), etc.**
+  - **`nmap -sU <target>`**
+
+You also can specify which UDP port:
+  - **`nmap -sU -p U:53, 123 <target>`**
+
+Also you can fire up both TCP and UDP scan with port specification:
+  - **`nmap -sU -sS -p U:53,123 T:80,443 <target>`**
+
+---
+
 
 ## <u>List of Switches</u>
 
 | Switch          | Description                                                  |
 | :---------------: | :------------------------------------------------------------ |
-| -sA             | ACK scan                                                     |
-| -sF             | FIN scan                                                     |
-| -sI             | IDLE scan                                                    |
-| -sL             | DNS scan (list scan)                                         |
-| -sN             | NULL scan                                                    |
-| -sO             | Protocol scan (tests which IP protocols respond)             |
-| -sP             | Ping scan                                                    |
-| -sR             | RPC scan                                                     |
-| -sS             | SYN scan                                                     |
-| -sT             | TCP connect scan                                             |
-| -sW             | Window scan                                                  |
-| -sX             | XMAS scan                                                    |
-| -A              | OS detection, version detection, script scanning and traceroute |
-| -PI             | ICMP ping                                                    |
-| -Po             | No ping                                                      |
-| -PS             | SYN ping                                                     |
-| -PT             | TCP ping                                                     |
-| -oN             | Normal output                                                |
-| -oX             | XML output                                                   |
-| -T0 through -T2 | Serial scans.  T0 is slowest                                 |
-| -T3 through -T5 | Parallel scans.  T3 is slowest                               |
+| `-sA`             | ACK scan                                                     |
+| `-sF`             | FIN scan                                                     |
+| `-sI`             | IDLE scan                                                    |
+| `-sL`            | DNS scan (list scan)                                         |
+| `-sN`             | NULL scan                                                    |
+| `-sO`             | Protocol scan (tests which IP protocols respond)             |
+| `-sP` or `-sn`            | Ping scan                                                    |
+| `-sR`             | RPC scan                                                     |
+| `-sS`             | SYN scan                                                     |
+| `-sT`             | TCP connect scan                                             |
+| `-sW`             | Window scan                                                  |
+| `-sX`             | XMAS scan                                                    |
+| `-A`              | OS detection, version detection, script scanning and traceroute |
+| `-sV` |  Determine only service/version info
+| `-PI`             | ICMP ping                                                    |
+| `-Pn` | No ping
+| `-Po`             | No ping                                                      |
+| `-PS`             | SYN ping                                                     |
+| `-PT`             | TCP ping                                                     |
+| `-oN`             | Normal output                                                |
+| `-oX`             | XML output                                                   |
+| `-n` | Never do DNS resolution/Always resolve
+| `-f` | --mtu <val>: fragment packets (optionally w/given MTU) 
+| `-D` | IP address Decoy: <decoy1,decoy2[,ME],...>: Cloak a scan with decoys
+| `-T0` through `-T2` | Serial scans.  T0 is slowest                                 |
+| `-T3` through `-T5` | Parallel scans.  T3 is slowest                               |
+| `-F` | Fast mode - Scan fewer ports than the default scan
 
-> ⚠️ **Nmap runs by default at a T3 level.**
 
-> ⚠️ **Fingerprinting** - another word for port sweeping and enumeration
+**Notes:**
+  - **Nmap runs by default at a T3 level (3 - Normal).**
+  - **Nmap runs by default TCP scans.**
+  - Nmap ping the target first before the port scan by default, but if the target have a firewall, maybe the scan will be blocked. **To avoid this, you can use `-Pn` to disable ping.**
+  - If you're in LAN and you need to disable ARP ping, use:
+    - `--disable-arp-ping`
+  - You can add a input from external lists of hosts/networks:
+    - `-iL hosts-example.txt`
+  - **Fingerprinting** - another word for port sweeping and enumeration
 
-## More switches:
-## 1. Port Specification
+## ➕ More Useful Information about Nmap: ➕
 
 <table data-rows="10" data-cols="3" data-tve-custom-colour="87922012"><thead><tr><th data-tve-custom-colour="11099273"><div><p>Switch</p></div></th><th data-tve-custom-colour="5315753"><div><p data-unit="px">Example</p></div></th><th data-tve-custom-colour="723491"><div><p>Description</p></div></th></tr></thead><tbody><tr><td data-tve-custom-colour="69668880"><div><p>-p</p></div></td><td data-tve-custom-colour="35630518"><div><p>nmap 192.168.1.1 -p 21</p></div></td><td data-tve-custom-colour="42544505"><div><p>Port scan for port x</p></div></td></tr><tr><td data-tve-custom-colour="23760083"><div><p>-p</p></div></td><td data-tve-custom-colour="91525947"><div><p>nmap 192.168.1.1 -p 21-100</p></div></td><td data-tve-custom-colour="85478031"><div><p>Port range</p></div></td></tr><tr><td data-tve-custom-colour="60930584"><div><p>-p</p></div></td><td data-tve-custom-colour="95405266"><div><p>nmap 192.168.1.1 -p U:53,T:21-25,80</p></div></td><td data-tve-custom-colour="16642894"><div><p>Port scan multiple TCP and UDP ports</p></div></td></tr><tr><td data-tve-custom-colour="56382335"><div><p>-p-</p></div></td><td data-tve-custom-colour="1929917"><div><p>nmap 192.168.1.1 -p-</p></div></td><td data-tve-custom-colour="68238518"><div><p>Port scan all ports</p></div></td></tr><tr><td data-tve-custom-colour="2630941"><div><p>-p</p></div></td><td data-tve-custom-colour="59723601"><div><p>nmap 192.168.1.1 -p http,https</p></div></td><td data-tve-custom-colour="38965266"><div><p>Port scan from service name</p></div></td></tr><tr><td data-tve-custom-colour="86193851"><div><p>-F</p></div></td><td data-tve-custom-colour="83865922"><div><p>nmap 192.168.1.1 -F</p></div></td><td data-tve-custom-colour="52914446"><div><p>Fast port scan (100 ports)</p></div></td></tr><tr><td data-tve-custom-colour="9925025"><div><p>--top-ports</p></div></td><td data-tve-custom-colour="5767817"><div><p>nmap 192.168.1.1 --top-ports 2000</p></div></td><td data-tve-custom-colour="97877956"><div><p>Port scan the top x ports</p></div></td></tr><tr><td data-tve-custom-colour="77359869"><div><p>-p-65535</p></div></td><td data-tve-custom-colour="97638659"><div><p>nmap 192.168.1.1 -p-65535</p></div></td><td data-tve-custom-colour="80200270"><div><p>Leaving off initial port in range <br/>makes the scan start at port 1</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="77359869"><div><p>-p0-</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="97638659"><div><p>nmap 192.168.1.1 -p0-</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="80200270"><div><p>Leaving off end port in range</p><p>makes the scan go through to port 65535</p></div></td></tr></tbody></table><p>&nbsp;</p>
 
@@ -191,11 +273,13 @@
 
 ## 4. Timing and Performance
 
-<table data-rows="8" data-cols="3" data-tve-custom-colour="67426359"><thead><tr><th data-tve-custom-colour="56239768"><div><p>Switch</p></div></th><th data-tve-custom-colour="61172434"><div><p data-unit="px">Example</p></div></th><th data-tve-custom-colour="70450063"><div><p>Description</p></div></th></tr></thead><tbody><tr><td data-tve-custom-colour="96848284"><div><p>-T0</p></div></td><td data-tve-custom-colour="16390657"><div><p>nmap 192.168.1.1 -T0</p></div></td><td data-tve-custom-colour="99779436"><div><p>Paranoid (0) Intrusion Detection <br/>System evasion</p></div></td></tr><tr><td data-tve-custom-colour="90598822"><div><p>-T1</p></div></td><td data-tve-custom-colour="56639310"><div><p>nmap 192.168.1.1 -T1</p></div></td><td data-tve-custom-colour="68900575"><div><p>Sneaky (1) Intrusion Detection System <br/>evasion</p></div></td></tr><tr><td data-tve-custom-colour="2255571"><div><p>-T2</p></div></td><td data-tve-custom-colour="1180821"><div><p>nmap 192.168.1.1 -T2</p></div></td><td data-tve-custom-colour="54409344"><div><p>Polite (2) slows down the scan to use <br/>less bandwidth and use less target <br/>machine resources</p></div></td></tr><tr><td data-tve-custom-colour="59873415"><div><p>-T3</p></div></td><td data-tve-custom-colour="88591673"><div><p>nmap 192.168.1.1 -T3</p></div></td><td data-tve-custom-colour="80756194"><div><p>Normal (3) which is default speed</p></div></td></tr><tr><td data-tve-custom-colour="63637259"><div><p>-T4</p></div></td><td data-tve-custom-colour="45398482"><div><p>nmap 192.168.1.1 -T4</p></div></td><td data-tve-custom-colour="16899626"><div><p>Aggressive (4) speeds scans; assumes <br/>you are on a reasonably fast and <br/>reliable network</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="63637259"><div><p>-T5</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="45398482"><div><p>nmap 192.168.1.1 -T5</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="16899626"><div><p>Insane (5) speeds scan; assumes you <br/>are on an extraordinarily fast network</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="73052435">&nbsp;</td><td colspan="1" rowspan="1" data-tve-custom-colour="13330189">&nbsp;</td><td colspan="1" rowspan="1" data-tve-custom-colour="85354161">&nbsp;</td></tr></tbody></table><p>&nbsp;</p>
 
 <table data-rows="9" data-cols="3" data-tve-custom-colour="75605587"><thead><tr><th data-tve-custom-colour="13586691"><div><p>Switch</p></div></th><th data-tve-custom-colour="67670104"><div><p data-unit="px">Example input</p></div></th><th data-tve-custom-colour="22001055"><div><p>Description</p></div></th></tr></thead><tbody><tr><td data-tve-custom-colour="36797711"><div><p>--host-timeout&nbsp;&lt;time&gt;</p></div></td><td data-tve-custom-colour="40415439"><div><p>1s; 4m; 2h</p></div></td><td data-tve-custom-colour="65853516"><div><p>Give up on target after this long</p></div></td></tr><tr><td data-tve-custom-colour="45657658"><div><p>--min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout&nbsp;&lt;time&gt;</p></div></td><td data-tve-custom-colour="82394169"><div><p>1s; 4m; 2h</p></div></td><td data-tve-custom-colour="39146150"><div><p>Specifies probe round trip time</p></div></td></tr><tr><td data-tve-custom-colour="3070409"><div><p>--min-hostgroup/max-hostgroup&nbsp;&lt;size&lt;size&gt;</p></div></td><td data-tve-custom-colour="71004712"><div><p>50; 1024</p></div></td><td data-tve-custom-colour="22579534"><div><p>Parallel host scan group <br/>sizes</p></div></td></tr><tr><td data-tve-custom-colour="13777720"><div><p>--min-parallelism/max-parallelism&nbsp;&lt;numprobes&gt;</p></div></td><td data-tve-custom-colour="6830765"><div><p>10; 1</p></div></td><td data-tve-custom-colour="68135110"><div><p>Probe parallelization</p></div></td></tr><tr><td data-tve-custom-colour="15515435"><div><p>--scan-delay/--max-scan-delay&nbsp;&lt;time&gt;</p></div></td><td data-tve-custom-colour="36552978"><div><p>20ms; 2s; 4m; 5h</p></div></td><td data-tve-custom-colour="54476562"><div><p>Adjust delay between probes</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="15515435"><div><p>--max-retries &lt;tries&gt;</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="36552978"><div><p>3</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="54476562"><div><p>Specify the maximum number <br/>of port scan probe retransmissions</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="15515435"><div><p>--min-rate&nbsp;&lt;number&gt;</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="36552978"><div><p>100</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="54476562"><div><p>Send packets no slower than&nbsp;&lt;numberr&gt; per second</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="15515435"><div><p>--max-rate &lt;number&gt;</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="36552978"><div><p>100</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="54476562"><div><p>Send packets no faster than&nbsp;&lt;number&gt; per second</p></div></td></tr></tbody></table><p>&nbsp;</p>
 
 ## 5. NSE Scripts
+NSE stands for Nmap Scripting Engine, and it’s basically a digital library of Nmap scripts that helps to enhance the default Nmap features and report the results in a traditional Nmap output.
+
+One of the best things about NSE is its ability to let users write and share their own scripts, so you’re not limited to relying on the Nmap default NSE scripts. [[+]](https://nmap.org/nsedoc/)
 
 <table data-rows="8" data-cols="3" data-tve-custom-colour="84942293"><thead><tr><th data-tve-custom-colour="54206681"><div><p>Switch</p></div></th><th data-tve-custom-colour="94833622"><div><p data-unit="px">Example</p></div></th><th data-tve-custom-colour="44020045"><div><p>Description</p></div></th></tr></thead><tbody><tr><td data-tve-custom-colour="28223530"><div><p>-sC</p></div></td><td data-tve-custom-colour="1861219"><div><p>nmap 192.168.1.1 -sC</p></div></td><td data-tve-custom-colour="37113719"><div><p>Scan with default NSE scripts. Considered useful for discovery and safe</p></div></td></tr><tr><td data-tve-custom-colour="4025240"><div><p>--script default</p></div></td><td data-tve-custom-colour="13420588"><div><p>nmap 192.168.1.1 --script default</p></div></td><td data-tve-custom-colour="41758"><div><p>Scan with default NSE scripts. Considered useful for discovery and safe</p></div></td></tr><tr><td data-tve-custom-colour="49874311"><div><p>--script</p></div></td><td data-tve-custom-colour="54335880"><div><p>nmap 192.168.1.1 --script=banner</p></div></td><td data-tve-custom-colour="63692658"><div><p>Scan with a single script. Example banner</p></div></td></tr><tr><td data-tve-custom-colour="29010211"><div><p>--script</p></div></td><td data-tve-custom-colour="38815019"><div><p>nmap 192.168.1.1 --script=http*</p></div></td><td data-tve-custom-colour="38719696"><div><p>Scan with a wildcard. Example http</p></div></td></tr><tr><td data-tve-custom-colour="50309291"><div><p>--script</p></div></td><td data-tve-custom-colour="27379683"><div><p>nmap 192.168.1.1 --script=http,banner</p></div></td><td data-tve-custom-colour="67727190"><div><p>Scan with two scripts. Example http and banner</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="50309291"><div><p>--script</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="27379683"><div><p>nmap 192.168.1.1 --script "not intrusive"</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="67727190"><div><p>Scan default, but remove intrusive scripts</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="50309291"><div><p>--script-args</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="27379683"><div><p>nmap --script snmp-sysdescr --script-args snmpcommunity=admin 192.168.1.1</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="67727190"><div><p>NSE script with arguments</p></div></td></tr></tbody></table><p>&nbsp;</p>
 
@@ -203,16 +287,7 @@
 
 <table data-rows="8" data-cols="2" data-tve-custom-colour="81834986"><thead><tr><th data-tve-custom-colour="46164884"><div><p>Command</p></div></th><th data-tve-custom-colour="84676748"><div><p>Description</p></div></th></tr></thead><tbody><tr><td data-tve-custom-colour="24377933"><div><p>nmap -Pn --script=http-sitemap-generator scanme.nmap.org</p></div></td><td data-tve-custom-colour="22583833"><div><p>http site map generator</p></div></td></tr><tr><td data-tve-custom-colour="28668006"><div><p>nmap -n -Pn -p 80 --open -sV -vvv --script banner,http-title -iR 1000</p></div></td><td data-tve-custom-colour="71143089"><div><p>Fast search for random web servers</p></div></td></tr><tr><td data-tve-custom-colour="24049541"><div><p>nmap -Pn --script=dns-brute domain.com</p></div></td><td data-tve-custom-colour="51645097"><div><p>Brute forces DNS hostnames guessing subdomains</p></div></td></tr><tr><td data-tve-custom-colour="7314780"><div><p>nmap -n -Pn -vv -O -sV --script smb-enum*,smb-ls,smb-mbenum,smb-os-discovery,smb-s*,smb-vuln*,smbv2* -vv 192.168.1.1</p></div></td><td data-tve-custom-colour="80246068"><div><p>Safe SMB scripts to run</p></div></td></tr><tr><td data-tve-custom-colour="17385457"><div><p>nmap --script whois* domain.com</p></div></td><td data-tve-custom-colour="52762961"><div><p>Whois query</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="17385457"><div><p>nmap -p80 --script http-unsafe-output-escaping scanme.nmap.org</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="52762961"><div><p>Detect cross site scripting vulnerabilities</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="17385457"><div><p>nmap -p80 --script http-sql-injection scanme.nmap.org</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="52762961"><div><p>Check for SQL injections</p></div></td></tr></tbody></table><p>&nbsp;</p>
 
-## 6. Firewall / IDS Evasion and Spoofing
-
-<table data-rows="9" data-cols="3" data-tve-custom-colour="74018057"><thead><tr><th data-tve-custom-colour="66763798"><div><p>Switch</p></div></th><th data-tve-custom-colour="2497752"><div><p data-unit="px">Example</p></div></th><th data-tve-custom-colour="28891756"><div><p>Description</p></div></th></tr></thead><tbody><tr><td data-tve-custom-colour="42379653"><div><p>-f</p></div></td><td data-tve-custom-colour="85690233"><div><p>nmap 192.168.1.1 -f</p></div></td><td data-tve-custom-colour="23877951"><div><p>Requested scan (including ping scans) use tiny fragmented IP packets. Harder for packet filters</p></div></td></tr><tr><td data-tve-custom-colour="9831139"><div><p>--mtu</p></div></td><td data-tve-custom-colour="8445695"><div><p>nmap 192.168.1.1 --mtu 32</p></div></td><td data-tve-custom-colour="13714864"><div><p>Set your own offset size</p></div></td></tr><tr><td data-tve-custom-colour="53184099"><div><p>-D</p></div></td><td data-tve-custom-colour="27224948"><div><p>nmap -D 192.168.1.101,192.168.1.102,<br/>192.168.1.103,192.168.1.23 192.168.1.1</p></div></td><td data-tve-custom-colour="6906852"><div><p>Send scans from spoofed IPs</p></div></td></tr><tr><td data-tve-custom-colour="36290366"><div><p>-D</p></div></td><td data-tve-custom-colour="86484685"><div><p>nmap -D decoy-ip1,decoy-ip2,your-own-ip,decoy-ip3,decoy-ip4 remote-host-ip</p></div></td><td data-tve-custom-colour="1334841"><div><p>Above example explained</p></div></td></tr><tr><td data-tve-custom-colour="87774529"><div><p>-S</p></div></td><td data-tve-custom-colour="3864884"><div><p>nmap -S www.microsoft.com www.facebook.com</p></div></td><td data-tve-custom-colour="76224450"><div><p>Scan Facebook from Microsoft (-e eth0 -Pn may be required)</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="87774529"><div><p>-g</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="3864884"><div><p>nmap -g 53 192.168.1.1</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="76224450"><div><p>Use given source port number</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="87774529"><div><p>--proxies</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="3864884"><div><p>nmap --proxies http://192.168.1.1:8080, http://192.168.1.2:8080 192.168.1.1</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="76224450"><div><p>Relay connections through HTTP/SOCKS4 proxies</p></div></td></tr><tr><td colspan="1" rowspan="1" data-tve-custom-colour="87774529"><div><p>--data-length</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="3864884"><div><p>nmap --data-length 200 192.168.1.1</p></div></td><td colspan="1" rowspan="1" data-tve-custom-colour="76224450"><div><p>Appends random data to sent packets</p></div></td></tr></tbody></table><p>&nbsp;</p>
-
-
-* **Example IDS Evasion command**
-  - `nmap -f -t 0 -n -Pn –data-length 200 -D`
-  - 192.168.1.101, 192.168.1.102, 192.168.1.103, 192.168.1.23 192.168.1.1
-
-*Source: https://www.stationx.net/nmap-cheat-sheet/*
+- <small>Source: https://www.stationx.net/nmap-cheat-sheet/</small>
 
 ## <u>hping</u>
 > ⚡︎ **Check the hping3 [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/2-Scanning-Networks/1-hping3.md)**
@@ -241,7 +316,7 @@ Hping3 is a scriptable program that uses the Tcl language, whereby packets can b
 | -U      | Sets the URG flag                                            |
 | -X      | Sets the XMAS scan flags                                     |
 
-## <u>Evasion</u>
+## <u>Evasion Concepts</u>
 
 - To evade IDS, sometimes you need to change the way you scan
 - One method is to fragment packets (nmap -f switch)
@@ -309,7 +384,6 @@ Login with msfadmin/msfadmin to get started
 <ul>
 <li><a href="/twiki/">TWiki</a></li>
 ```
-  
 
 ## <u>Vulnerability Scanning</u>
 
@@ -322,16 +396,30 @@ Login with msfadmin/msfadmin to get started
   - FreeScan - best known for testing websites and applications
   - OpenVAS - best competitor to Nessus and is free
 
-# <u>Enumeration Concepts</u>
-Enumeration is the process of extracting user names, machine names, network resources, shares, and services from a system, and its conducted in an intranet environment.
+## <u>ProxyChains</u>
+*ProxyChains is open-source software that is available free and most of Linux distro it is pre-installed. If you are using the latest version of Kali Linux it is pre-installed in it.*
 
-- Get user names using email IDs
-- Get information using default passwords
-- Get user names using SNMP
-- Brute force AD
-- Get user groups from Windows
-- Get information using DNS zone transfers
-- NetBios, LDAP, NTP
+*ProxyChains is a tool that redirects the TCP (Transmission Control Protocol) connection with the help of proxies like TOR, HTTP(S), and SOCKS, and it creates a proxy chain server.*
+
+**ProxyChains Features:**
+
+- Support SOCKS5, SOCKS4, and HTTP CONNECT proxy servers.
+- Proxychains can be mixed up with a different proxy types in a list
+- Proxychains also supports any kinds of chaining option methods, like: random, which takes a random proxy in the list stored in a configuration file, or chaining proxies in the exact order list, different proxies are separated by a new line in a file. There is also a dynamic option, that lets Proxychains go through the live only proxies, it will exclude the dead or unreachable proxies, the dynamic option often called smart option.
+- Proxychains can be used with servers, like squid, sendmail, etc.
+- Proxychains is capable to do DNS resolving through proxy.
+- Proxychains can handle any TCP client application, ie., nmap, telnet.
+
+# <u>Enumeration Concepts</u>
+Enumeration is the process of extracting **user names, machine names, network resources, shares, and services** from a system, and its conducted in an intranet environment.
+
+- **Get user names using email IDs**
+- **Get information using default passwords**
+- **Get user names using SNMP**
+- **Brute force AD**
+- **Get user groups from Windows**
+- **Get information using DNS zone transfers**
+- **NetBios, LDAP, NTP, DNS**
 
 In this phase, the attacker creates an active connection to the system and performs directed queries to gain more information about the target. The gathered information is used to identify the vulnerabilities or weak points in system security and tries to exploit in the System gaining phase.
 
@@ -340,6 +428,87 @@ In this phase, the attacker creates an active connection to the system and perfo
 - **Direct access**
 - **Gain more information**
 
+## <u>SNMP Enumeration</u>
+> ⚡︎ **Check the SNMP Enumeration [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/3-Enumeration/2-SNMP-Enumeration.md)**
+
+SNMP enumeration is the process of enumerating the users accounts and devices on a SNMP enabled computer.
+
+- SNMP service comes with two passwords, which are used to configure and access the SNMP agent from the management station (MIB): 
+  1. **Read community string**
+  2. **Read/Write community string**
+- These strings (**`passwords`**) come with a **default value**, which is same for all the systems.
+- **They become easy entry points for attackers if left unchanged by administrator**.
+
+Attackers enumerate SNMP to extract information about network resources such as hosts, routers, devices, shares(...) Network information such as ARP tables, routing tables, device specific information and traffic statistics.
+
+- **Runs on Port 161 UDP**
+- **Management Information Base** (MIB) - database that stores information
+- **Object Identifiers** (OID) - identifiers for information stored in MIB
+- **SNMP GET** - gets information about the system
+- **SNMP SET** - sets information about the system
+- **Types of objects**
+  - **Scalar** - single object
+  - **Tabular** - multiple related objects that can be grouped together
+- SNMP uses community strings which function as passwords
+- There is a read-only and a read-write version
+- Default read-only string is **public** and default read-write is **private**
+- These are sent in cleartext unless using SNMP v3
+- **CLI Tools**
+  - **`snmp-check`** --> SNMP device enumerator comes pre-installed on Kali Linux machine; **snmp-check** supports a huge type of enumerations: 
+    - contact and user accounts
+    - devices
+    - domain
+    - hardware and storage informations
+    - hostname
+    - IIS statistics
+    - listening UDP ports and TCP connections
+    - motd (banner)
+    - network interfaces and network services
+
+    - routing information
+    - etc
+
+  - **Metasploit module `snmp_enum`**
+    - [⚡︎ MSF snmp_enum practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/3-Enumeration/2-SNMP-Enumeration.md)
+
+  - snmpwalk
+- **GUI Tools**
+  - Engineer's Toolset
+  - SNMPScanner
+  - OpUtils 5
+  - SNScan
+
+    **Example of SNScan**:
+      - *Note: the first scanned item is a printer running SNMP.*
+    ![sns](https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/292c0411bb379aaf25e403741f64e62bbe4bc6a0/snmp-snas.png)
+
+
+## <u>Windows System Basics</u>
+
+- Everything runs within context of an account
+- **Security Context** - user identity and authentication information
+- **Security Identifier** (SID) - identifies a user, group or computer account
+- **Resource Identifier** (RID) - portion of the SID identifying a specific user, group or computer
+- The end  of the SID indicates the user number
+  - Example SID:  S-1-5-21-3874928736-367528774-1298337465-**500**
+  - **Administrator Account** - SID of 500
+    - Command to get SID of local user: 
+      - **`wmic useraccount where name='username' get sid`**
+  - **Regular Accounts** - start with a SID of 1000
+  - **Linux Systems** used user IDs (UID) and group IDs (GID).  Found in /etc/passwd
+- **SAM Database** - file where all local passwords are stored (encrypted)
+  - Stored in C:\Windows\System32\Config
+- **Linux Enumeration Commands in PowerShell or CmdPrompt**
+  - **`finger`** - info on user and host machine
+  - **`rpcinfo`** and **`rpcclient`** - info on RPC in the environment
+  - **`showmount`** - displays all shared directories on the machine
+- **Look for share resources (NetBIOS):**
+  - **`net view \\sysName`**
+- **Windows SysInternals** is a website and suite that offers technical resources and utilities to manage, diagnose, troubleshoot, and monitor.
+  - https://docs.microsoft.com/en-us/sysinternals/downloads/
+  - Lots of resources for enumerating, windows administration tools, etc.
+
+
 ## <u>NetBIOS Enumeration</u>
 
 - NetBIOS provides name servicing, connectionless communication and some Session layer stuff
@@ -347,7 +516,7 @@ In this phase, the attacker creates an active connection to the system and perfo
 - NetBIOS name is a **16-character ASCII string** used to identify devices
 
 **Enumerating NetBIOS**:
-- You can use **`zenmap or zenmap`** to check which OS the target is using, and which ports are open:
+- You can use **`nmap or zenmap`** to check which OS the target is using, and which ports are open:
     - **`nmap -O <target>`**
 
 - If theres any **UDP port 137** or **TCP port 138/139** open, we can assume that the target is running some type of NetBIOS service.
@@ -375,66 +544,43 @@ In this phase, the attacker creates an active connection to the system and perfo
 | <20> | UNIQUE | Server service running    |
 
 - NetBIOS name resolution doesn't work on IPv6
-- **Other Tools**
-  - SuperScan
-  - Hyena
-  - NetBIOS Enumerator (is a nbtstat with GUI)
-  - NSAuditor
+- **Other Tools for NetBIOS enumeration:**
+  - **SuperScan**
+  - **Hyena**
+  - **NetBIOS Enumerator (is a nbtstat with GUI)**
+  - **NSAuditor**
 
-## <u>Windows System Basics</u>
+## <u>Linux System Basics</u>
 
-- Everything runs within context of an account
-- **Security Context** - user identity and authentication information
-- **Security Identifier** (SID) - identifies a user, group or computer account
-- **Resource Identifier** (RID) - portion of the SID identifying a specific user, group or computer
-- The end  of the SID indicates the user number
-  - Example SID:  S-1-5-21-3874928736-367528774-1298337465-**500**
-  - **Administrator Account** - SID of 500
-    - Command to get SID of local user: 
-      - **`wmic useraccount where name='username' get sid`**
-  - **Regular Accounts** - start with a SID of 1000
-  - **Linux Systems** used user IDs (UID) and group IDs (GID).  Found in /etc/passwd
-- **SAM Database** - file where all local passwords are stored (encrypted)
-  - Stored in C:\Windows\System32\Config
-- **Linux Enumeration Commands**
-  - **`finger`** - info on user and host machine
-  - **`rpcinfo`** and **`rpcclient`** - info on RPC in the environment
-  - **`showmount`** - displays all shared directories on the machine
+- **`Enum4linux` is a tool for enumerating information from Windows and Samba systems:**
+  - `enum4linux -u CEH -p Pa55w0rd -U 10.0.2.23`
 
-## <u>SNMP Enumeration</u>
-> ⚡︎ **Check the SNMP Enumeration [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/3-Enumeration/2-SNMP-Enumeration.md)**
+    - `-u` Username, `-p` Password, `-U` users information
+  - [⚡︎ enum4linux practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/3-Enumeration/3-Enum4linux-Win-and-Samba-Enumeration.md)
+  - Key features:
+    - RID cycling *(When RestrictAnonymous is set to 1 on Windows 2000)*
+    - User listing *(When RestrictAnonymous is set to 0 on Windows 2000)*
+    - Listing of group membership information
+    - Share enumeration
+    - Detecting if host is in a workgroup or a domain
+    - Identifying the remote operating system
+    - Password policy retrieval (using polenum)
+- **`finger`** --> who is currently logged in, when and where.
 
-SNMP enumeration is the process of enumerating the users accounts and devices on a SNMP enabled computer.
+  ```
+  Login     Name       Tty      Idle  Login Time   Office     Office Phone
+  kali      Kali       tty7    10:09  Sep 1 14:14 (:0)
 
-SNMP service comes with two passwords, which are used to configure and access the SNMP agent from the management station. They are: Read community string and Read/Write community string. These strings (passwords) come with a default value, which is same for all the systems. They become easy entry points for attackers if left unchanged by administrator.
+  ```
+- **`w`** --> Show who is logged on and what they are doing.
 
-Attackers enumerate SNMP to extract information about network resources such as hosts, routers, devices, shares(...) Network information such as ARP tables, routing tables, device specific information and traffic statistics.
+  ```
+  00:27:15 up  9:32,  1 user,  load average: 0.06, 0.09, 0.09
+  USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+  kali     tty7     :0               14:16   10:11m 30.26s  2.09s xfce4-session
 
-- **Runs on Port 161 UDP**
-- **Management Information Base** (MIB) - database that stores information
-- **Object Identifiers** (OID) - identifiers for information stored in MIB
-- **SNMP GET** - gets information about the system
-- **SNMP SET** - sets information about the system
-- **Types of objects**
-  - **Scalar** - single object
-  - **Tabular** - multiple related objects that can be grouped together
-- SNMP uses community strings which function as passwords
-- There is a read-only and a read-write version
-- Default read-only string is **public** and default read-write is **private**
-- These are sent in cleartext unless using SNMP v3
-- **CLI Tools**
-  - Metasploit module snmp_enum *(method used on the [practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/3-Enumeration/2-SNMP-Enumeration.md))*
-  - snmpwalk
-- **GUI Tools**
-  - Engineer's Toolset
-  - SNMPScanner
-  - OpUtils 5
-  - SNScan
-
-**Example of SNScan**:
-  - *Note: the first scanned item is a printer running SNMP.*
-<img width="80%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/292c0411bb379aaf25e403741f64e62bbe4bc6a0/snmp-snas.png">
-
+  ```
+> ⚠️ **Linux architecture and commands will be cover later on next module.**
 
 ## <u>LDAP Enumeration</u>
 
@@ -444,7 +590,7 @@ Attackers enumerate SNMP to extract information about network resources such as 
 
 - To identify if the target system is using LDAP services you can use **nmap** with `-sT` flag for TCP connect/Full scan and `-O` flag for OS detection. 
 
-**`sudo nmap -sT -O 192.168.63.142`**
+**`sudo nmap -sT -O <target IP address>`**
 
 ```
 PORT      STATE SERVICE
@@ -546,11 +692,11 @@ PORT   STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 0.86 seconds
 ```
 
-- It is possible to connect to SMTP through Telnet connection, instead using port 23(Telnet) we can set the port 25(SMTP) on the telnet command:
+- It is possible to connect to SMTP through **Telnet connection**, instead using port 23(Telnet) we can set the port 25(SMTP) on the telnet command:
   - **`telnet <target> 25`**
-
-- Case we got connected, we can use the **SMTP commands** to explore as shown below:
-  - ![smtp](https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/2ea0450933a1899b77a7519a46b4aee3b1597759/smtp-commands.png)
+    - Case we got connected, we can use the **SMTP commands** to explore as shown below:
+    - ![smtp](https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/2ea0450933a1899b77a7519a46b4aee3b1597759/smtp-commands.png)
+    - Both of emails are valid to an attacker explore further attacks like brute forcing etc.
 
 ### Some SMTP Commands:
 
