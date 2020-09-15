@@ -14,10 +14,7 @@
         - ➕  Content segregation  
 
 * The objective of this repo is to clarify all topics presented on [CEH v10](https://iclass.eccouncil.org/our-courses/certified-ethical-hacker-ceh/) (ANSI) exam.
-
----
-
-⚡︎ **This study guide have some [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/README.md) to test your knowledge and learn by doing.**
+* ⚡︎ **This study guide have some [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/README.md) to test your knowledge and learn by doing.**
 
 ---
 
