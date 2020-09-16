@@ -4,14 +4,13 @@
 
 ## 📢 About this repo
 
-* **Unofficial Study Guide for CEH v10 exam, forked from:**
-    - https://github.com/scottymcraig/CEHv10StudyGuide 
+* **Unofficial Study Guide for CEH v10 exam, forked from:** <small>https://github.com/scottymcraig/CEHv10StudyGuide</small> 
     * **Changes:**
-        - ➕  Modules added
-        - ➕  Increased information details in all modules
-        - ➕  Practical labs added
-        - ➕  Images added for clear understanding
-        - ➕  Content segregation  
+        - [+] Modules added
+        - [+] Increased information details in all modules
+        - [+] Practical labs added
+        - [+] Images added for clear understanding
+        - [+] Content segregation  
 
 * The objective of this repo is to clarify all topics presented on [CEH v10](https://iclass.eccouncil.org/our-courses/certified-ethical-hacker-ceh/) (ANSI) exam.
 * ⚡︎ **This study guide have some [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/README.md) to test your knowledge and learn by doing.**
@@ -37,5 +36,3 @@
 14. [Pentesting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/14-Pentesting.md)
 15. [Cloud Computing](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/15-Cloud%20Computing.md)
 16. [Cryptography](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/16-Cryptography.md)
-
----

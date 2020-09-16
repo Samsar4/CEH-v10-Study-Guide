@@ -348,62 +348,117 @@ Hping3 is a scriptable program that uses the Tcl language, whereby packets can b
 
 * **Example of Banner grabbing on netcat - extracting request HTTP header**  
   1. `nc` command with `target IP` address and `port 80`
-  2. issue the `GET / HTTP/1.0` (this GET request will send to the web server).
-  3. The server responded with some interesting information.
-```
-nc 192.168.63.143 80
-GET / HTTP/1.0            
+  2. Issue the `GET / HTTP/1.0` (this GET request will send to the web server).
+  3. **The server responded with some interesting information:**
+      ```
+      nc 192.168.63.143 80
+      GET / HTTP/1.0            
 
-HTTP/1.1 200 OK
-Date: Sun, 12 Aug 2018 13:36:59 GMT
-Server: Apache/2.2.8 (Ubuntu) DAV/2
-X-Powered-By: PHP/5.2.4-2ubuntu5.10
-Content-Length: 891
-Connection: close
-Content-Type: text/html
+      HTTP/1.1 200 OK
+      Date: Sun, 12 Aug 2018 13:36:59 GMT
+      Server: Apache/2.2.8 (Ubuntu) DAV/2
+      X-Powered-By: PHP/5.2.4-2ubuntu5.10
+      Content-Length: 891
+      Connection: close
+      Content-Type: text/html
 
-<html><head><title>Metasploitable2 - Linux</title></head><body>
-<pre>
+      <html><head><title>Metasploitable2 - Linux</title></head><body>
+      <pre>
 
-                _                  _       _ _        _     _      ____  
- _ __ ___   ___| |_ __ _ ___ _ __ | | ___ (_) |_ __ _| |__ | | ___|___ \ 
-| '_ ` _ \ / _ \ __/ _` / __| '_ \| |/ _ \| | __/ _` | '_ \| |/ _ \ __) |
-| | | | | |  __/ || (_| \__ \ |_) | | (_) | | || (_| | |_) | |  __// __/ 
-|_| |_| |_|\___|\__\__,_|___/ .__/|_|\___/|_|\__\__,_|_.__/|_|\___|_____|
-                            |_|                                          
-
-
-Warning: Never expose this VM to an untrusted network!
-
-Contact: msfdev[at]metasploit.com
-
-Login with msfadmin/msfadmin to get started
+                      _                  _       _ _        _     _      ____  
+      _ __ ___   ___| |_ __ _ ___ _ __ | | ___ (_) |_ __ _| |__ | | ___|___ \ 
+      | '_ ` _ \ / _ \ __/ _` / __| '_ \| |/ _ \| | __/ _` | '_ \| |/ _ \ __) |
+      | | | | | |  __/ || (_| \__ \ |_) | | (_) | | || (_| | |_) | |  __// __/ 
+      |_| |_| |_|\___|\__\__,_|___/ .__/|_|\___/|_|\__\__,_|_.__/|_|\___|_____|
+                                  |_|                                          
 
 
-</pre>
-<ul>
-<li><a href="/twiki/">TWiki</a></li>
-```
+      Warning: Never expose this VM to an untrusted network!
 
-## <u>Vulnerability Scanning</u>
+      Contact: msfdev[at]metasploit.com
 
-- Can be complex or simple tools run against a target to determine vulnerabilities
-- Industry standard is Tenable's **Nessus**
+      Login with msfadmin/msfadmin to get started
 
-- Other options include
-  - GFI LanGuard
-  - Qualys
-  - FreeScan - best known for testing websites and applications
-  - OpenVAS - best competitor to Nessus and is free
 
-## <u>ProxyChains</u>
+      </pre>
+      <ul>
+      <li><a href="/twiki/">TWiki</a></li>
+      ```
+
+## <u>Vulnerabilities</u>
+
+### **Vulnerability Categories**:
+
+- **Misconfiguration** - improperly configuring a service or application
+- **Default installation** - failure to change settings in an application that come by default
+- **Buffer overflow** - code execution flaw
+- **Missing patches** -  systems that have not been patched
+- **Design flaws** - flaws inherent to system design such as encryption and data validation
+- **Operating System Flaws** - flaws specific to each OS
+- **Default passwords** - leaving default passwords that come with system/application
+
+### **Vulnerability Assessment** - Scans and tests for vulnerabilities but does not intentionally exploit them.
+  - Find the vulnerabilities so we can categorize them (OS, Misconfigurations, patch management, third-party, etc)
+
+### **Vulnerability Management Life-cycle**
+*The Vulnerability Management Life Cycle is intended to allow organizations to **identify system security weaknesses; prioritize assets; assess, report, and remediate the weaknesses; and verify that they have been eliminated.***
+
+![vuln-assess](https://www.parsolvo.com/wp-content/uploads/2020/02/Vulnerability-Management-Process-Lifecycle-Blue.png)
+
+1. **Discover:** Inventory all assets across the network and identify host details including operating system and open services to identify vulnerabilities. Develop a network baseline. Identify security vulnerabilities on a regular automated schedule.
+2. **Prioritize Assets:** Categorize assets into groups or business units, and assign a business value to asset groups based on their criticality to your business operation.
+3. **Assess:** Determine a baseline risk profile so you can eliminate risks based on asset criticality, vulnerability threat, and asset classification.
+4. **Report:** Measure the level of business risk associated with your assets according to your security policies. Document a security plan, monitor suspicious activity, and describe known vulnerabilities.
+5. **Remediate:** Prioritize and fix vulnerabilities in order according to business risk. Establish controls and demonstrate progress.
+6. **Verify:** Verify that threats have been eliminated through follow-up audits.
+
+### **Vulnerability Scanning**
+*Can be complex or simple tools run against a target to determine vulnerabilities.*
+
+- **Types of Vuln. Assessment tools:**
+  - Host-based
+  - Depth-based (Fuzzer tools)
+  - Application-layer tools (software, databases, etc)
+  - Active scanning
+  - Passive scanning
+  - Scope tools
+
+- **Tools**:
+  - Industry standard is **[Tenable's Nessus](https://www.tenable.com/).**
+  - **[GFI LanGuard](https://www.gfi.com/products-and-solutions/network-security-solutions/gfi-languard).**
+  - **[Nikto](https://github.com/sullo/nikto)** - CLI; is a **web server assessment tool**. It is designed to find various default and insecure files, configurations and programs on any type of web server.
+  - **[OpenVAS](https://www.openvas.org/)** - Best competitor to Nessus and is free.
+  - **[wpscan](https://wpscan.org/)** - CLI; Scan WordPress websites.
+  - **MBSA - Microsoft Baseline Security Analyzer**.
+  - **FreeScan** - Well known for testing websites and applications.
+  - **Qualys**
+
+### **CVSS and CVE**
+- **CVSS - Common Vulnerability Scoring System** [[+]](https://nvd.nist.gov/vuln-metrics/cvss)
+  - Places numerical score based on severity
+  - ![cvss](https://3.bp.blogspot.com/-5V1cb_wTvsk/Wl78iF4Sd8I/AAAAAAAAF7U/KmK4pMXi54YworDgh4uI8aZtHgy0bbznQCLcBGAs/s1600/CVSS.png)
+    - None - white (0.0)
+    - Low - green tones (0.1 - 3.9)
+    - Medium - yellow/light orange (4.0 - 4.9)
+    - High - orange (7.0 - 8.0)
+    - Critical - red (9.0 - 10.0)
+
+- **CVE – Common Vulnerabilities and Exposures** [[+]](https://cve.mitre.org/)
+  - Is a list of publicly disclosed vulnerabilities and exposures that is maintained by MITRE.
+  - ![cve](https://i0.wp.com/gbhackers.com/wp-content/uploads/2016/10/cve.png?resize=486%2C408&ssl=1)
+- **NVD - National Vulnerability Database**  [[+]](https://nvd.nist.gov/)
+  -  is a database, maintained by NIST, that is fully synchronized with the MITRE CVE list; US Gov. vulnerabilities repository.
+
+## <u>ProxyChains ⛓</u>
+![proxychains](https://udigrudroid.files.wordpress.com/2018/11/proxy.jpg?w=620)
+
 *ProxyChains is open-source software that is available free and most of Linux distro it is pre-installed. If you are using the latest version of Kali Linux it is pre-installed in it.*
 
 *ProxyChains is a tool that redirects the TCP (Transmission Control Protocol) connection with the help of proxies like TOR, HTTP(S), and SOCKS, and it creates a proxy chain server.*
 
 **ProxyChains Features:**
 
-- Support SOCKS5, SOCKS4, and HTTP CONNECT proxy servers.
+- Support **SOCKS5**, **SOCKS4**, and **HTTP/HTTPS** CONNECT proxy servers.
 - Proxychains can be mixed up with a different proxy types in a list
 - Proxychains also supports any kinds of chaining option methods, like: random, which takes a random proxy in the list stored in a configuration file, or chaining proxies in the exact order list, different proxies are separated by a new line in a file. There is also a dynamic option, that lets Proxychains go through the live only proxies, it will exclude the dead or unreachable proxies, the dynamic option often called smart option.
 - Proxychains can be used with servers, like squid, sendmail, etc.
@@ -713,4 +768,3 @@ EXPN | asks for a confirmation about the identification of a mailing list.
 **Other tools**:
 - smtp-user-enum
   - Username guessing tool primarily for use against the default Solaris SMTP service. Can use either EXPN, VRFY or RCPT TO.
-  
