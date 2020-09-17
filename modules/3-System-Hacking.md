@@ -20,53 +20,110 @@
 
 ## <u>Password Attacks</u>
 
-> ⚡︎ **Check out the practical labs(3) on [Dumping and Cracking SAM hashes](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/2-SAM-Hashes.md), [Rainbow Tables Basics](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/3-Rainbow-tables.md) and [LLMNR/NBT-NS](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/1-LLMNR-NBT-NS.md)** 
-- **Non-electronic** - social engineering attacks - most effective.
-  - Includes shoulder surfing and dumpster diving
-- **Active online** - done by directly communicating with the victim's machine
-  - Includes dictionary and brute-force attacks, hash injections, phishing, Trojans, spyware, keyloggers and password guessing
-  - **Keylogging** - process of using a hardware device or software application to capture keystrokes of a user
-  - **LLMNR/NBT-NS** - attack based off Windows technologies that caches DNS locally. Responding to these poisons the local cache.  If an NTLM v2 hash is sent over, it can be sniffed out and then cracked.
-    - **Tools**
-      - NBNSpoof
-      - Pupy
-      - Metasploit
-      - Responder
-    - **LLMNR uses UDP 5355**
-    - **NBT-NS uses UDP 137**
-  - Active online attacks are easier to detect and take a longer time
-  - Can combine "net" commands with a tool such as **NetBIOS Auditing tool** or **Legion** to automate the testing of user IDs and passwords
-  - **Tools**
-    - Hydra
-    - Metasploit
-- **Passive online** - sniffing the wire in hopes of intercepting a password in clear text or attempting a replay attack or man-in-the-middle attack
-  - **Tools**
-    - **Cain and Abel** - can poison ARP and then monitor the victim's traffic
-    - **Ettercap** - works very similar to Cain and Abel.  However, can also help against SSL encryption
-    - **KerbCrack** - built-in sniffer and password cracker looking for port 88 Kerberos traffic
-    - **ScoopLM** - specifically looks for Windows authentication traffic on the wire and has a password cracker
-- **Offline** - when the hacker steals a copy of the password file and does the cracking on a separate system
+> ⚡︎ **Check out the practical labs on [Dumping and Cracking SAM hashes [1]](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/2-SAM-Hashes.md), [Rainbow Tables Basics [2]](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/3-Rainbow-tables.md) and [LLMNR/NBT-NS [3]](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/1-LLMNR-NBT-NS.md).**
+
+### **Non-electronic** - Non-technical attacks.
+  - Social engineering attacks - most effective.
+  - Shoulder surfing 
+  - Dumpster diving
+  - Snooping around
+  - Guessing
+
+### **Active online** - done by directly communicating with the victim's machine.
+
+- Includes **Dictionary** and **Brute-force attacks**, **hash injections, phishing, Trojans, spyware, keyloggers and password guessing**
+
+- **[LLMNR](https://en.wikipedia.org/wiki/Link-Local_Multicast_Name_Resolution) / [NBT-NS](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc958811(v=technet.10)?redirectedfrom=MSDN) Poisoning** - attack based off Windows technologies that caches DNS locally. Responding to these poisons the local cache.  If an NTLM v2 hash is sent over, it can be sniffed out and then cracked.
+  - ⚡️ [LLMNR/NBT-NS practical lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/1-LLMNR-NBT-NS.md)
+  - **LLMNR uses UDP 5355**
+  - **NBT-NS uses UDP 137**
+  - `Responder` is the tool to sniff the access logs from LLMNR / NBT-NS
+  - ![LLMNR spoofing](https://www.verifyit.nl/wp/wp-content/uploads/2016/12/llmnr_poison1.jpg)
+
+- **Keylogging** - process of using a hardware device or software application to capture keystrokes of a user
+
+- Active online attacks are easier to detect and take a longer time
+- **Tools for Active Online Attack:**
+  - `Medusa`
+  - `Hydra`
+  - `NBNSpoof`
+  - `Pupy`
+  - `Metasploit`
+  - `Responder` - **LLMNR and NBT-NS responder**, it will answer to *specific* NBT-NS (NetBIOS Name Service) queries based on their name suffix. By default, the tool will only answers to File Server Service request, which is for **SMB**.
+- Can combine "net" commands with a tool such as **NetBIOS Auditing tool** or **Legion** to automate the testing of user IDs and passwords
+  - **Tools for NetBIOS attack:**
+    - `Hydra`
+    - `Metasploit`
+
+### **Passive online** - **Sniffing** the wire in hopes of **intercepting** a password in clear text or attempting a replay attack or man-in-the-middle attack
+
+- **Tools for Passive Online Attack:**
+  - `Cain and Abel` - Can poison ARP and then monitor the victim's traffic; Also used for cracking hash passwords (LM, NTLM), sniff network packets for password, sniff out for local stored passwords, etc.
+  - `Ettercap` - MITM tool for LAN's, DNS Spoofer; Help against SSL encryption; Intercept the traffic on a network segment, capture passwords, and conduct an active eavesdropping against a number of common protocols.
+  - `KerbCrack` - built-in sniffer and password cracker looking for port 88 Kerberos traffic
+  - `ScoopLM` - specifically looks for Windows authentication traffic on the wire and has a password cracker
+
+⚠️ **Services/Protocols that use Clear text**:
+Service | Port
+-|-
+FTP | 20/21
+TELNET | 23
+SMTP | 25
+HTTP | 80
+POP3 | 110
+IMAPv4 | 143
+NetBIOS | 139,445
+SNMP | 161,162
+SQLnet | 1521
+
+### **Offline** - when the hacker steals a copy of the password file (Plaintext or Hash) and does the cracking on a separate system.
+  
   - **Dictionary Attack** - uses a word list to attack the password.  Fastest method of attacking
+
+    - **Wordlists** - A wordlist or a password dictionary is a collection of passwords stored in plain text. It's basically a text file with a bunch of passwords in it. One popular example of wordlist is the **[rockyou.txt](https://www.kaggle.com/wjburns/common-password-list-rockyoutxt)** containing 14,341,564 unique passwords.
+
+    - You also can generate your own wordlist with given parameters like length, combining letters and numbers, profiling etc.
+      - Tools for generate Wordlists:
+        - `CeWL`
+        - `crunch`
+        
   - **Brute force attack** - tries every combination of characters to crack a password
+
     - Can be faster if you know parameters (such as at least 7 characters, should have a special character, etc.)
+
   - **Hybrid attack** - Takes a dictionary attack and replaces characters (such as a 0 for an o) or adding numbers to the end
+
   - **Rainbow tables** - uses pre-hashed passwords to compare against a password hash.  Is faster because the hashes are already computed.
-  - **Tools**
-    - Cain 
-    - KerbCrack 
-    - Legion
-    - John the Ripper
-    - fgdump - dump SAM databases
-    - Pwdump7 - dump SAM databases;
-    - Ophcrack - crack the passwords and obtain plain text passwords;
-    - Rainbowcrack - rainbow tables generator for password cracking
+
+  - **Tools for cracking password files (CLI):**
+    - `John the Ripper` - Works on Unix, Windows and Kerberos; Compatible with MySQL, LDAP and MD4.
+    - [`Hashcat`](https://hashcat.net/wiki/doku.php?id=hashcat) - Advanced password recovery tool; Provides several options like hash modes OS's, documents, password managers... (MD5, SHA-family, RIPE-MD, NTLM, LM, BitLocker, OSX, MD5 salted or iterated, and the list goes on).
+      - ![hashcat](https://hashcat.net/hashcat/hashcat.png) 
+  - **Tools for cracking password files (GUI):**
+    - `Cain & Abel` - Windows software; Cracks hash passwords (LM, NTLM), sniff network packets for password, sniff out for local stored passwords, etc.
+    - `LOphcrack` -  Paid software; Extract and crack hashes; Uses brute force or dictionary attack;
+    - `Ophcrack` - Free open-source; Cracks Windows log-in passwords by using LM hashes through rainbow tables.
+    - `Rainbowcrack `- Rainbow tables generator for password cracking
+    - `Legion` - Legion automates the password guessing in NetBIOS sessions. Legion scans multiple IP address ranges for Windows shares and also offers a manual dictionary attack tool.
+    - `KerbCrack` - Crack Kerberos passwords.
+    - `Mimikatz` - Steal credentials and escalate privileges (Windows NTLM hashes and Kerberos tickets(Golden Ticket Attack); 'Pass-the-hash' and 'Pass-the-ticker').
+    - `fgdump` - Dump SAM databases on Windows machines.
+    - `Pwdump7` - Dump SAM databases on Windows machines.
 
 - **CHNTPW** - chntpw is a software utility for **resetting** or **blanking local passwords used by Windows NT, 2000, XP, Vista, 7, 8, 8.1 and 10**. It does this by editing the SAM database where Windows stores password hashes.
   1. **Physical access** to victim's computer
   2. Startup on BIOS and allow boot to CD or USB
   3. Modify the SAM user account information through the CHNTPW
 
-⚠️ **SAM (Security Account Manager)** is a database file present in Windows machines that stores user accounts and security descriptors for users on a local computer. It stores users passwords in a hashed format (in LM hash and NTLM hash). Because a hash function is one-way, this provides some measure of security for the storage of the passwords.
+⚠️ `rtgen`, `winrtgen` - Tools for generate your own rainbow table.
+
+⚠️ **SAM (Security Account Manager)** is a database file **present in Windows machines that stores user accounts and security descriptors for users on a local computer**. It stores users passwords in a hashed format (in LM hash and NTLM hash). Because a hash function is one-way, this provides some measure of security for the storage of the passwords.
+
+⚠️ **`/etc/shadow`** is where **hashed password data** is stored in **Linux systems** (only users with high privileges can access).
+
+⚠️ **Password attack countermeasures:**
+- **Length of passwords** is good against **brute-force attacks.**
+- **Password complexity** is good against **dictionary attacks.**
     
 ## <u>Authentication and Passwords</u>
 
