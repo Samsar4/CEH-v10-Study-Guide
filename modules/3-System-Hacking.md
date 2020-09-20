@@ -394,26 +394,29 @@ Database file on a domain controller that stores passwords
 - Host-based IDS
 - Automatic form-filling password manager or virtual keyboard
 
-## <u>Hiding Files and Covering Tracks</u>
+## <u>Hiding Files</u>
 
 > ⚡︎ **Check out the practical labs(2) on [Hiding Files using NTFS streams](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/8-NTFS-Streams.md) and [Steganography](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/9-Steganography.md)**
 
-- In Windows, **Alternate Data Stream** (ADS) can hide files
+- In Windows, you can use **Alternate Data Stream** (ADS) to  hide files:
   - Hides a file from directory listing on an NTFS file system
-    - `readme.txt:badfile.exe`
-    - Can be run by start `readme.txt:badfile.exe`
-  - You can also create a symlink to this and make it look real (e.g. `mklink innocent.exe readme.txt:badfile.exe`)
-  - Every forensic kit looks for this, however
-  - To show ADS, dir /r does the trick
-  - You can also blow away all ADS by copying files to a FAT partition
+    - `type badfile.exe: > plaintext.txt:badfile.exe`
+    - Next create a symlink `mklink normalApp.exe readme.txt:badfile.exe`)
+  - You can also clear out all ADS by copying files to a FAT partition
+  - To show ADS, `dir /r` does the trick; 
+    -  You can use `streams` from **Sysinternals** to show streams.
+    - Also you can use **FTK (Forensics ToolKit)** to look for this
 - **You can also hide files by attributes**
-  - In Windows:  attrib +h filename
-  - In Linux, simply add a . to the beginning of the filename
+  - In Windows:  `attrib +h filename`
+  - In Linux, simply add a `.` to the beginning of the filename (`.file.tar`)
 - **Can hide data and files with steganography**
   - Tools for steganography:
-    - Snow
-    - OpenStego
-    - OpenPuff
+    - CLI (Linux):
+      - **`steghide`**
+    - GUI (Windows):
+      - **Snow**
+      - **OpenStego**
+      - **OpenPuff**
 
 ## <u>Rootkits</u>
 
@@ -439,24 +442,19 @@ Database file on a domain controller that stores passwords
 ## <u>Covering Tracks</u>
 
 **Clearing logs is the main idea behind covering tracks.**
-1. Find the logs (Windows or Linux)
-2. Clear them.
-#### On Windows:
-In Windows, you need to clear **application**, **system** and **security logs**.
+1. Find and clear the logs.
+2. Falsify/Modify logs.
 
-  - **Auditpol** for changing settings on log files (used for manipulate audit policies).
-  - Main commands: 
-    - `auditpol /get /category:*` --> display all audit policies in detail if is enable *(Object Acces, System, Logon/Logoff, Privilege Use, and so on).*
-    - `auditpol /clear` --> reset (disable) the system audit policy for all subcategories.
-    - `auditpol /remove` --> Removes all per-user audit policy settings and disables all system audit policy settings.
+### **On Linux:**
+- Linux keep the **command line history on `.bash_history`** file 
+  - To clear out the command line history use `rm -rf` to force remove. You also can use `shred -zu` that deletes the file and **overwrite on memory**.
+  - You can also use `history -c` to clear all command line history on entire system or `history -w` to clear out all session history.
 
-> ⚡︎ **Check out the [practical lab on Auditpol](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/11-Auditpol.md)**
-  - **MRU** (Most Recently Used) programs that registry recenlty used programs/files and saves on Windows Registry.
-  - Is possible to manually clear the logs on **Event Viewer**.
+- **Turn off the command logs:**
+  - `export HISTSIZE=0`
+  - `echo $HISTSIZE` will return 0 limiting the number of commands which can be saved in $HISTFILE.
 
-
-#### On Linux:
-- You can use `rm -rf` to force remove the bash **history**
+- **clearev** - Meterpreter shell command to clear log files (issued inside Metasploit Framework)
 
 **Most common logs on Linux:**
 
@@ -468,7 +466,31 @@ In Windows, you need to clear **application**, **system** and **security logs**.
   - Related to booting and any messages logged during startup.
 - `/var/log/maillog` or `var/log/mail.log` 
   - stores all logs related to mail servers.
+- **Clearing and Modifying logs on Linux**:
+  - It is possible to echo whitespace to clear the event log file:
+    - `echo " " > /var/log/auth.log`
+  - Also you can perform this by using 'black hole dev/null':
+    - `echo /dev/null > auth.log`
+  - To tamper/modify the log files, you can use `sed` stream editor to delete, replace and insert data.
+    - `sed -i '/opened/d' /var/log/auth.log` - this command will delete every line that contains the '**opened**' word, that refers to opened sessions on Linux system. 
 
+### **On Windows:**
+- To clear out all **command line history**:
+  - On **Cmd Prompt**: press [`alt`] + [`F7`]
+  - On **PowerShell**: type `Clear-History`
+
+In Windows, you need to clear **application**, **system** and **security logs**.
+
+  - **Auditpol** for changing settings on log files (used for manipulate audit policies).
+  - Main commands: 
+    - `auditpol /get /category:*` --> display all audit policies in detail if is enable *(Object Acces, System, Logon/Logoff, Privilege Use, and so on).*
+    - `auditpol /clear` --> reset (disable) the system audit policy for all subcategories.
+    - `auditpol /remove` --> Removes all per-user audit policy settings and disables all system audit policy settings.
+
+> ⚡︎ **Check out the [practical lab on Auditpol](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/11-Auditpol.md)**
+  - **MRU** (Most Recently Used) programs that registry recenlty used programs/files and saves on Windows Registry.
+  
+  - **Is possible to manually clear the logs on <u>Event Viewer</u>**.
 
 ### Conclusion on Covering Tracks 
 
@@ -481,4 +503,3 @@ In Windows, you need to clear **application**, **system** and **security logs**.
   - ccleaner --> automate the system cleaning, scrub online history, log files, etc. [Windows]
   - MRUblaster [Windows]
   - Meterpreter on MSF have **clearev** to clear all event logs remotely. [Kali Linux using MSF]
-
