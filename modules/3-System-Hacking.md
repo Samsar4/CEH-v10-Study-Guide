@@ -13,10 +13,9 @@
 3. **Executing Applications** - Putting back doors into the system so that you can maintain access
 4. **Hiding Files** - Making sure the files you leave behind are not discoverable
 5. **Covering Tracks** - Cleaning up everything else (log files, etc.)
-    - **clearev** - Meterpreter shell command to clear log files
+    - **clearev** - Meterpreter shell command to clear log files (issued inside Metasploit Framework)
     - Clear MRU list in Windows
     - In Linux, append a dot in front of a file to hide it
-
 
 ## <u>Password Attacks</u>
 
@@ -63,7 +62,7 @@
   - `KerbCrack` - built-in sniffer and password cracker looking for port 88 Kerberos traffic
   - `ScoopLM` - specifically looks for Windows authentication traffic on the wire and has a password cracker
 
-⚠️ **Services/Protocols that use Clear text**:
+⚠️ **Services/Protocols that uses Clear text**:
 Service | Port
 -|-
 FTP | 20/21
@@ -87,13 +86,13 @@ SQLnet | 1521
         - `CeWL`
         - `crunch`
         
-  - **Brute force attack** - tries every combination of characters to crack a password
+  - **Brute force attack** - Tries every combination of characters to crack a password
 
     - Can be faster if you know parameters (such as at least 7 characters, should have a special character, etc.)
 
   - **Hybrid attack** - Takes a dictionary attack and replaces characters (such as a 0 for an o) or adding numbers to the end
 
-  - **Rainbow tables** - uses pre-hashed passwords to compare against a password hash.  Is faster because the hashes are already computed.
+  - **Rainbow tables** - Uses pre-hashed passwords to compare against a password hash.  Is faster because the hashes are already computed.
 
   - **Tools for cracking password files (CLI):**
     - `John the Ripper` - Works on Unix, Windows and Kerberos; Compatible with MySQL, LDAP and MD4.
@@ -115,7 +114,7 @@ SQLnet | 1521
   2. Startup on BIOS and allow boot to CD or USB
   3. Modify the SAM user account information through the CHNTPW
 
-⚠️ `rtgen`, `winrtgen` - Tools for generate your own rainbow table.
+⚠️ `rtgen`, `winrtgen` - Tools for generate your own rainbow tables.
 
 ⚠️ **SAM (Security Account Manager)** is a database file **present in Windows machines that stores user accounts and security descriptors for users on a local computer**. It stores users passwords in a hashed format (in LM hash and NTLM hash). Because a hash function is one-way, this provides some measure of security for the storage of the passwords.
 
@@ -125,7 +124,7 @@ SQLnet | 1521
 - **Length of passwords** is good against **brute-force attacks.**
 - **Password complexity** is good against **dictionary attacks.**
     
-## <u>Authentication and Passwords</u>
+## <u>Authentication</u>
 
 - **Three Different Types**
   - **Something You Are** - Uses biometrics to validate identity (retina, fingerprint, etc.)
@@ -152,15 +151,15 @@ SQLnet | 1521
 # Windows Security Architecture
 
 - Authentication credentials stored in SAM file
-- File is located at C:\windows\system32\config
+- File is located at `C:\windows\system32\config`
 - Older systems use LM hashing.  Current uses NTLM v2 (MD5)
 - Windows network authentication uses Kerberos
 
 ### **LM Hashing**
   - Splits the password up.  If it's over 7 characters, it is encoded in two sections.
-  - If one section is blank, the hash will be AAD3B435B51404EE
+  - If one section is blank, the hash will be `AAD3B435B51404EE`
   - Easy to break if password  is 7 characters or under because you can split the hash
-- SAM file presents as UserName:SID:LM_Hash:NTLM_Hash:::
+- SAM file presents as `UserName:SID:LM_Hash:NTLM_Hash:::`
 
 ### **Ntds.dit**
 Database file on a domain controller that stores passwords
@@ -313,16 +312,87 @@ Database file on a domain controller that stores passwords
 
 > ⚡︎ **Check out the [practical lab on PrivEsc](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/5-System-Hacking/5-Escalating-Privileges.md)**
 
-- **Vertical** - lower-level user executes code at a higher privilege level
-- **Horizontal** - executing code at the same user level but from a location that would be protected from that access
-- **Four Methods**
-  - Crack the password of an admin - primary aim
-  - Take advantage of an OS vulnerability
-    - **DLL Hijacking** - replacing a DLL in the application directory with your own version which gives you the access you need
-  - Use a tool that will provide you the access such as Metasploit
-  - Social engineering a user to run an application
+### **Vertical** - Lower-level user executes code at a higher privilege level *(e.g.: common user to root/administrator).*
+### **Horizontal** - executing code at the same user level but from a location that would be protected from that access
+
+
+- Crack the password of an admin - primary aim
+- Taking advantage of an OS vulnerability
+  - One way to perform a priv esc is using CVE's in order to perform local shells, c shells, web shells and so on.
+  - Examples:
+    - Linux: [DirtyCow](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5195) race-condition vulnerability;
+    - Windows: [EternalBlue](https://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2017-0144) exploits the old Samba version 1 to leverage a Remote code execution (RCE);
+
+- **DLL Hijacking** - replacing a DLL in the application directory with your own version which gives you the access you need
+- In Linux machines is possible to look for **crontabs** and find misconfigurations on privileges. 
+- In Linux, **insecure `sudo`** can lead a privilege escalation to root; You can check this by typing: `sudo -l`. If there's any system command that allows **NOPASSWD option** this may lead to escalation.
+- Nmap old versions you can start **interactive mode** and issue the `!/bin/bash` to elevate root priveleges. 
+- Use a tool that will provide you the access such as Metasploit
+- Social engineering a user to run an application
 - ECC refers executing applications as "owning" a system
 - **Executing applications** - starting things such as keyloggers, spyware, back doors and crackers
+
+## <u>Covert data gathering</u>
+### **Keyloggers** - record keys strokes of a individual computer keyboard or a network of computers.
+
+- Keylogger when associated with spyware, hels to transmit your information to an unknown third party.
+
+- **Types of Keyloggers**:
+- **Hardware keylogger**
+  - PC/BIOS embedded
+  - Keyboard
+  - External device
+    - PS/2 and USB
+    - Acoustic/CAM
+    - Bluetooth
+    - Wi-Fi
+  - **Hardware Keylogger Tools:**
+    - KeyGrabber - electronic device capable of caputring keystrokes from PS/2 USB keyboard.
+
+- **Software keylogger**
+  - Application
+  - Kernel
+  - Hypervisor-based
+  - Form Grabbing based (records
+   from web form data)
+  - **Software Keylogger Tools:**
+    - KeyCarbon
+    - Keyllama Keylloger
+    - Keyboard logger
+    - KeyGhost
+
+
+
+### **Spywares** - watching user's action and logging them without the user's knowledege.
+  - Hide its process, files and other objects
+  - **Spywares can teals user's PII, monitors activity, display annoying pop-ups, redirect web pages to ads, changes the browser's settings, steal passwords, modifies the DLLs, changes firewall settings and so on**.
+- **Types of spyware:**
+  - Desktop 
+  - Email 
+  - Internet 
+  - Child-Monitoring 
+  - Screen Capturing 
+  - USB
+  - Audio and Video
+  - Printers
+  - Mobile devices / Telephones / Cellphones
+  - GPS
+- **Spyware Tools**:
+  - [SpyAgent](https://www.spytech-web.com/) - allows you to secretly monitor and record all activities on your computer, which is completely legal.
+  - [Power Spy](http://ematrixsoft.com/power-spy-software.php) -  allows you to secretly monitor and record all activities on your computer, which is completely legal.
+  - **mSpy** - GPS spyware that trace the location of particular mobile devices.
+  - **USBDeview** - monitors and analyzes data transferred between any USB device connected to a computer.
+
+### Defending against Keyloggers and Spywares
+- Restrict physical access to computer systems
+- Use anti-keylogger between the keyboard and its driver
+- Use pop-up blocker and avoid opening junk emails
+- Use anti-spyware/antivirus 
+- Firewall and anti-keylogging software(Zemana AntiLogger)
+- Update and patch!
+- Recognize phishing emails
+- Host-based IDS
+- Automatic form-filling password manager or virtual keyboard
 
 ## <u>Hiding Files and Covering Tracks</u>
 
@@ -330,9 +400,9 @@ Database file on a domain controller that stores passwords
 
 - In Windows, **Alternate Data Stream** (ADS) can hide files
   - Hides a file from directory listing on an NTFS file system
-  - readme.txt:badfile.exe
-  - Can be run by start readme.txt:badfile.exe
-  - You can also create a symlink to this and make it look real (e.g. mklink innocent.exe readme.txt:badfile.exe)
+    - `readme.txt:badfile.exe`
+    - Can be run by start `readme.txt:badfile.exe`
+  - You can also create a symlink to this and make it look real (e.g. `mklink innocent.exe readme.txt:badfile.exe`)
   - Every forensic kit looks for this, however
   - To show ADS, dir /r does the trick
   - You can also blow away all ADS by copying files to a FAT partition
@@ -344,6 +414,27 @@ Database file on a domain controller that stores passwords
     - Snow
     - OpenStego
     - OpenPuff
+
+## <u>Rootkits</u>
+
+- Software put in place by attacker to obscure system compromise
+- Hides processes and files
+- Also allows for future access
+- **Examples**
+  - Horsepill - Linus kernel rootkit inside initrd
+  - Grayfish - Windows rootkit that injects in boot record
+  - Firefef - multi-component family of malware
+  - Azazel
+  - Avatar
+  - Necurs
+  - ZeroAccess
+- **Hypervisor level** - rootkits that modify the boot sequence of a host system to load a VM as the host OS
+- **Hardware** - hide malware in devices or firmware
+- **Boot loader level** - replace boot loader with one controlled by hacker
+- **Application level** - directed to replace valid application files with Trojans
+- **Kernel level** - attack boot sectors and kernel level replacing kernel code with back-door code; most dangerous
+- **Library level** - use system-level calls to hide themselves
+- One way to detect rootkits is to map all the files on a system and then boot a system from a clean CD version and compare the two file systems
 
 ## <u>Covering Tracks</u>
 
@@ -391,23 +482,3 @@ In Windows, you need to clear **application**, **system** and **security logs**.
   - MRUblaster [Windows]
   - Meterpreter on MSF have **clearev** to clear all event logs remotely. [Kali Linux using MSF]
 
-## <u>Rootkits</u>
-
-- Software put in place by attacker to obscure system compromise
-- Hides processes and files
-- Also allows for future access
-- **Examples**
-  - Horsepill - Linus kernel rootkit inside initrd
-  - Grayfish - Windows rootkit that injects in boot record
-  - Firefef - multi-component family of malware
-  - Azazel
-  - Avatar
-  - Necurs
-  - ZeroAccess
-- **Hypervisor level** - rootkits that modify the boot sequence of a host system to load a VM as the host OS
-- **Hardware** - hide malware in devices or firmware
-- **Boot loader level** - replace boot loader with one controlled by hacker
-- **Application level** - directed to replace valid application files with Trojans
-- **Kernel level** - attack boot sectors and kernel level replacing kernel code with back-door code; most dangerous
-- **Library level** - use system-level calls to hide themselves
-- One way to detect rootkits is to map all the files on a system and then boot a system from a clean CD version and compare the two file systems
