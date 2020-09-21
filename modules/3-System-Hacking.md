@@ -62,7 +62,8 @@
   - `KerbCrack` - built-in sniffer and password cracker looking for port 88 Kerberos traffic
   - `ScoopLM` - specifically looks for Windows authentication traffic on the wire and has a password cracker
 
-⚠️ **Services/Protocols that uses Clear text**:
+> ⚠️ **Services/Protocols that uses Clear text**:
+
 Service | Port
 -|-
 FTP | 20/21
@@ -114,15 +115,15 @@ SQLnet | 1521
   2. Startup on BIOS and allow boot to CD or USB
   3. Modify the SAM user account information through the CHNTPW
 
-⚠️ `rtgen`, `winrtgen` - Tools for generate your own rainbow tables.
+> ⚠️ `rtgen`, `winrtgen` - Tools for generate your own rainbow tables.
 
-⚠️ **SAM (Security Account Manager)** is a database file **present in Windows machines that stores user accounts and security descriptors for users on a local computer**. It stores users passwords in a hashed format (in LM hash and NTLM hash). Because a hash function is one-way, this provides some measure of security for the storage of the passwords.
+> ⚠️ **SAM (Security Account Manager)** is a database file **present in Windows machines that stores user accounts and security descriptors for users on a local computer**. It stores users passwords in a hashed format (in LM hash and NTLM hash). Because a hash function is one-way, this provides some measure of security for the storage of the passwords.
 
-⚠️ **`/etc/shadow`** is where **hashed password data** is stored in **Linux systems** (only users with high privileges can access).
+> ⚠️ **`/etc/shadow`** is where **hashed password data** is stored in **Linux systems** (only users with high privileges can access).
 
-⚠️ **Password attack countermeasures:**
-- **Length of passwords** is good against **brute-force attacks.**
-- **Password complexity** is good against **dictionary attacks.**
+> ⚠️ **Password attack countermeasures:**
+> - **Length of passwords** is good against **brute-force attacks.**
+> - **Password complexity** is good against **dictionary attacks.**
     
 ## <u>Authentication</u>
 
