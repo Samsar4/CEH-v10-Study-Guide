@@ -16,14 +16,15 @@
 
 
 * ⚠️ **Important note about the exam:**
-    - CEH v10 will retire by the end of 2020.
-    - CEH v11 will be introduced in january/2021 covering new topics like:
+    - **CEH v10** will retire by the end of 2020.
+    - **CEH v11** will be introduced in january/2021 covering new topics like:
         - *Hacking challenges, Emerging attack vectors(Web API, Web Shell etc), Cointainers, Reverse engineering (Static and Dynamic analysis), WPA3, Parrot OS and more.*[[+]](https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/)
 
 ---
 
 ### ⚡︎ **This study guide have some [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/README.md) to test your knowledge and learn by doing.**
 
+---
 
 # Index
 
