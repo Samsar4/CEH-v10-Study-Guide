@@ -2,6 +2,7 @@
 <img width="100%" src="https://gist.githubusercontent.com/Samsar4/62886aac358c3d484a0ec17e8eb11266/raw/55c29341ff0f4bedab9817654b06cde10e2a4ed2/CEH-banner.jpg" />
 </p>
 
+
 ## 📢 About this repo
 
 * **Unofficial Study Guide for CEH v10 exam, forked from:** <small>https://github.com/scottymcraig/CEHv10StudyGuide</small> 
@@ -14,17 +15,16 @@
 
 * The objective of this repo is to clarify all topics presented on [CEH v10](https://iclass.eccouncil.org/our-courses/certified-ethical-hacker-ceh/) (ANSI) exam.
 
-
-* ⚠️ **Important note about the exam:**
-    - **CEH v10** will retire by the end of 2020.
-    - **CEH v11** will be introduced in january/2021 covering new topics like:
-        - *Hacking challenges, Emerging attack vectors(Web API, Web Shell etc), Cointainers, Reverse engineering (Static and Dynamic analysis), WPA3, Parrot OS and more.*[[+]](https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/)
-
 ---
 
 ### ⚡︎ **This study guide have some [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/README.md) to test your knowledge and learn by doing.**
 
 ---
+
+* ⚠️ **Important note about the exam:**
+    - **CEH v10** will retire by the end of 2020.
+    - **CEH v11** will be introduced in january/2021 covering new topics like:
+        - *Hacking challenges, Emerging attack vectors(Web API, Web Shell etc), Cointainers, Reverse engineering (Static and Dynamic analysis), WPA3, Parrot OS and more.*[[+]](https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/)
 
 # Index
 
