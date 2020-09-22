@@ -14,74 +14,106 @@
 4. 💰 **Exploit the relationship** 
     - Collect sensitive information and current technologies
 
-- **Behaviors**
+## Principles
+1. **Authority**
+	* Impersonate or imply a position of authority
+2. **Intimidation**
+	* Frighten by threat
+3. **Consensus / Social proof**
+	* To convince of a general group agreement
+4. **Scarcity**
+	* The situation will not be this way for long
+5. **Urgency**
+	* Works alongside scarcity / act quickly, don't think
+6. **Familiarity**
+	* To imply a closer relationship
+7. **Trust**
+	* To assure reliance on their honesty and integrity
+
+## **Behaviors**
   - **Human nature/Trust** - trusting others
   - **Ignorance** of social engineering efforts
   - **Fear** of consequences of not providing the information
   - **Greed** - promised gain for providing requested information
   - A sense of **moral obligation**
 
-* **Companies Common Risks:**
-    - **Insufficient training**
-    - **Lack of controls**
-        - Technical
-            - e.g: Firewall rule, ACL rules, patch management (...)
-        - Administrative
-            - e.g: Mandatory Vacations, Job Rotation, Separation of Duties (...)
-        - Physical
-            - e.g: Proper Lighting, Cameras, Guards, Mantraps (...)
-    - **Size of the Company Matters**
-    - **Lack of Policies**
-        - Promiscuous Policy
-        - Permisive Policy
-        - Prudent Policy
-        - Paranoid Policy
+## **Companies Common Risks:**
+- **Insufficient training**
+- **Lack of controls**
+    - Technical
+        - e.g: Firewall rule, ACL rules, patch management (...)
+    - Administrative
+        - e.g: Mandatory Vacations, Job Rotation, Separation of Duties (...)
+    - Physical
+        - e.g: Proper Lighting, Cameras, Guards, Mantraps (...)
+- **Size of the Company Matters**
+- **Lack of Policies**
+    - Promiscuous Policy
+    - Permisive Policy
+    - Prudent Policy
+    - Paranoid Policy
 
-## <u>Human-Based Attacks</u>
+## <u>Social Engineering Attacks:</u>
 
-- **Dumpster Diving** - looking for sensitive information in the trash
+## Human-Based Attacks 👥
+
+- **Dumpster Diving** - Looking for sensitive information in the trash
   - Shredded papers can sometimes indicate sensitive info
-- **Impersonation** - pretending to be someone you're not
+
+- **Impersonation** - Pretending to be someone you're not
   - Can be anything from a help desk person up to an authoritative figure (FBI agent)
   - Posing as a tech support professional can really quickly gain trust with a person
-- **Shoulder Surfing** - looking over someone's shoulder to get info
+
+- **Shoulder Surfing** - Looking over someone's shoulder to get info
   - Can be done long distance with binoculars, etc.
-- **Eavesdropping** - listening in on conversations about sensitive information
-- **Tailgating** - attacker has a fake badge and walks in behind someone who has a valid one
-- **Piggybacking** - attacker pretends they lost their badge and asks someone to hold the door
-- **RFID Identity Theft** (RFID skimming) - stealing an RFID card signature with a specialized device
-- **Reverse Social Engineering** - getting someone to call you and give information
+
+- **Eavesdropping** - Listening in on conversations about sensitive information
+
+- **Tailgating** - Attacker walks in behind someone who has a valid badge. (e.g: Holding boxes or simply by following without getting notice)
+
+- **Piggybacking** - Attacker pretends they lost their badge and asks someone to hold the door
+
+- **RFID Identity Theft** (RFID skimming) - Stealing an RFID card signature with a specialized device
+
+- **Reverse Social Engineering** - Getting someone to call you and give information
   - Often happens with tech support - an email is sent to user stating they need them to call back (due to technical issue) and the user calls back
   - Can also be combined with a DoS attack to cause a problem that the user would need to call about
-- Always be pleasant - it gets more information
-- **Rebecca** or **Jessica** - targets for social engineering
-- **Insider Attack** - an attack from an employee, generally disgruntled
+  - Always be pleasant - it gets more information
+
+- **Insider Attack** - An attack from an employee, generally disgruntled
   - Sometimes subclassified (negligent insider, professional insider)
 
-## <u>Computer-Based Attacks</u>
+## Computer-Based Attacks 💻
+*Can begin with sites like Facebook where information about a person is available; For instance - if you know Bob is working on a project, an email crafted to him about that project would seem quite normal if you spoof it from a person on his project.*
 
-- Can begin with sites like Facebook where information about a person is available
-- For instance - if you know Bob is working on a project, an email crafted to him about that project would seem quite normal if you spoof it from a person on his project
-- **Phishing** - crafting an email that appears legitimate but contains links to fake websites or to download malicious content
-- **Ways to Avoid Phishing**
-  - Beware unknown, unexpected or suspicious originators
-  - Beware of who the email is addressed to
-  - Verify phone numbers
-  - Beware bad spelling or grammar
-  - Always check links
-- **Spear Phishing** - targeting a person or a group with a phishing attack
+- **Phishing** - crafting an email that appears legitimate but contains links to fake websites or to download malicious content.
+
+  - **Ways to Avoid Phishing**
+    - Beware unknown, unexpected or suspicious originators
+    - Beware of who the email is addressed to
+    - Verify phone numbers
+    - Beware bad spelling or grammar
+    - Always check links
+
+- **Spear Phishing** - Targeting a person or a group with a phishing attack.
   - Can be more useful because attack can be targeted
-- **Whaling** - going after CEOs or other C-level executives
-- **Pharming** - use of malicious code that redirects a user's traffic
-- **Spimming** - sending spam over instant message
-- **Fave Antivirus** - very prevalent attack; pretends to be an anti-virus but is a malicious tool
 
-### Tools
-- **SET (Social Engineering Toolkit)** - Pentest tool design to perform advanced attacks agaisnt human by exploiting their behavior.
-- **Netcraft** Toolbar/extension
-- **PhishTank** for detect phishing
-- **Wifiphisher** - automated phishing attacks against Wi-Fi networks in order to obtain credentials or inject malware.
-- **SPF SpeedPhish framework** - quick recon and deployment of simple social eng. exercises
+- **Whaling** - Going after **CEOs** or other **C-level executives**.
+
+- **Pharming** - Make a user's traffic redirects to a clone website; may use DNS poisoning.
+
+- **Spamming** - Sending spam over instant message.
+
+- **Fake Antivirus** - Very prevalent attack; pretends to be an anti-virus but is a malicious tool.
+
+### **Tools**
+- **SET (Social Engineering Toolkit)** - Pentest tool design to perform advanced attacks against human by exploiting their behavior.
+
+- **PhishTank** -  For phishing detection
+
+- **Wifiphisher** - Automated phishing attacks against Wi-Fi networks in order to obtain credentials or inject malware.
+
+- **SPF SpeedPhish framework** - Quick recon and deployment of simple social eng. exercises
 
 ## <u>Mobile-Based Attacks</u>
 
