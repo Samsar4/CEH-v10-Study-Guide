@@ -18,8 +18,10 @@
 ---
 
 ### ⚡︎ **This study guide have some [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/README.md) to test your knowledge and learn by doing.**
-
 ---
+
+- Some **TryHackMe** boxes/labs for CEH prep: [Nmap](https://tryhackme.com/room/rpnmap), [NetworkServices](https://tryhackme.com/room/networkservices), [WebAppSec](https://tryhackme.com/room/webappsec101), [Hydra](https://tryhackme.com/room/hydra) & [CrackTheHash](https://tryhackme.com/room/crackthehash)
+
 
 * ⚠️ **Important note about the exam:**
     - **CEH v10** will retire by the end of 2020.
