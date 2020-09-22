@@ -2,29 +2,92 @@
 
 > ⚡︎ **This chapter has [practical labs](https://github.com/Samsar4/Ethical-Hacking-Labs/tree/master/10-Session-Hijacking)**
 
-*Attacker waits for a session to begin and after the victim authenticates, steals the session for himself*
+*The Session Hijacking attack consists of the exploitation of the web session control mechanism, which is normally managed for a session token.* [[+]](https://owasp.org/www-community/attacks/Session_hijacking_attack)
 
-- **Steps**
-  1. Sniff the traffic between the client and server
-  2. Monitor the traffic and predict the sequence numbering
-  3. Desynchronize the session with the client
-  4. Predict the session token and take over the session
-  5. Inject packets to the target server
-- Can be done via brute force, calculation or stealing
-- Predicting can be done by knowing the window size and the packet sequence number
-- Sequence numbers increment on **acknowledgement**
-  - For example, an acknowledgement of 105 with a window of 200 means you could expect sequence numbering from 105 to 305
-- **Tools**
-  - **Ettercap** - man-in-the-middel tool and packet sniffer on steroids
-  - **Hunt** - sniff, hijack and reset connections
-  - **T-Sight** - easily hijack sessions and monitor network connections
-  - **Zaproxy**
-  - **Paros**
-  - **Burp Suite**
-  - **Juggernaut**
-  - **Hamster**
-  - **Ferret**
-  
+-  HTTP communication uses many different TCP connections, the web server needs a method to recognize every user’s connections.
+- The most useful method depends on a **token** that the Web Server sends to the client browser after a successful client authentication.
+- A **session token** is normally composed of a string of variable width and it could be used in different ways
+  - like in the URL, in the header of the HTTP requisition as a cookie, in other parts of the header of the HTTP request, or yet in the body of the HTTP requisition.
+
+**The Session Hijacking attack compromises the session token by stealing or predicting a valid session token to gain unauthorized access to the Web Server.**
+
+<p align="center">
+<img width="70%" src="https://dpsvdv74uwwos.cloudfront.net/statics/img/blogposts/illustration-of-session-hijacking-using-xss.png" />
+</p>
+<p align="center">
+  <small>Session Hijacking using XSS</small>
+</p>
+
+## **The session token could be compromised in different ways; the most common are:**
+
+### **Predictable session token**
+- The session ID information for a certain application is normally composed by a string of fixed width. **Randomness is very important** to avoid its prediction.
+  - **Example:** Session ID  value is “user01”, which corresponds to the username. By trying new values for it, like “user02”, it could be possible to get inside the application without prior authentication.
+
+### **Session Sniffing** 
+- Sniffing can be used to hijack a session when there is non-encrypted communication between the web server and the user, and the session ID is being sent in plain text. 
+  - **Wireshark** and **Kismet** can be used to capture sensitive data packets such as the session ID from the network.
+
+### **Cross-site scripting (XSS)**
+- A server can be vulnerable to a cross-site scripting exploit, which enables an attacker to execute malicious code from the user’s side, gathering session information. An attacker can target a victim’s browser and send a scripted JavaScript link, which upon opening by the user, runs the malicious code in the browser hijacking sessions.
+
+### **CSRF - Cross-Site Request Forgery**
+- Forces an end user to execute unwanted actions on a web application in which they’re currently authenticated. With a little help of social engineering (such as sending a link via email or chat), an attacker may trick the users of a web application into executing actions of the attacker’s choosing; 
+- CSRF attack can force the user to perform state changing requests like transferring funds, changing their email address, and so forth. If the victim is an administrative account, CSRF can compromise the entire web application.
+
+- **CSRF Scenario:**
+  1. Visit your bank's site, log in.
+  2. Then visit the attacker's site (e.g. sponsored ad from an untrusted organization).
+  3. Attacker's page includes form with same fields as the bank's "Transfer Funds" form.
+  4. Form fields are pre-filled to transfer money from your account to attacker's account.
+  5. Attacker's page includes Javascript that submits form to your bank.
+  6. When form gets submitted, browser includes your cookies for the bank site, including the session token.
+  7. Bank transfers money to attacker's account.
+  8. The form can be in an iframe that is invisible, so you never know the attack occurred.
+
+### **Session Fixation**
+- Session Fixation is an attack that permits an attacker to hijack a valid user session. The attack explores a limitation in the way the web application manages the session ID, more specifically the vulnerable web application.
+
+- **Session fixation Scenario**:
+  1. The attacker accesses the web application login page and **receives a session ID** generated by the web application.
+  2. The attacker uses an additional technique such as **CRLF Injection, man-in-the-middle attack, social engineering,** etc., and gets the victim to use the **provided session identifier**. 
+  3. The victim accesses the web application login page and logs in to the application. After authenticating, the **web application treats anyone who uses this session ID as if they were this user.**
+  4. The attacker uses the session ID to access the web application, **take over the user session, and impersonate the victim**. 
+
+### **Man-in-the-browser attack**
+- The Man-in-the-Browser attack is the same approach as Man-in-the-middle attack, but in this case a Trojan Horse is used to intercept and manipulate calls between the main application’s executable.
+
+### **Man-in-the-middle attack**
+- MITM attack is a general term for when a perpetrator positions himself in a conversation between a user and an application—either to eavesdrop or to impersonate one of the parties, making it appear as if a normal exchange of information is underway.
+
+
+## Other attacks
+- **Compression Ratio Info-leak Made Easy (CRIME)**:
+  - Is a security exploit against secret web cookies over connections using the HTTPS and SPDY protocols that also use data compression. When used to recover the content of secret authentication cookies, it allows an attacker to perform session hijacking.
+- **BREACH**:
+  - Is a security exploit against HTTPS when using HTTP compression (SSL/TLS compression). BREACH is built based on the CRIME security exploit.
+
+> ⚠️ **SPDY protocol manipulates HTTP traffic, with particular goals of reducing web page load latency and improving web security.**
+
+- **Forbideen Attack** 
+Vulnerability in TLS that incorrectly reuse the **same cryptographic nonce when data is encrypted**. TLS specifications are clear that these arbitrary pieces of data should be used only once. When the same one is used more than once, it provides an opportunity to carry out the forbidden attack.
+
+## <u>Network Layer Attacks</u>
+- **TCP Hijacking**: TCP/IP Hijacking is when an authorized user gains access to a genuine network connection of another user. It is done in order to bypass the password authentication which is normally the start of a session.
+  - e.g: TELNET Hijacking using Ettercap, Shijack, making a blind hijacking.
+
+### **Tools**
+- **Ettercap** - MiTM tool and packet sniffer on steroids
+- **Hunt** - sniff, hijack and reset connections
+- **T-Sight** - easily hijack sessions and monitor network connections
+- **Zaproxy**
+- **Burp Suite**
+- **Paros**
+- **Shijack** - TCP/IP hijack tools
+- **Juggernaut**
+- **Hamster**
+- **Ferret**
+
 ## Countermeasures
 * **Session IDS**
   - Using unpredictable (randomized) Session IDs
