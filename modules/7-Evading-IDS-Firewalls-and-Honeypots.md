@@ -187,10 +187,10 @@ Rule part | Information
   - TCP alert in a source IP address 192.168.x.x with any port; HOME_NET destination on port 21.
 
 > **`alert tcp $HOME_NET 21 -> any any (msg:"FTP failed login"; content:"Login or password incorrent"; sid:1000003; rev:1;)`**
-  - TCP alert in HOME_NET por 21 as a source to any destination IP address and port
+  - TCP alert in HOME_NET port 21 (FTP) as a source, to any destination IP address and port.
 
 > **`alert tcp !HOME_NET any -> $HOME_NET 31337 (msg : "BACKDOOR ATTEMPT-BackOrifice")`**
-  - This alerts about traffic coming not from an external network to the internal one on port 31337
+  - This alerts about traffic coming not from an external network to the internal one on port 31337.
 
 **Example output**
   - 10/19-14:48:38.543734 0:48:542:2A:67 -> 0:10:B5:3C:34:C4 type:0x800 len:0x5EA    
@@ -233,7 +233,7 @@ Rule part | Information
 
 - **Desynchronization** - Manipulation the TCP SYN to fool IDS into not paying attention to the sequence numbers of the illegitimate attack traffic, but rather, give it a false set of sequences to follow.
 
-- **Encryption** - Using encryption to hide attack
+- **Encryption** - Using encryption to hide attack.
 
 - **Flood the network** - Trigger alerts that aren't your intended attack so that you confuse firewalls/IDS and network admins; Overwhelming the IDS.
 
@@ -279,7 +279,7 @@ Rule part | Information
   - 007 Shell
 - The best way around a firewall will always be a compromised internal machine
 
-## <u>How to detect Honeypot</u>
+## <u>How to detect a Honeypot</u>
 *Probe services running on them; Ports that show a service is available, but **deny a three-way handshake may indicate that the system is a honeypot***.
 
 * **Layer 7 (Application)** - Examine latency of responses from server
