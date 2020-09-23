@@ -8,6 +8,7 @@
   - **Tools**
     - Netcraft
     - HTTPRecon
+    - theHarvester
     - ID Serve
     - HTTPrint
     - nmap
@@ -19,8 +20,9 @@
         - dDiscovers virtual hosts on the IP address you are trying to footprint; * is replaced by online db such as  IP2Hosts
       - `nmap --script http-enum -p80 <host>`
         - Enumerates common web apps
-      - `nmap -p80 --script http-robots.txt <host>`
+      - `nmap --script http-robots.txt -p 80 <host>`
         - Grabs the robots.txt file
+        
 - **Website Mirroring** - brings the site to your own machine to examine structure, etc.
   - **Tools**
     - Wget
@@ -29,19 +31,22 @@
     - WebCopier Pro
     - Web Ripper
     - SurfOffline
+
 - **Vulnerability Scanning** - scans web server for vulnerabilities
   - **Tools**
     - Nessus
     - Nikto - specifically suited for web servers; still very noisy like Nessus
+
 - **Session Hijacking**
+
 - **Web Server Password Cracking**
 
 ## <u>Web Server Architecture</u>
 
-- **Most Popular Servers** - Apache, IIS and Nginx
-- Apache runs configurations as a part of a module within special files (http.conf, etc.)
-- IIS runs all applications in the context of LOCAL_SYSTEM
-- IIS 5 had a ton of bugs - easy to get into
+- **Most Popular Servers** - Apache, Microsoft IIS and Nginx
+  - Apache runs configurations as a part of a module within special files (http.conf, etc.)
+  - IIS runs all applications in the context of LOCAL_SYSTEM
+  - IIS 5 had a ton of bugs - easy to get into
 - **N-Tier Architecture** - distributes processes across multiple servers; normally as three-tier: Presentation (web), logic (application) and data (database)
 - **Error Reporting** - should not be showing errors in production; easy to glean information
 - **HTML** - markup language used to display web pages
@@ -63,18 +68,34 @@
 
 ## <u>Web Server Attacks</u>
 
-- **DNS Amplification** - uses recursive DNS to DoS a target; amplifies DNS answers to target until it can't do anything
+- **DNS Amplification** - Uses recursive DNS to DoS a target; amplifies DNS answers to target until it can't do anything
+
 - **Directory Transversal** (../ or dot-dot-slash) - requests file that should not be accessible from web server
   - Example: http://www.example.com/../../../../etc/password
   - Can use Unicode to possibly evade IDS - %2e for dot and %sf for slash
-- **Parameter Tampering** (URL Tampering) - manipulating parameters within URL to achieve escalation or other changes
-- **Hidden Field Tampering** - modifying hidden form fields producing unintended results
-- **Web Cache Poisoning** - replacing the cache on a box with a malicious version of it
+
+- **Parameter Tampering** (URL Tampering) - Manipulating parameters within URL to achieve escalation or other changes
+
+- **Hidden Field Tampering** - Modifying hidden form fields producing unintended results
+
+- **HTTP Response Splitting** - An attacker passes malicious data to a vulnerable application through the HTTP response header.
+
+- **Web Cache Poisoning** - Replacing the cache on a box with a malicious version of it
+
 - **WFETCH** - Microsoft tool that allows you to craft HTTP requests to see response data
-- **Misconfiguration Attack** - same as before - improper configuration of a web server
-- **Password Attack** - attempting to crack passwords related to web resources
-- **Connection String Parameter Pollution** - injection attack that uses semicolons to take advantage of databases that use this separation method
-- **Web Defacement** - simply modifying a web page to say something else
+
+- **Misconfiguration Attack** - Same as before - improper configuration of a web server. (e.g: Default settings like admin/password credentials; Lack of security controls)
+
+- **Password Attack** - Attempting to crack passwords related to web resources
+
+- **Connection String Parameter Pollution** - Injection attack that uses semicolons to take advantage of databases that use this separation method
+
+- **Web Defacement** - Simply modifying a web page to say something else
+
+- **DoS/DDoS** - Compromise availability 
+
+- **Shellshock** - Causes Bash to unintentionally execute commands when commands are concatenated on the end of function definitions
+
 - **Tools**
   - **Brutus** - brute force web passwords of HTTP
   - **Hydra** - network login cracker
@@ -84,4 +105,3 @@
     - **Payload** contains the arbitrary code if exploit is successful
     - **Auxiliary** used for one-off actions (like a scan)
     - **NOPS** used for buffer-overflow type operations
-- **Shellshock** - causes Bash to unintentionally execute commands when commands are concatenated on the end of function definitions
