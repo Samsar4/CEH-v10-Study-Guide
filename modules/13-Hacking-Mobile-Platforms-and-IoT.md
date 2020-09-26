@@ -1,6 +1,6 @@
 # Hacking Mobile Platforms and IoT
 
-## <u>Mobile Platform Hacking</u>
+# <u>A) Mobile Platform Hacking</u>
 
 - **Three Main Avenues of Attack**
   - **Device Attacks** - browser based, SMS, application attacks, rooted/jailbroken devices
@@ -9,21 +9,30 @@
 
 <br>
 
-- **OWASP Top 10 Mobile Risks**
+- **OWASP Top 10 Mobile Risks:**
   - ![owasp-mobile](https://www.nowsecure.com/wp-content/uploads/2016/10/OWASP-Mobile-Top-10.png)
 
 <br>
 
-- **M1 - Improper Platform Usage** - misuse of features or security controls (Android intents, TouchID, Keychain)
-- **M2 - Insecure Data Storage** - improperly stored data and data leakage
-- **M3 - Insecure Communication** - poor handshaking, incorrect SSL, clear-text communication
-- **M4 - Insecure Authentication** - authenticating end user or bad session management
-- **M5 - Insufficient Cryptography** - code that applies cryptography to an asset, but is insufficient (does NOT include SSL/TLS)
-- **M6 - Insecure Authorization** - failures in authorization (access rights)
-- **M7 - Client Code Quality** - catchall for code-level implementation problems
-- **M8 - Code Tampering** - binary patching, resource modification, dynamic memory modification
-- **M9 - Reverse Engineering** - reversing core binaries to find problems and exploits
-- **M10 - Extraneous Functionality** - catchall for backdoors that were inadvertently placed by coders
+- **M1 - Improper Platform Usage** - Misuse of features or security controls (Android intents, TouchID, Keychain)
+
+- **M2 - Insecure Data Storage** - Improperly stored data and data leakage
+
+- **M3 - Insecure Communication** - Poor handshaking, incorrect SSL, clear-text communication
+
+- **M4 - Insecure Authentication** - Authenticating end user or bad session management
+
+- **M5 - Insufficient Cryptography** - Code that applies cryptography to an asset, but is insufficient (does NOT include SSL/TLS)
+
+- **M6 - Insecure Authorization** - Failures in authorization (access rights)
+
+- **M7 - Client Code Quality** - Catchall for code-level implementation problems
+
+- **M8 - Code Tampering** - Binary patching, resource modification, dynamic memory modification
+
+- **M9 - Reverse Engineering** - Reversing core binaries to find problems and exploits
+
+- **M10 - Extraneous Functionality** - Catchall for backdoors that were inadvertently placed by coders
 
 ## <u>Mobile Platforms</u>
 
@@ -34,7 +43,7 @@
       - TunesGo
       - OneClickRoot
       - MTK Droid
-- **iOS** - platform built by Apple
+- **iOS** - platform by Apple
   - **Jailbreaking** - different levels of rooting an iOS device
     - **Tools**
       - evasi0n7
@@ -85,13 +94,16 @@ All other attacks presented on previous chapter are suceptible to mobile devices
   - Network Spoofer
   - DroidSheep
   - Nmap
+
+### <u>Bluetooth:</u>
 - **Bluetooth Attacks**
-  - **Bluesmacking** - denial of service against device
-  - **Bluejacking** - sending unsolicited messages
-  - **Bluesniffing** - attempt to discover Bluetooth devices
-  - **Bluebugging** - remotely using a device's features
-  - **Bluesnarfing** - theft of data from a device
-  - **Blueprinting** - collecting device information over Bluetooth
+  - **Bluesmacking** - Denial of service against device
+  - **Bluejacking** - Sending unsolicited messages
+  - **Bluesniffing** - Attempt to discover Bluetooth devices
+  - **Bluebugging** - Remotely using a device's features
+  - **Bluesnarfing** - Theft of data from a device
+  - **Blueprinting** - Collecting device information over Bluetooth
+
 - **Bluetooth Attack Tools**
   - **BlueScanner** - finds devices around you
   - **BT Browser** - another tool for finding and enumerating devices
@@ -115,75 +127,226 @@ All other attacks presented on previous chapter are suceptible to mobile devices
 
 ⚠️ Companies should use **MDM policies** to accomplish mobile security.
 
----
 
-## <u>IoT Architecture</u>
+# <u>B) IoT Architecture</u>
 
-- **Definition** - a collection of devices using sensors, software, storage and electronics to collect, analyze, store and share data
+### **- What is IoT?**
+***The Internet of Things (IoT)** describes the network of physical objects—“things”—that are embedded with sensors, software, and other technologies for the purpose of connecting and exchanging data with other devices and systems over the internet.*
+
+- Traditional fields of embedded systems, wireless sensor networks, control systems, automation (including home and building automation), and others all contribute to enabling the Internet of things. 
+
+- ![iot](https://www.researchgate.net/profile/Akram_Hakiri/publication/281896657/figure/fig1/AS:391492888743939@1470350586428/High-level-IoT-architecture.png)
+
 - **Three Basic Components**
   - Sensing Technology
   - IoT gateways
   - The cloud
-- **Operating Systems**
-  - **RIOT OS** - embedded systems, actuator boards, sensors; is energy efficient
-  - **ARM Mbed OS** - mostly used on wearables and other low-powered devices
-  - **RealSense OS X** - Intel's depth sensing version; mostly found in cameras and other sensors
-  - **Nucleus RTOS** - used in aerospace, medical and industrial applications
-  - **Brillo** - Android-based OS; generally found in thermostats
-  - **Contiki** - OS made for low-power devices; found mostly in street lighting and sound monitoring
-  - **Zephyr** - option for low-power devices and devices without many resources
-  - **Ubuntu Core** - used in robots and drones; known as "snappy"
-  - **Integrity RTOS** - found in aerospace, medical, defense, industrial and automotive sensors
-  - **Apache Mynewt** - used in devices using Bluetooth Low Energy Protocol
-- **Methods of Communicating**
-  - **Device to Device** - communicates directly with other IoT devices
-  - **Device to Cloud** - communicates directly to a cloud service
-  - **Device to Gateway** - communicates with a gateway before sending to the cloud
-  - **Back-End Data Sharing** - like device to cloud but adds abilities for parties to collect and use the data
-- **Architecture Levels**
-  - **Edge Technology Layer** - consists of sensors, RFID tags, readers and the devices
-  - **Access Gateway Layer** - first data handling, message identification and routing
-  - **Internet Layer** - crucial layer which serves as main component to allow communication
-  - **Middleware Layer** - sits between application and hardware; handles data and device management, data analysis and aggregation
-  - **Application Layer** - responsible for delivery of services and data to the user
 
-## <u>IoT Vulnerabilities and Attacks</u>
+### **Methods of Communicating**
+*IoT connectivity boils down to how things connect to each other. Can be wired, wireless, 4G LTE, Bluetooth, GPS, LoRa, mesh networking, RFID, WiFi, Zigbee and Z-wave.*
 
-- **I1 - Insecure Web Interface** - problems such as account enumeration, weak credentials, and no account lockout
-- **I2 - Insufficient Authentication/Authorization** - assumes interfaces will only be exposed on internal networks and thus is a flaw
-- **I3 - Insecure Network Services** - may be susceptible to buffer overflow or DoS attacks
-- **I4 - Lack of Transport Encryption/Integrity Verification** - data transported without encryption
-- **I5 - Privacy Concerns** - due to collection of personal data
-- **I6 - Insecure Cloud Interface** - easy-to-guess credentials make enumeration easy
-- **I7 - Insecure Mobile Interface** - easy-to-guess credentials on mobile interface
-- **I8 - Insufficient Security Configurability** - cannot change security which causes default passwords and configuration
-- **I9 - Insecure Software/Firmware** - lack of a device to be updated or devices that do not check for updates
-- **I10 - Poor Physical Security** - because of the nature of devices, these can easily be stolen
+  - **Device to Device** - Direct communication between two devices.
+  - **Device to Cloud** - Communicates directly to a cloud service.
+  - **Device to Gateway** - Communicate to a centralized gateway that gathers data and then sends it to an application server based in the cloud.
+  - **Back-End Data Sharing** - Used to scale the device to cloud model to allow for multiple devices to interact withone or more application servers.
 
-- **Sybil Attack** - uses multiple forged identities to create the illusion of traffic
-- **HVAC Attacks** - attacks on HVAC systems
-- **Rolling Code** - the ability to jam a key fob's communications, steal the code and then create a subsequent code
-- **BlueBorne Attack** - attacks against Bluetooth devices
+> ⚠️ **Zigbee** and **Z-Wave** is a wireless mesh networking protocol popular in home automation. 
 
-- Other attacks already enumerated in other sections still apply such as MITM, ransomware, side channel
+### **Edge Computing**
+*Edge Computing is a distributed computing paradigm in which processing and computation are performed mainly on classified device nodes known as smart devices or edge devices as opposed to processed in a centralized cloud environment or data centers.*
+
+<p align="center">
+<img width=70%"" src="https://www.xenonstack.com/images/blog/2019/11/edge-computing-services-solutions-xenonstack.png" />
+</p>
+
+- It helps to provide server resources, data analysis, and artificial intelligence to data collection sources and cyber-physical sources like smart sensors and actuators.
+
+> ⚠️ **Edge computing** handling data by pushing into the cloud. **Fog Computing** is more like keep things locally.
+
+### **Multi-Layer Architecture of IoT**
+- **Edge Technology Layer** - consists of sensors, RFID tags, readers and the devices
+- **Access Gateway Layer** - first data handling, message identification and routing
+- **Internet Layer** - crucial layer which serves as main component to allow communication
+- **Middleware Layer** - sits between application and hardware; handles data and device management, data analysis and aggregation
+- **Application Layer** - responsible for delivery of services and data to the user
+
+### **IoT Technology Protocols**
+- **Short-Range Wireless:**
+  - Bluetooth Low-energy (BLE)
+  - Light-Fidelity (Li-Fi)
+  - Near Field Communication (NFC)
+  - QR Codes & Barcodes
+  - Radio-frequency Identification (RFID)
+  - Wi-fi / Direct
+  - Z-wave
+  - Zigbee
+- **Medium-Range Wireless:**
+  - Ha-Low
+  - LTE-Advanced
+- **Long-Range Wireless:**
+  - Low-power Wide-area Networking (LPWAN)
+  - LoRaWAN
+  - Sigfox
+  - Very Smart Aperture Terminal (VSAT)
+  - Cellular
+- **Wired Communications:**
+  - Ethernet 
+  - Power-Line Communication (PLC)
+  - Multimedia over Coax Alliance (MoCA)
+
+### **IoT Operating Systems**
+- **RIOT OS** - Embedded systems, actuator boards, sensors; is energy efficient
+- **ARM Mbed OS** - Mostly used on wearables and other low-powered devices
+- **RealSense OS X** - Intel's depth sensing version; mostly found in cameras and other sensors
+- **Nucleus RTOS** - Used in aerospace, medical and industrial applications
+- **Brillo** - Android-based OS; generally found in thermostats
+- **Contiki** - OS made for low-power devices; found mostly in street lighting and sound monitoring
+- **Zephyr** - Option for low-power devices and devices without many resources
+- **Ubuntu Core** - Used in robots and drones; known as "snappy"
+- **Integrity RTOS** - Found in aerospace, medical, defense, industrial and automotive sensors
+- **Apache Mynewt** - Used in devices using Bluetooth Low Energy Protocol
+
+### **Geofencing**
+*Uses GPS and RFID technologies to create a virtual geographic boundary, like around your home property. A response is then triggered any time a mobile device enters or leaves the area.*
+
+### **Grid Computing**
+Reduces costs by maximizing existing resources. This is accomplished with **multiple machines together to solve a specific problem.**
+
+### **Analytics of Things (AoT)**
+- The analysis of IoT data, which is the data being generated by IoT sensors and devices.
+
+### **Industrial IoT (IIoT)**
+![iiot](https://i1.wp.com/intellinium.io/wp-content/uploads/2016/12/iot_edited.png?w=800&ssl=1)
+
+*The industrial internet of things (IIoT) refers to the extension and use of the internet of things (IoT) in industrial sectors and applications. With a strong focus on machine-to-machine (M2M) communication, big data, and machine learning, the IIoT enables industries and enterprises to have better efficiency and reliability in their operations.*
+
+- **The IIoT encompasses industrial applications, including robotics, medical devices, and software-defined production processes.**
+
+## <u>IoT Vulnerabilities and Attacks:</u>
+
+### **OWASP Top 10 IoT Vulnerabilities (2014)**
+- **I1 - Insecure Web Interface** 
+  - Problems such as account enumeration, weak credentials, and no account lockout
+- **I2 - Insufficient Authentication/Authorization** 
+  - Assumes interfaces will only be exposed on internal networks and thus is a flaw
+- **I3 - Insecure Network Services** 
+  - May be susceptible to buffer overflow or DoS attacks
+- **I4 - Lack of Transport Encryption/Integrity Verification** 
+  - Data transported without encryption
+- **I5 - Privacy Concerns** 
+  - Due to collection of personal data
+- **I6 - Insecure Cloud Interface** 
+  - Easy-to-guess credentials make enumeration easy
+- **I7 - Insecure Mobile Interface** 
+  - Easy-to-guess credentials on mobile interface
+- **I8 - Insufficient Security Configurability** 
+  - Cannot change security which causes default passwords and configuration
+- **I9 - Insecure Software/Firmware** 
+  - Lack of a device to be updated or devices that do not check for updates
+- **I10 - Poor Physical Security** 
+  - Because of the nature of devices, these can easily be stolen
+
+---
+
+### **OWASP Top 10 IoT Vulnerabilities (2018)**
+
+- **1. Weak, guessable, or hardcoded passwords**
+  - Use of easily bruteforced, publicly available, or unchangeable credentials, including backdoors in firmware or client software that grants unauthorized access to deployed systems.
+
+- **2. Insecure network services**
+  - Unneeded or insecure network services running on the device itself, especially those exposed to the internet, that compromise the confidentiality, integrity/authenticity, or availability of information or allow unauthorized remote control…
+
+- **3. Insecure ecosystem interfaces**
+  - Insecure web, backend API, cloud, or mobile interfaces in the ecosystem outside of the device that allows compromise of the device or its related components. Common issues include a lack of authentication/authorization, lacking or weak encryption, and a lack of input and output filtering.
+
+- **4. Lack of secure update mechanism**
+  - Lack of ability to securely update the device. This includes lack of firmware validation on device, lack of secure delivery (un-encrypted in transit), lack of anti-rollback mechanisms,
+and lack of notifications of security changes due to updates.
+- **5. Use of insecure or outdated components**
+  - Use of deprecated or insecure software components/libraries that could allow the device to be compromised. This includes insecure customization of operating system platforms, and the use of third-party software or hardware components from a compromised supply chain.
+- **6. Insufficient privacy protection**
+  - User’s personal information stored on the device or in the ecosystem that is used insecurely, improperly, or without permission. 
+- **7. Insecure data transfer and storage**
+  - Lack of encryption or access control of sensitive data anywhere within the ecosystem, including at rest, in transit, or during processing.
+- **8. Lack of device management**
+  - Lack of security support on devices deployed in production, including asset management, update management, secure decommissioning, systems monitoring, and response capabilities.
+- **9. Insecure default settings**
+  - Devices or systems shipped with insecure default settings or lack the ability to make the system more secure by restricting operators from modifying configurations.
+- **10. Lack of physical hardening**
+  - Lack of physical hardening measures, allowing potential attackers to gain sensitive information that can help in a future remote attack or take local control of the device.
+---
+
+
+
+## <u>Common IoT Attack Areas</u>
+1. Device memory containing credentials
+2. Device / Ecosystem Access Control
+3. Device Physical Interfaces / Fimrware extraction
+4. Device web interface
+5. Device Firmware
+6. Device network services
+7. Devices administrative interface(s)
+8. Unencrypted Local data storage
+9. Cloud interface(s)
+10. Device update mechanism(s)
+11. Insecure API's (vendor & thir-party)
+12. Mobile application
+13. Confidentiality and Integrity issues across the ecosystem
+14. Network traffic
+
+## <u>IoT Threats</u>
+1. **DDoS Attack**
+2. **HVAC System attacks** - Attacks on HVAC systems
+3. **Rolling code attack** - Used to steal cars; The ability to jam a key fob's communications, steal the code and then create a subsequent code
+4. **BlueBorne attack** - Attacks against Bluetooth devices
+5. **Jamming attack**
+6. **Remote access via backdoors**
+7. **Remote access via unsecured protocols** such as TELNET
+8. **Sybil attack** - Uses multiple forged identities to create the illusion of traffic; happens when a insecure computer is hijacked to claim multiple identities.
+9. **Rootkits / Exploit kits**
+10. **Ransomware**
+
+
+> ⚠️ **Other attacks already enumerated in other sections still apply such as MITM, ransomware, side channel, replay attack etc.**
 
 ## <u>IoT Hacking Methodology</u>
 
-- **Steps**
-  - **Information Gathering** - gathering information about the devices; useful resource is Shodan (Google for IoT devices connected to Internet)
-    - **Foren6** - IoT traffic sniffer
-  - **Vulnerability Scanning** - same as normal methodology - looks for vulnerabilities
-    - **Tools**
+### **Steps**:
+1. **Information Gathering** - gathering information about the devices; 
+    - **Tools**:
+      - Shodan
+      - Censys
+      - Thingful
+      - Google 
+
+2. **Vulnerability Scanning** - same as normal methodology - looks for vulnerabilities
+    - **Tools:**
       - Nmap
+      - Multi-ping
       - RIoT Vulnerability Scanner
+      - Foren6 (traffic sniffer)
       - beSTORM
-      - IoTsploit
-      - IoT Inspector
-  - **Launching Attacks**
-    - **Tools**
+
+3. **Launching Attacks**
+    - **Tools:**
+      - RFCrack
+      - Attify Zigbee Framework
+      - HackRF
       - Firmalyzer
-      - KillerBee
-      - JTAGulator
-      - Attify
-  - **Gaining Access** - same objectives as normal methodology
-  - **Maintaining Access** - same objectives as normal methodology
+
+4. **Gaining Access** - same objectives as normal methodology
+
+5. **Maintaining Access** - same objectives as normal methodology
+---
+## Countermeasures to help secure IoT devices:
+
+1. Firmware updates
+2. Block ALL unecessary ports
+3. Disable insecure access protocols such as TELNET
+4. Only use encrypted communication protocols
+5. Use strong passwords
+6. Encrypt ALL data and communications coming into, being stored in and leaving the device
+7. Use account lockout
+8. Configuration management and baselining of devices along with compliance monitoring
+9. Use multi-factor authentication
+10. Disable UPnP
