@@ -26,6 +26,10 @@
 
 # Index
 
+**All Modules in one single file**: [![markdown](https://img.shields.io/badge/Markdown-.md-silver.svg)](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/All-Modules.md) [![HTML](https://img.shields.io/badge/HTML-.html-blue.svg)](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/All-Modules.html)
+
+
+
 0. [Introduction to Information Security and Ethical Hacking](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/0-Introduction.md)
 1. [Reconnaissance and Footprinting](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/1-Reconnaissance-and-Footprinting.md)
 2. [Scanning and Enumeration](https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/2-Scanning-and-Enumeration.md)
