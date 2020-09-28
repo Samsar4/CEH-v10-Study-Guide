@@ -419,6 +419,25 @@ Database file on a domain controller that stores passwords
       - **OpenStego**
       - **OpenPuff**
 
+> ### ⚠️ Steganography:
+
+- **Steganography** - practice of concealing a message inside another medium so that only the sender and recipient know of its existence
+- **Ways to Identify**
+  - Text - character positions are key - blank spaces, text patterns
+  - Image - file larger in size; some may have color palette faults
+  - Audio & Video - require statistical analysis
+- **Methods**
+  - Least significant bit insertion - changes least meaningful bit
+  - Masking and filtering (grayscale images) - like watermarking
+  - Algorithmic transformation - hides in mathematical functions used in image compression
+- **Tools**
+  - QuickStego
+  - gifshuffle
+  - SNOW
+  - Steganography Studio
+  - OpenStego
+
+
 ## <u>Rootkits</u>
 
 - Software put in place by attacker to obscure system compromise
