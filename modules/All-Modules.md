@@ -4998,7 +4998,7 @@ and lack of notifications of security changes due to updates.
   - **Metasploit** - framework for developing and executing code against a remote target machine
   - **CANVAS** - hundreds of exploits, automated exploitation system and extensive exploit development framework
 
-### <u>Ethical Hacking Phases</u>
+### <u>Pen test Phases</u>
 1. **Pre-Attack Phase** - Reconnaissance and data-gathering.
 2. **Attack Phase** - Attempts to penetrate the network and execute attacks.
 3. **Post-Attack Phase** - Cleanup to return a system to the pre-attack condition and deliver reports.
