@@ -163,14 +163,14 @@ There is an inter dependency between these three attributes. When **security goe
 - **Default passwords** - leaving default passwords that come with system/application
 
 
-## <u>Ethical Hacking Phases (CEH)</u>
+## <u>Pen Test Phases (CEH)</u>
 1. **Pre-Attack Phase** - Reconnaissance and data-gathering.
 2. **Attack Phase** - Attempts to penetrate the network and execute attacks.
 3. **Post-Attack Phase** - Cleanup to return a system to the pre-attack condition and deliver reports.
 
 > ⚠️ For the exam, EC-Council brings his own methodology and that's all you need for the exam; you can check another pentesting methodologies [here](https://owasp.org/www-project-web-security-testing-guide/latest/3-The_OWASP_Testing_Framework/1-Penetration_Testing_Methodologies) if you are interested; In case you are studying to become a professional pentester besides certification content, I recommend the [OSSTMM](https://www.isecom.org/research.html) (Open Source Security Testing Methodology Manual).
 
-## <u>Generic Phases of Hacking</u>
+## <u>The Five Stages of Ethical Hacking</u>
 
 ### 1. **Reconnaissance**
 *Gathering evidence about targets*; There are two types of Recon:
