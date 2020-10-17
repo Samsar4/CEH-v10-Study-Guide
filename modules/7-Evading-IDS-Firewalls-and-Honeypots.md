@@ -283,7 +283,7 @@ Rule part | Information
 *Probe services running on them; Ports that show a service is available, but **deny a three-way handshake may indicate that the system is a honeypot***.
 
 * **Layer 7 (Application)** - Examine latency of responses from server
-* **Layer 4 (Trasnport)** - Examine the TCP windows size, looing for continuous Acknowledgement of incoming packets even when the windows size is set to 0.
+* **Layer 4 (Transport)** - Examine the TCP windows size, looing for continuous Acknowledgement of incoming packets even when the windows size is set to 0.
 * **Layer 2 (Data Link)** - If you are on the same network as the honeypot, **look for MAC addresses** in packets that indicate the presence of a **'Black Hole'** (`0:0:f:ff:ff:ff`)
 
 > ⚠️  **The exam will not cover every information presented, but is good to have a general idea.**

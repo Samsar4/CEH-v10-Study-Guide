@@ -7,7 +7,7 @@
             .sd$$$$$$$P^*^T$$$P^*"*^T$$$$$bs.            
           .s$$$$$$$$P*     `*' _._  `T$$$$$$$s.          
         .s$$$$$$$$$P          ` :$;   T$$$$$$$$s.        
-       s$$$$$$$$$$;  db..+s.   `**'    T$$$$$$$$$s       
+       s$$$$$$$$$$;  db..+s.   `'    T$$$$$$$$$s       
      .$$$$$$$$$$$$'  `T$P*'             T$$$$$$$$$$.     
     .$$$$$$$$$$$$P                       T$$$$$$$$$$.    
    .$$$$$$$$$$$$$b                       `$$$$$$$$$$$.   
@@ -21,12 +21,12 @@ $$$$$$$$$$$b.                                     :$$$$$$
 $$$$$$$$$$$$$bs.                                 .$$$$$$$
 $$$$$$$$$$$$$$$$$bs.                           .d$$$$$$$$
 :$$$$$$$$$$$$$P*"*T$$bs,._                  .sd$$$$$$$$$;
-:$$$$$$$$$$$$P     TP^**T$bss++.._____..++sd$$$$$$$$$$$$;
+:$$$$$$$$$$$$P     TP^T$bss++.._____..++sd$$$$$$$$$$$$;
  $$$$$$$$$$$$b           `T$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
  :$$$$$$$$$$$$b.           `*T$$P^*"*"*^^*T$$$$$$$$$$$$; 
   $$$b       `T$b+                        :$$$$$$$BUG$$  
   :$P'         `"'               ,._.     ;$$$$$$$$$$$;  
-   \                            `*TP*     d$$P*******$   
+   \                            `*TP*     d$$P*$   
     \                                    :$$P'      /    
      \                                  :dP'       /     
       `.                               d$P       .'      
@@ -38,22 +38,23 @@ $$$$$$$$$$$$$$$$$bs.                           .d$$$$$$$$
 -->
 
 <head>
-  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CEH v10 - Unofficial Study Guide - 2020</title>
   <style>
     body {
-      margin: 100px;
-      padding: 38px;
       background-color: #2a2b2e;
-      font-family: Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif; 
+      font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;
       font-size: 16px;
       line-height: 1.5;
       letter-spacing: 0.3px;
+      margin: 90px;
+      padding: 0px;
     }
 
     h1 {
       font-size: 50px;
       color: white;
+      text-decoration-line: underline;
     }
 
     h2 {
@@ -79,13 +80,20 @@ $$$$$$$$$$$$$$$$$bs.                           .d$$$$$$$$
     p,
     ul,
     li {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       color: #d6d6d6;
-      color: font-size: 16px;
+      font-size: 16px;
+    }
+
+    ul {
+      list-style-type: square;
+      color: black;
     }
 
     th {
       background-color: #1d1d1d;
     }
+
     table,
     td,
     th {
@@ -122,13 +130,16 @@ $$$$$$$$$$$$$$$$$bs.                           .d$$$$$$$$
       border-radius: 10px;
       padding: 17px;
     }
+
     blockquote {
-    background-color: #3c3c3c;
-    padding: 1px;
-    border-radius: 10px;
+      background-color: #3c3c3c;
+      padding: 1px;
+      border-radius: 10px;
     }
+
     img {
-      width: 70%;
+      max-width: 100%;
+      height: auto;
     }
   </style>
 </head>
@@ -2071,7 +2082,7 @@ traceroute to nsa.gov (104.83.73.99), 30 hops max, 60 byte packets
   <pre><code>theHarvester -d www.hackthissite.orgwww.hackthissite.org -n -b  google
 table results already exists
 
-*******************************************************************
+*
 *  _   _                                            _             *                                                                                        
 * | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *                                                                                        
 * | __|  _ \ / _ \  / /_/ / _` | '__\ \ / / _ \/ __| __/ _ \ '__| *                                                                                        
@@ -2083,7 +2094,7 @@ table results already exists
 * Edge-Security Research                                          *                                                                                        
 * cmartorella@edge-security.comcmartorella@edge-security.com                                   *                                                                                        
 *                                                                 *                                                                                        
-*******************************************************************                                                                                        
+*                                                                                        
                                                                                                                                                            
                                                                                                                                                            
 [*] Target: www.hackthissite.orgwww.hackthissite.org 
@@ -2399,18 +2410,41 @@ GENERATED WORDS: 959
   <ul>
     <li>
       <p><strong>Important ICMP codes</strong></p>
-      <p>| ICMP Message Type | Description and Codes |
-        | --------------------------- | ------------------------------------------------------------ |
-        | 0: Echo Reply | Answer to a Type 8 Echo Request |
-        | 3: Destination Unreachable | Error message followed by these codes:<br>0 - Destination network
-        unreachable<br>1 - Destination host unreachable<br>6 - Network unknown<br>7 - Host unknown<br>9 - Network
-        administratively prohibited<br>10 - Host administratively prohibited<br>13 - Communication administratively
-        prohibited |
-        | 4: Source Quench | A congestion control message |
-        | 5: Redirect | Sent when there are two or more gateways available for the sender to use. Followed by these
-        codes:<br>0 - Redirect datagram for the network<br>1 - Redirect datagram for the host |
-        | 8: Echo Request | A ping message, requesting an echo reply |
-        | 11: Time Exceeded | Packet took too long to be routed (code 0 is TTL expired) |</p>
+      <p><table>
+        <thead>
+        <tr>
+        <th>ICMP Message Type</th>
+        <th>Description and Codes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>0: Echo Reply</td>
+        <td>Answer to a Type 8 Echo Request</td>
+        </tr>
+        <tr>
+        <td>3: Destination Unreachable</td>
+        <td>Error message followed by these codes: 0 - Destination network unreachable 1 - Destination host unreachable 6 - Network unknown 7 - Host unknown 9 - Network administratively prohibited 10 - Host administratively prohibited 13 - Communication administratively prohibited </td>
+        </tr>
+        <tr>
+        <td>4: Source Quench</td>
+        <td>A congestion control message </td>
+        </tr>
+        <tr>
+        <td>5: Redirect</td>
+        <td>Sent when there are two or more gateways available for the sender to use. Followed by these codes: 0 - Redirect datagram for the network 1 - Redirect datagram for the host</td>
+        </tr>
+        <tr>
+        <td>8: Echo Request</td>
+        <td>A ping message, requesting an echo reply</td>
+        </tr>
+        <tr>
+        <td>11: Time Exceeded</td>
+        <td>Packet took too long to be routed (code 0 is TTL expired)</td>
+        </tr>
+        </tbody>
+        </table>
+        </p>
     </li>
   </ul>
   <h2><u>Port Discovery - Basic Concepts</u></h2>
@@ -2444,7 +2478,7 @@ GENERATED WORDS: 959
   <hr>
   <h3>⚠️ Keep in mind the TCP Flags &amp; TCP Three-way handshake before use <code>nmap</code>!</h3>
   <ul>
-    <li>**☞ TCP Flags:**</li>
+    <li>☞ TCP Flags:</li>
   </ul>
   <table>
     <thead>
@@ -2488,7 +2522,7 @@ GENERATED WORDS: 959
     </tbody>
   </table>
   <ul>
-    <li>**☞ The TCP Three-way handshake:** <em>(<a
+    <li>☞ The TCP Three-way handshake: <em>(<a
           href="https://github.com/Samsar4/CEH-v10-Study-Guide/blob/master/modules/0-Introduction.md">explained in
           chapter 0 - Introduction</a>)</em></li>
   </ul>
@@ -5345,9 +5379,9 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
       </ul>
     </li>
   </ul>
-  <blockquote>
-    <h3>⚠️ Steganography:</h3>
-  </blockquote>
+
+    <h2><u>Steganography</u></h2>
+
   <ul>
     <li><strong>Steganography</strong> - practice of concealing a message inside another medium so that only the sender
       and recipient know of its existence</li>
@@ -5510,7 +5544,7 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
         Windows Registry.</p>
     </li>
     <li>
-      <p>**Is possible to manually clear the logs on <u>Event Viewer</u>**.</p>
+      <p>Is possible to manually clear the logs on <u>Event Viewer</u>.</p>
     </li>
   </ul>
   <h3>Conclusion on Covering Tracks</h3>
@@ -5664,7 +5698,7 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
     </li>
   </ul>
   <blockquote>
-    <p>**️⚠️ - Viruses needs help/interaction to propagate; Worms self propagates**</p>
+    <p>️⚠️ - Viruses needs help/interaction to propagate; Worms self propagates</p>
   </blockquote>
   <h3>Major characteristics of viruses:</h3>
   <ol>
@@ -5926,8 +5960,8 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
     </tbody>
   </table>
   <blockquote>
-    <p>**⚠️ - Its not necessary to know every possible trojan port in the history for the CEH exam, it's good for
-      understanding.**</p>
+    <p>⚠️ - Its not necessary to know every possible trojan port in the history for the CEH exam, it's good for
+      understanding.</p>
   </blockquote>
   <h3><strong>Trojan Countermeasures</strong></h3>
   <ol>
@@ -6818,9 +6852,9 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
       requests at the application’s protocols.</li>
   </ul>
   <blockquote>
-    <p>**⚠️ An <u>application-level proxy</u> is one that knows about the particular application it is providing proxy
+    <p>⚠️ An <u>application-level proxy</u> is one that knows about the particular application it is providing proxy
       services for; it understands and interprets the commands in the application protocol. A <u>circuit-level proxy</u>
-      is one that creates a circuit between the client and the server without interpreting the application protocol.**
+      is one that creates a circuit between the client and the server without interpreting the application protocol.
     </p>
   </blockquote>
   <ul>
@@ -7283,7 +7317,7 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
         may indicate that the system is a honeypot</strong></em>.</p>
   <ul>
     <li><strong>Layer 7 (Application)</strong> - Examine latency of responses from server</li>
-    <li><strong>Layer 4 (Trasnport)</strong> - Examine the TCP windows size, looing for continuous Acknowledgement of
+    <li><strong>Layer 4 (Transport)</strong> - Examine the TCP windows size, looing for continuous Acknowledgement of
       incoming packets even when the windows size is set to 0.</li>
     <li><strong>Layer 2 (Data Link)</strong> - If you are on the same network as the honeypot, <strong>look for MAC
         addresses</strong> in packets that indicate the presence of a <strong>'Black Hole'</strong>
@@ -7509,7 +7543,7 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
       <p>Sends thousands of SYN packets</p>
     </li>
     <li>
-      <p>While the <strong>server waits for the final ACK packet</strong>, **<u>which never arrives</u>**, the attacker
+      <p>While the <strong>server waits for the final ACK packet</strong>, <u>which never arrives</u>, the attacker
         continues to send more SYN packets. The arrival of each new SYN packet causes the server to temporarily maintain
         a new open port connection for a certain length of time, and once all the available ports have been utilized the
         server is unable to function normally.</p>
@@ -8195,7 +8229,7 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
       </ul>
     </li>
   </ul>
-  <p>**<u>Enumerating:</u>**</p>
+  <p><u>Enumerating:</u></p>
   <ul>
     <li>
       <p><code>1' union all select 1,user() #</code></p>
@@ -8210,7 +8244,7 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
       </ul>
     </li>
   </ul>
-  <p>**<u>Load/Reading a file:</u>**</p>
+  <p><u>Load/Reading a file:</u></p>
   <ul>
     <li><code>bob' union all select 1,load_file("/etc/passwd"),3,4,5 --</code>
       <ul>
@@ -8218,7 +8252,7 @@ kali:$6$a/53BntOdPOaghAx$VCAdR3Af97cYTtWCtDp9iksacL3gj2Sgrb12EMix0ITuxc5jOQp1lba
       </ul>
     </li>
   </ul>
-  <p>**<u>Writing a file:</u>**</p>
+  <p><u>Writing a file:</u></p>
   <ul>
     <li><code>bob' union all select 1,"Test",3,4,5 into outfile '/tmp/test.txt'--</code>
       <ul>
@@ -8315,7 +8349,7 @@ uid=0(root) gid=0(root) groups=0(root)
   <p><strong>Examples</strong>:</p>
   <ol>
     <li>
-      <p>*An application **stores credit card numbers in a database <u>without encryption</u>*<em>. If an attacker gets
+      <p>*An application stores credit card numbers in a database <u>without encryption</u>*<em>. If an attacker gets
           access to the database through SQL injection, he could easily get the credit card numbers.</em></p>
     </li>
     <li>
